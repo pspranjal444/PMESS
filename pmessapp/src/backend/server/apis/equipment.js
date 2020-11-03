@@ -5,17 +5,17 @@ const EquipmentDetails = require('../../model/equipment-details');
 
 // API to create a new equipment entry
 router.post('/', (req, res) => {
-    const { equipment_id, equipmentName, serialNo, maintenanceFrequency, needsReview, isNotInUse, isBackInUse } = req.body;
-
+    const { equipment_id, equipmentName, serialNo, maintenanceFrequency } = req.body.data;
+    
     const equipment = new EquipmentDetails({
         _id: new mongoose.Types.ObjectId(),
         equipment_id: equipment_id,
         equipmentName: equipmentName,
         serialNo: serialNo,
         maintenanceFrequency: maintenanceFrequency,
-        needsReview: needsReview,
-        isNotInUse: isNotInUse,
-        isBackInUse: isBackInUse
+        needsReview: false,
+        isNotInUse: false,
+        isBackInUse: false
     });
 
     EquipmentDetails.find({ equipment_id: equipment_id }).exec().then(result => {
@@ -74,6 +74,52 @@ router.get('/all', (req, res) => {
             })
         });
 })
+
+// API to mark equipment back in use as true or false
+router.patch('/backinuse', (req, res) => {
+    const { equipment_id, isBackInUse } = req.body;
+
+    EquipmentDetails.update({ equipment_id: equipment_id },
+        {
+            $set: {
+                isBackInUse: isBackInUse
+            }
+        })
+        .exec().then(result => {
+            res.status(200).json({
+                success: true,
+                message: "Equipment Details successfully updated"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Equipment Details could not be updated successfully"
+            })
+        });
+});
+
+// API to mark equipment that it needs review
+router.patch('/needsreview', (req, res) => {
+    const { equipment_id, needsReview } = req.body;
+
+    EquipmentDetails.update({ equipment_id: equipment_id },
+        {
+            $set: {
+                needsReview: needsReview
+            }
+        })
+        .exec().then(result => {
+            res.status(200).json({
+                success: true,
+                message: "Equipment Details successfully updated"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Equipment Details could not be updated successfully"
+            })
+        });
+});
 
 // API to edit equipment details
 router.patch('/edit', (req, res) => {

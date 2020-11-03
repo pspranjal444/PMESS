@@ -45,7 +45,6 @@ router.get('/', (req, res) => {
     const user_id = req.query.user_id;
     const password = req.query.password;
     const role = req.query.role;
-
     if (voca.isEmpty(user_id) || voca.isEmpty(password) || voca.isEmpty(role)) {
         res.status(202).json({
             success: false,

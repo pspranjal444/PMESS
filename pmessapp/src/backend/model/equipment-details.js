@@ -5,7 +5,7 @@ const equipmentDetailsSchema = new mongoose.Schema({
     equipment_id: String,
     equipmentName: String,
     serialNo: String,
-    maintenanceFrequency: String,
+    maintenanceFrequency: Number,
     needsReview: Boolean,
     isNotInUse: Boolean,
     isBackInUse: Boolean
