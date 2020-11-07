@@ -1,18 +1,20 @@
 import Axios from 'axios';
-import React, { Component } from 'react';
+import  React, {Component} from 'react';
 import backend_url from '../../url/backend_url';
 import frequency from '../../utility/frequencyConvert';
+import UpcomingAdmin from './upcomingadmin';
 
-class Equipments extends Component {
+class AnnuallyAdmin extends Component {
     constructor() {
         super();
+        
         this.state = {
             equipments: []
         }
     }
 
     componentDidMount() {
-        Axios.get(backend_url + '/equipment/all')
+        Axios.get(backend_url+'/equipment/annually')
             .then(result => {
                 this.setState({
                     equipments: result.data.result
@@ -50,6 +52,8 @@ class Equipments extends Component {
 
         return (
             <div>
+                <UpcomingAdmin/>
+                <div class="container">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -65,9 +69,10 @@ class Equipments extends Component {
                         {data}
                     </tbody>
                 </table>
+                </div>
             </div>
         )
     }
 }
 
-export default Equipments;
+export default AnnuallyAdmin;

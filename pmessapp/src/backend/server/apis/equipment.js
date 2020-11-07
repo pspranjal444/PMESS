@@ -6,6 +6,16 @@ const EquipmentDetails = require('../../model/equipment-details');
 // API to create a new equipment entry
 router.post('/', (req, res) => {
     const { equipment_id, equipmentName, serialNo, maintenanceFrequency } = req.body.data;
+
+    var todaysDateISO = new Date();
+
+    if(maintenanceFrequency == 0) {
+        todaysDateISO.setDate(todaysDateISO.getDate() + 7);
+    } else if(maintenanceFrequency == 1) {
+        todaysDateISO.setDate(todaysDateISO.getDate() + 30);
+    } else if(maintenanceFrequency == 2) {
+        todaysDateISO.setDate(todaysDateISO.getDate() + 365);
+    }
     
     const equipment = new EquipmentDetails({
         _id: new mongoose.Types.ObjectId(),
@@ -15,7 +25,8 @@ router.post('/', (req, res) => {
         maintenanceFrequency: maintenanceFrequency,
         needsReview: false,
         isNotInUse: false,
-        isBackInUse: false
+        isBackInUse: true,
+        dueDate: todaysDateISO.toLocaleDateString('en-US')
     });
 
     EquipmentDetails.find({ equipment_id: equipment_id }).exec().then(result => {
@@ -61,7 +72,6 @@ router.get('/all', (req, res) => {
 
     EquipmentDetails.find({}).exec()
         .then(result => {
-            console.log(result)
             res.status(200).json({
                 success: true,
                 result: result,
@@ -74,6 +84,63 @@ router.get('/all', (req, res) => {
             })
         });
 })
+
+// API to get all upcoming equipments that need to be serviced within the upcoming week
+router.get('/weekly', (req, res) => {
+    var todaysDatePlusSeven = new Date();
+    todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate()+7);
+    todaysDatePlusSeven =  todaysDatePlusSeven.toLocaleDateString('en-US');
+
+    var todaysDate = new Date();
+    todaysDate = todaysDate.toLocaleDateString('en-US');
+
+    EquipmentDetails.find({dueDate: {$gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven)}}).exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
+
+// API to get all upcoming equipments that need to be serviced within the upcoming month 
+router.get('/monthly', (req, res) => {
+    var todaysDatePlusThirty = new Date();
+    todaysDatePlusThirty.setDate(todaysDatePlusThirty.getDate()+30);
+    todaysDatePlusThirty =  todaysDatePlusThirty.toLocaleDateString('en-US');
+
+    var todaysDate = new Date();
+    todaysDate = todaysDate.toLocaleDateString('en-US');
+
+    EquipmentDetails.find({dueDate: {$gte: new Date(todaysDate), $lte: new Date(todaysDatePlusThirty)}}).exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
+
+// API to get all upcoming equipments that need to be serviced within the upcoming annually
+router.get('/annually', (req, res) => {
+    var todaysDatePlusYear = new Date();
+    todaysDatePlusYear.setDate(todaysDatePlusYear.getDate()+365);
+    todaysDatePlusYear =  todaysDatePlusYear.toLocaleDateString('en-US');
+
+    var todaysDate = new Date();
+    todaysDate = todaysDate.toLocaleDateString('en-US');
+
+    EquipmentDetails.find({dueDate: {$gte: new Date(todaysDate), $lte: new Date(todaysDatePlusYear)}}).exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
 
 // API to mark equipment back in use as true or false
 router.patch('/backinuse', (req, res) => {

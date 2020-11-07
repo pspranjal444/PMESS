@@ -8,7 +8,8 @@ const equipmentDetailsSchema = new mongoose.Schema({
     maintenanceFrequency: Number,
     needsReview: Boolean,
     isNotInUse: Boolean,
-    isBackInUse: Boolean
+    isBackInUse: Boolean,
+    dueDate: Date
 });
 
 module.exports = mongoose.model('EquipmentDetails', equipmentDetailsSchema);

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
-import { Alert } from 'bootstrap';
 
 class Login extends Component {
     constructor() {
@@ -25,7 +24,7 @@ class Login extends Component {
         axios.get(backend_url + '/user', {params:{ user_id, password, role }})
             .then(result => {
                 if (result.data.success && result.status == 200) {
-                    this.props.history.push('/dashboard');
+                    this.props.history.push('/upcomingadmin');
                 } else {
                     alert('User could not be created successfully');
                 }
