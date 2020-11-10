@@ -89,11 +89,11 @@ router.patch('/complete', (req, res) => {
     })
 });
 
-// API to get maintenance schedule for a specific equipment
+// API to get maintenance schedules for a specific equipment
 router.get('/', (req, res) => {
     const { equipment_id } = req.query;
 
-    MaintenanceSchedule.findOne({ equipment_id: equipment_id }).exec()
+    MaintenanceSchedule.find({ equipment_id: equipment_id }).exec()
         .then(result => {
             res.status(200).json({
                 success: true,

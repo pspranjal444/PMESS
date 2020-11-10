@@ -4,6 +4,7 @@ import backend_url from '../../url/backend_url';
 import frequency from '../../utility/frequencyConvert';
 import AdminNavbar from '../navbar/navbar';
 import { Modal, Button } from 'antd';
+import maintenanceSchedule from '../../backend/model/maintenance-schedule';
 
 
 class Equipments extends Component {
@@ -17,7 +18,8 @@ class Equipments extends Component {
             equipmentName: '',
             serialNo: '',
             maintenanceFrequency: '',
-            dueDate: ''
+            dueDate: '',
+            maintenanceschedules: []
         }
     }
 
@@ -45,6 +47,21 @@ class Equipments extends Component {
     }
 
     render() {
+        let mss = '';
+        if (this.state.maintenanceschedules.length > 0) {
+            mss = this.state.maintenanceschedules.map((ms) => {
+                return (
+                    <tr key={ms._id}>
+                        <td style={{ textAlign: 'center' }}>{ms.mechanic_id}</td>
+                        <td style={{ textAlign: 'center' }}>{ms.maintenanceCompleteDate ? ms.maintenanceCompleteDate : "In progress"}</td>
+                        <td style={{ textAlign: 'center' }}>{ms.isLocked ? ms.mechanic_id + " is working" : "Not yet started"}</td>
+                        <td style={{ textAlign: 'center' }}><Button>Review it</Button></td>
+                        <td style={{ textAlign: 'center' }}><Button>Related Reports</Button></td>
+                    </tr>
+                )
+            })
+        }
+
         let data = this.state.equipments.map((equipment) => {
             return (
                 <tr key={equipment.equipment_id}>
@@ -54,13 +71,16 @@ class Equipments extends Component {
                     <td style={{ textAlign: 'center' }}>{frequency[equipment.maintenanceFrequency]}</td>
                     <td style={{ textAlign: 'center' }}>
                         <Button type="primary" onClick={() => {
-                            this.setState({
-                                visible: true,
-                                equipment_id: equipment.equipment_id,
-                                equipmentName: equipment.equipmentName,
-                                serialNo: equipment.serialNo,
-                                maintenanceFrequency: equipment.maintenanceFrequency,
-                                dueDate: equipment.dueDate
+                            Axios.get(backend_url + '/maintenance/', { params: { equipment_id: equipment.equipment_id } }).then(result => {
+                                this.setState({
+                                    visible: true,
+                                    equipment_id: equipment.equipment_id,
+                                    equipmentName: equipment.equipmentName,
+                                    serialNo: equipment.serialNo,
+                                    maintenanceFrequency: equipment.maintenanceFrequency,
+                                    dueDate: equipment.dueDate,
+                                    maintenanceschedules: result.data.result
+                                })
                             })
                         }}>
                             View
@@ -78,12 +98,29 @@ class Equipments extends Component {
                         title={this.state.equipmentName}
                         visible={this.state.visible}
                         onOk={this.handleOk}
-                        onCancel={this.handleCancel}>
+                        onCancel={this.handleCancel}
+                        width={1000}>
                         <p><strong>Equipment Id:</strong> {this.state.equipment_id}</p>
                         <p><strong>Serial No:</strong> {this.state.serialNo}</p>
                         <p><strong>Maintenance Frequency:</strong> {frequency[this.state.maintenanceFrequency]}</p>
                         <p><strong>Next due date:</strong> {new Date(this.state.dueDate).toLocaleDateString()}</p>
                         <p>History of maintenance schedules:</p>
+                        <div class="container"  style={{width: "800px"}}>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style={{ textAlign: 'center' }}>Mechanic Id</th>
+                                        <th style={{ textAlign: 'center' }}>Complete Date</th>
+                                        <th style={{ textAlign: 'center' }}>In Progress?</th>
+                                        <th style={{ textAlign: 'center' }}>Review</th>
+                                        <th style={{ textAlign: 'center' }}>View Repairs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {mss}
+                                </tbody>
+                            </table>
+                        </div>
                     </Modal>
                 </>
                 <div class="container">
