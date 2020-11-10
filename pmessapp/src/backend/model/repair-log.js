@@ -2,16 +2,14 @@ const mongoose = require('mongoose');
 
 const repairLogschema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    maintenance_id: String,
     equipment_id: String,
     problem: String,
     correctiveAction: String,
-    followUp: String,
     part: String,
-    timeSpent: Number,
     mechanic_id: String,
-    reviewedBy: String,
-    reviewedTime: Date,
-    createdDate: Date,
+    mechanicName: String,
+    reviewedDate: Date,
     severity: String
 });
 

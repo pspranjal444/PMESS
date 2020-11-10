@@ -15,6 +15,8 @@ import {BrowserRouter} from 'react-router-dom';
 import WeeklyAdmin from './frontend/upcomingmaintenance/weeklyadmin';
 import MonthlyAdmin from './frontend/upcomingmaintenance/monthlyadmin';
 import AnnuallyAdmin from './frontend/upcomingmaintenance/annuallyadmin';
+import ViewEquipmentsMechanic from './frontend/mechanic/viewequipments/viewlockequipments';
+import Try1 from './frontend/try1';
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
         <Route path='/weeklyadmin' component={WeeklyAdmin}/>
         <Route path='/monthlyadmin' component={MonthlyAdmin}/>
         <Route path='/annuallyadmin' component={AnnuallyAdmin}/>
+        <Route path='/viewequipmentsmechanic' component={ViewEquipmentsMechanic}/>
       </BrowserRouter>
   );
 }

@@ -2,43 +2,38 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const MaintenanceSchedule = require('../../model/maintenance-schedule');
+const Equipment = require('../../model/equipment-details');
 
-// API to create a new maintenance schedule for an equipment
-router.post('/', (req, res) => {
-    const { equipment_id, mechanicName, mechanic_id, isDelayed, isDue, maintenanceStatus, reason } = req.body;
+// API to create a new maintenance schedule for an equipment and lock it to particular mechanic
+router.post('/lock', (req, res) => {
+    const { equipment_id, mechanic_id } = req.body;
 
     const schedule = new MaintenanceSchedule({
         _id: new mongoose.Types.ObjectId(),
         equipment_id: equipment_id,
-        mechanicName: mechanicName,
         mechanic_id: mechanic_id,
-        isDelayed: isDelayed,
-        isDue: isDue,
-        maintenanceStatus: maintenanceStatus,
-        reason: reason,
-        createdDate: Date.now(),
+        isDelayed: false,
+        isLocked: true,
+        maintenanceComplete: false,
     });
 
-    MaintenanceSchedule.find({ equipment_id: equipment_id }).exec().then(result => {
-        if (result.length <= 0) {
-            schedule.save().then(() => {
-                res.status(200).json({
-                    success: true,
-                    message: "Maintenance Schedule added to the database successfully"
-                });
-            }).catch(err => {
-                res.status(202).json({
-                    success: false,
-                    message: "Error while adding schedule to the database"
-                });
+    schedule.save().then(() => {
+        Equipment.update({equipment_id: equipment_id}, {
+            $set: {
+                isLocked: true
+            }
+        }).exec().then(()=>{
+            res.status(200).json({
+                success: true,
+                message: "Equipment locked successfully"
             });
-        } else {
-            res.status(202).json({
-                success: false,
-                message: "Schedule already exists in the database"
-            });
-        }
-    })
+        })   
+    }).catch(err => {
+        res.status(202).json({
+            success: false,
+            message: "Equipment could not be locked successfully"
+        });
+    });
 });
 
 // API to edit details of the maintenance schedule
@@ -131,4 +126,19 @@ router.get('/all', (req, res) => {
         });
 })
 
+router.get('/locked', (req, res) => {
+    const { equipment_id } = req.query;
+
+    MaintenanceSchedule.find({ $and: [{ equipment_id: equipment_id }, { maintenanceComplete: false }, { isLocked: true }] }).exec().then(result => {
+        res.status(200).json({
+            success: true,
+            result: result
+        })
+    }).catch(err => {
+        res.status(202).json({
+            success: false,
+            result: null
+        })
+    })
+})
 module.exports = router;

@@ -9,7 +9,8 @@ const equipmentDetailsSchema = new mongoose.Schema({
     needsReview: Boolean,
     isNotInUse: Boolean,
     isBackInUse: Boolean,
-    dueDate: Date
+    dueDate: Date,
+    isLocked: Boolean
 });
 
 module.exports = mongoose.model('EquipmentDetails', equipmentDetailsSchema);

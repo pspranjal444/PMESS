@@ -26,7 +26,8 @@ router.post('/', (req, res) => {
         needsReview: false,
         isNotInUse: false,
         isBackInUse: true,
-        dueDate: todaysDateISO.toLocaleDateString('en-US')
+        dueDate: todaysDateISO.toLocaleDateString('en-US'),
+        isLocked: false
     });
 
     EquipmentDetails.find({ equipment_id: equipment_id }).exec().then(result => {

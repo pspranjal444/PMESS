@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
+import cookie from 'react-cookies';
 
 class Login extends Component {
     constructor() {
@@ -24,9 +25,14 @@ class Login extends Component {
         axios.get(backend_url + '/user', {params:{ user_id, password, role }})
             .then(result => {
                 if (result.data.success && result.status == 200) {
-                    this.props.history.push('/upcomingadmin');
+                    cookie.save('user_id', user_id);
+                    if (role === 'A'){
+                        this.props.history.push('/viewequipments')
+                    } else {
+                        this.props.history.push('/viewequipmentsmechanic');
+                    } 
                 } else {
-                    alert('User could not be created successfully');
+                    alert('Unable to login. Please check the credentials');
                 }
             })
     }
@@ -63,8 +69,8 @@ class Login extends Component {
                                 Mechanic
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Submit</button>
-                        &nbsp;&nbsp;<a href="#">Login</a>
+                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Login</button>
+                        &nbsp;&nbsp;<a href="/signup">Sign Up</a>
                     </form>
                 </div>
             </div>

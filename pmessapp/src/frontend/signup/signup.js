@@ -36,7 +36,7 @@ class Signup extends Component {
                 <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png" height="50px" style={{ marginLeft: "60px" }} />
                 <br /><br />
                 <div class="col-xs-3" style={{ border: "1px solid black", padding: "20px" }}>
-                    <h2>Signup</h2>
+                    <h2>Sign Up</h2>
                     <br />
                     <form>
                         <div class="form-group">
@@ -63,8 +63,8 @@ class Signup extends Component {
                             </label>
                         </div>
                         {/* <br/> */}
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Submit</button>
-                        &nbsp;&nbsp;<a href="#">Login</a>
+                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Sign Up</button>
+                        &nbsp;&nbsp;<a href="/">Login</a>
                     </form>
                 </div>
             </div>

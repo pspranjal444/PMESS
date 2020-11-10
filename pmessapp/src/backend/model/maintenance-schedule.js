@@ -6,13 +6,14 @@ const maintenanceScheduleSchema = new mongoose.Schema({
     mechanicName: String,
     mechanic_id: String,
     isDelayed: Boolean,
-    isDue: Boolean,
-    maintenanceStatus: String,
-    reason: String,
-    createdDate: Date,
+    remarks: String,
     maintenanceCompleteDate: Date,
+    maintenanceComplete: Boolean,
+    isLocked: Boolean,
     reviewedBy: String,
-    completedBy: String
+    reviewedDate: Date,
+    reviewRemarks: String,
+    reviewOk: Boolean
 });
 
 module.exports = mongoose.model('MaintenanceSchedule', maintenanceScheduleSchema);
