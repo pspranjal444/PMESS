@@ -50,12 +50,7 @@ class ViewLockEquipment extends Component {
         });
         return (
             <div>
-<<<<<<< HEAD
                 {/* <AdminNavbar /> */}
-=======
-                <AdminNavbar />
-                <a href="/lockedequipments">Work</a>
->>>>>>> 2ed6f1c1435740609584fc61a1d29b1dba76d644
                 <div class="container">
                     <table class="table table-striped">
                         <thead>

@@ -16,14 +16,13 @@ import WeeklyAdmin from './frontend/upcomingmaintenance/weeklyadmin';
 import MonthlyAdmin from './frontend/upcomingmaintenance/monthlyadmin';
 import AnnuallyAdmin from './frontend/upcomingmaintenance/annuallyadmin';
 import ViewEquipmentsMechanic from './frontend/mechanic/viewequipments/viewlockequipments';
-// <<<<<<< HEAD
+
 import Try1 from './frontend/try1';
 import Sidebar from './frontend/sidebar/sidebar';
 import Home from './frontend/components/home/home';
-=======
+
 import LockedEquipments from './frontend/mechanic/viewequipments/lockedequipments';
 
->>>>>>> 2ed6f1c1435740609584fc61a1d29b1dba76d644
 function App() {
   return (
       <BrowserRouter>
