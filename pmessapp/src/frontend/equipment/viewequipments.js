@@ -4,8 +4,6 @@ import backend_url from '../../url/backend_url';
 import frequency from '../../utility/frequencyConvert';
 import AdminNavbar from '../navbar/navbar';
 import { Modal, Button } from 'antd';
-import maintenanceSchedule from '../../backend/model/maintenance-schedule';
-
 
 class Equipments extends Component {
     constructor() {

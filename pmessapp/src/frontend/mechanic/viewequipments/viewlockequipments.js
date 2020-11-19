@@ -51,6 +51,7 @@ class ViewLockEquipment extends Component {
         return (
             <div>
                 <AdminNavbar />
+                <a href="/lockedequipments">Work</a>
                 <div class="container">
                     <table class="table table-striped">
                         <thead>

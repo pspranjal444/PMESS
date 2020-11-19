@@ -5,18 +5,19 @@ const RepairLog = require('../../model/repair-log');
 
 // API to create a new repair log entry
 router.post('/', (req, res) => {
-    const { equipment_id, problem, correctiveAction, followUp, part, mechanic_id, severity } = req.body;
+    const { maintenance_id, equipment_id, problem, correctiveAction, part, mechanic_id, severity, mechanicName } = req.body.data;
 
     const log = new RepairLog({
         _id: new mongoose.Types.ObjectId(),
+        maintenance_id: maintenance_id,
         equipment_id: equipment_id,
         problem: problem,
         correctiveAction: correctiveAction,
-        followUp: followUp,
         part: part,
         mechanic_id: mechanic_id,
-        createdDate: Date.now(),
-        severity: severity
+        reviewedDate: Date.now(),
+        severity: severity,
+        mechanicName: mechanicName
     });
 
     log.save().then(() => {
@@ -50,11 +51,11 @@ router.patch('/complete', (req, res) => {
         });
 });
 
-// API to get a specific repair log
+// API to get a repair logs for a specific maintenance schedule
 router.get('/', (req, res) => {
-    const { _id } = req.query;
+    const { maintenance_id } = req.query;
 
-    RepairLog.findOne({ _id: _id }).exec()
+    RepairLog.find({ maintenance_id: maintenance_id }).exec()
         .then(result => {
             res.status(200).json({
                 success: true,
