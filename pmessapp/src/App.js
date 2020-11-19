@@ -34,7 +34,7 @@ function App() {
           <Route path='/home' component={Home}/>
         <Route path='/dashboard' component={Dashboard}/>
         <Route path='/addequipment' component={AddEquipment}/>
-        <Route path='/viewequipments' component={ViewEquipments}/>
+        {/* <Route path='/viewequipments' component={ViewEquipments}/> */}
         <Route path='/upcomingadmin' component={UpcomingAdmin}/>
         <Route path='/weeklyadmin' component={WeeklyAdmin}/>
         <Route path='/monthlyadmin' component={MonthlyAdmin}/>

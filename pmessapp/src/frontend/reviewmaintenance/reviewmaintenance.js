@@ -156,7 +156,7 @@ class ReviewMaintenance extends Component {
 
         return (
             <div>
-                <AdminNavbar />
+                {/* <AdminNavbar /> */}
                 <Modal
                     title={this.state.equipmentDetails.equipmentName}
                     visible={this.state.visibleOne}
