@@ -17,12 +17,17 @@ import MonthlyAdmin from './frontend/upcomingmaintenance/monthlyadmin';
 import AnnuallyAdmin from './frontend/upcomingmaintenance/annuallyadmin';
 import ViewEquipmentsMechanic from './frontend/mechanic/viewequipments/viewlockequipments';
 import Try1 from './frontend/try1';
-
+import Sidebar from './frontend/sidebar/sidebar';
+import Home from './frontend/components/home/home';
 function App() {
   return (
       <BrowserRouter>
+         {/* Header Components*/}
+          <Route path='/' component={Sidebar}/>
+
         <Route exact path='/' component={Login}/>
         <Route path='/signup' component={Signup}/>
+          <Route path='/home' component={Home}/>
         <Route path='/dashboard' component={Dashboard}/>
         <Route path='/addequipment' component={AddEquipment}/>
         <Route path='/viewequipments' component={ViewEquipments}/>

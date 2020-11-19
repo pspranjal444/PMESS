@@ -50,7 +50,7 @@ class ViewLockEquipment extends Component {
         });
         return (
             <div>
-                <AdminNavbar />
+                {/* <AdminNavbar /> */}
                 <div class="container">
                     <table class="table table-striped">
                         <thead>

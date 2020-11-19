@@ -10,7 +10,7 @@ class UpcomingAdmin extends Component {
     render() {
         return (
             <div>
-                <AdminNavbar />
+                {/* <AdminNavbar /> */}
                 <div class="container">
                     <ul class="nav nav-tabs">
                         <li name="week" id="week"><a href="/weeklyadmin">Upcoming Week</a></li>
