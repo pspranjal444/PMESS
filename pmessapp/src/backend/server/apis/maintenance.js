@@ -126,10 +126,28 @@ router.get('/all', (req, res) => {
         });
 })
 
+// API to get maintenance schedule for an ongoing maintenance
 router.get('/locked', (req, res) => {
     const { equipment_id } = req.query;
 
     MaintenanceSchedule.find({ $and: [{ equipment_id: equipment_id }, { maintenanceComplete: false }, { isLocked: true }] }).exec().then(result => {
+        res.status(200).json({
+            success: true,
+            result: result
+        })
+    }).catch(err => {
+        res.status(202).json({
+            success: false,
+            result: null
+        })
+    })
+})
+
+// API to get locked equipments for a particular mechanic
+router.get('/locked/mechanic', (req, res) => {
+    const { mechanic_id } = req.query;
+
+    MaintenanceSchedule.find({ $and: [{ mechanic_id: mechanic_id }, { maintenanceComplete: false }, { isLocked: true }] }).exec().then(result => {
         res.status(200).json({
             success: true,
             result: result

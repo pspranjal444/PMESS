@@ -18,7 +18,7 @@ class Signup extends Component {
         })
     }
 
-    onClick = (event) => {
+    onClick = () => {
         const { user_id, password, role } = this.state;
         axios.post(backend_url + '/user', { user_id, password, role })
             .then(result => {
@@ -62,7 +62,6 @@ class Signup extends Component {
                                 Mechanic
                             </label>
                         </div>
-                        {/* <br/> */}
                         <button type="submit" class="btn btn-primary" onClick={this.onClick}>Sign Up</button>
                         &nbsp;&nbsp;<a href="/">Login</a>
                     </form>

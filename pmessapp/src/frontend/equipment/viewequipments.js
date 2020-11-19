@@ -51,7 +51,7 @@ class Equipments extends Component {
 
     render() {
         const mystyle = {
-            paddingottom: "10%",
+            paddingBottom: "10%",
             paddingLeft: "70%"
         };
         let mss = '';
