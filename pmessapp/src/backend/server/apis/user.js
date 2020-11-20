@@ -6,11 +6,15 @@ const mongoose = require('mongoose');
 
 // API to create a new user
 router.post('/', (req, res) => {
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
     const user_id = req.body.user_id;
     const password = req.body.password;
+    const phone = req.body.phone;
+    const email_id = req.body.email_id;
     const role = req.body.role;
 
-    if (voca.isEmpty(user_id) || voca.isEmpty(password) || voca.isEmpty(role)) {
+    if (voca.isEmpty(firstName) || voca.isEmpty(lastName) || voca.isEmpty(user_id) || voca.isEmpty(password) || voca.isEmpty(phone) || voca.isEmpty(email_id) || voca.isEmpty(role)) {
         console.log("One or more of the fields is empty");
         res.status(202).json({
             success: true,
@@ -21,8 +25,12 @@ router.post('/', (req, res) => {
 
     const user = new UserDetails({
         _id: new mongoose.Types.ObjectId(),
+        firstName: firstName,
+        lastName: lastName,
         user_id: user_id,
         password: password,
+        phone:phone,
+        email_id: email_id,
         role: role
     });
 
