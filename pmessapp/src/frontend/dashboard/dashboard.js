@@ -26,7 +26,6 @@ class Dashboard extends Component {
         
         return (
             <div>
-                <AdminNavbar/>
                 <div style={{ paddingLeft: "20%" }}>
                     <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
                         <TabPane tab="  Due Equipments " key="1">
