@@ -17,6 +17,7 @@ import MonthlyAdmin from './frontend/upcomingmaintenance/monthlyadmin';
 import AnnuallyAdmin from './frontend/upcomingmaintenance/annuallyadmin';
 import ViewEquipmentsMechanic from './frontend/mechanic/viewequipments/viewlockequipments';
 import LockedEquipments from './frontend/mechanic/viewequipments/lockedequipments';
+import ReviewMaintenance from './frontend/reviewmaintenance/reviewmaintenance';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/annuallyadmin' component={AnnuallyAdmin}/>
         <Route path='/viewequipmentsmechanic' component={ViewEquipmentsMechanic}/>
         <Route path='/lockedequipments' component={LockedEquipments}/>
+        <Route path='/reviewmaintenance' component={ReviewMaintenance}/>
       </BrowserRouter>
   );
 }

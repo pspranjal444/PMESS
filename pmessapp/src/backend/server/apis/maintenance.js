@@ -18,16 +18,16 @@ router.post('/lock', (req, res) => {
     });
 
     schedule.save().then(() => {
-        Equipment.update({equipment_id: equipment_id}, {
+        Equipment.update({ equipment_id: equipment_id }, {
             $set: {
                 isLocked: true
             }
-        }).exec().then(()=>{
+        }).exec().then(() => {
             res.status(200).json({
                 success: true,
                 message: "Equipment locked successfully"
             });
-        })   
+        })
     }).catch(err => {
         res.status(202).json({
             success: false,
@@ -65,16 +65,15 @@ router.patch('/edit', (req, res) => {
 
 // API to mark maintenance as complete
 router.patch('/complete', (req, res) => {
-    const { equipment_id, reviewedBy, completedBy } = req.body;
 
-    MaintenanceSchedule.update({ equipment_id: equipment_id }, {
+    const { maintenance_id } = req.body;
+    console.log(req.body.data)
+    MaintenanceSchedule.update({ _id: maintenance_id }, {
         $set: {
             isDelayed: false,
-            isDue: false,
-            maintenanceStatus: "COMPLETE",
+            maintenanceComplete: true,
             maintenanceCompleteDate: Date.now(),
-            reviewedBy: reviewedBy,
-            completedBy: completedBy
+            isLocked: false
         }
     }).exec().then(() => {
         res.status(200).json({
@@ -126,6 +125,42 @@ router.get('/all', (req, res) => {
         });
 })
 
+// API to get maintenance schedules for all equipments which have not been reviewed
+router.get('/all/incomplete', (req, res) => {
+
+    MaintenanceSchedule.find({ maintenanceComplete: false }).exec()
+        .then(result => {
+            res.status(200).json({
+                success: true,
+                result: result,
+                message: "Maintenance Schedules found"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedules not found"
+            })
+        });
+})
+
+// API to get maintenance schedules for all equipments which have been reviewed
+router.get('/all/complete', (req, res) => {
+
+    MaintenanceSchedule.find({ maintenanceComplete: true }).exec()
+        .then(result => {
+            res.status(200).json({
+                success: true,
+                result: result,
+                message: "Maintenance Schedules found"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedules not found"
+            })
+        });
+})
+
 // API to get maintenance schedule for an ongoing maintenance
 router.get('/locked', (req, res) => {
     const { equipment_id } = req.query;
@@ -159,4 +194,5 @@ router.get('/locked/mechanic', (req, res) => {
         })
     })
 })
+
 module.exports = router;
