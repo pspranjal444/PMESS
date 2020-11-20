@@ -23,7 +23,7 @@ class ReviewMaintenance extends Component {
             visibleFour: false,
             reviewRemarks: '',
             reviewOk: '',
-            maintenanceComplete: '',
+            // maintenanceComplete: '',
             mechanicName: '',
             maintenance_id: '',
             equipment_id: '',
@@ -151,7 +151,7 @@ class ReviewMaintenance extends Component {
                                     <textarea class="form-control" id="reviewRemarks" name="reviewRemarks" aria-describedby="emailHelp" placeholder="Enter review remarks" onChange={this.onChange} />
                                 </div>
 
-                                <div class="form-group">
+                                {/* <div class="form-group">
                                     <label for="maintenanceComplete">Mark Maintenance Complete</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="maintenanceComplete" id="maintenanceComplete" value="true" onChange={this.onChange} />
@@ -165,7 +165,7 @@ class ReviewMaintenance extends Component {
                                             Mark Incomplete
                                         </label>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div class="form-group">
                                     <label for="reviewOk">Is review ok ?</label>
@@ -189,7 +189,7 @@ class ReviewMaintenance extends Component {
                                         reviewRemarks: this.state.reviewRemarks,
                                         reviewOk: this.state.reviewOk,
                                         reviewedBy: cookie.load('user_id'),
-                                        maintenanceComplete: this.state.maintenanceComplete
+                                        // maintenanceComplete: this.state.maintenanceComplete
                                     }
                                     Axios.patch(backend_url + '/maintenance/complete', { data }).then(result => {
                                         if (result.status === 200 && result.data.success === true) {
@@ -268,7 +268,7 @@ class ReviewMaintenance extends Component {
                                 <th style={{ textAlign: 'center' }}>Equipment Id</th>
                                 <th style={{ textAlign: 'center' }}>Equipment Details</th>
                                 <th style={{ textAlign: 'center' }}>Repair Log</th>
-                                <th style={{ textAlign: 'center' }}>View Repair Logs</th>
+                                <th style={{ textAlign: 'center' }}>Review</th>
                             </tr>
                         </thead>
                         <tbody>
