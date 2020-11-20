@@ -3,17 +3,25 @@ import Equipments from '../equipment/viewequipments';
 import AdminNavbar from '../navbar/navbar';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
+import cookie from 'react-cookies';
 
 class Sidebar extends Component {
     constructor(props) {
 
         super();
-        this.handleNavClick = this.handleNavClick.bind(this);
+        // this.handleNavClick = this.handleNavClick.bind(this);
     }
 
-    handleNavClick = (event) => {
-        //event.preventDefault();
-        console.log('test');
+    // handleNavClick = (event) => {
+    //     //event.preventDefault();
+    //     console.log('test');
+    // }
+
+    handleLogout = () => {
+        console.log("logout");
+        cookie.remove('user_id', { path: '/' });
+        cookie.remove('role',{path:'/'});
+        this.props.history.push('/');
     }
 
     render() {
@@ -34,7 +42,7 @@ class Sidebar extends Component {
                    
                     </SubMenu>
                     <MenuItem  onClick={this.handleNavClick}>Reports</MenuItem>
-                    <MenuItem  onClick={this.handleNavClick}>Logout</MenuItem>
+                    <MenuItem  onClick={this.handleLogout}> Logout</MenuItem>
                 </Menu>
                 </ProSidebar>
 
