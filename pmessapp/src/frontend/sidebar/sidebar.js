@@ -21,7 +21,7 @@ class Sidebar extends Component {
         console.log("logout");
         cookie.remove('user_id', { path: '/' });
         cookie.remove('role',{path:'/'});
-        this.props.history.push('/');
+        window.location.href = '/';
     }
 
     render() {

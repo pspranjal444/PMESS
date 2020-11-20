@@ -28,9 +28,11 @@ class Login extends Component {
                     cookie.save('user_id', user_id);
                     cookie.save('role', role);
                     if (util.isAdmin()) {
-                        this.props.history.push('/home')
+                        //this.props.history.push('/home')
+                        window.location.href = '/home';
                     } else {
-                        this.props.history.push('/viewequipmentsmechanic');
+                        window.location.href = '/viewequipmentsmechanic';
+                        //this.props.history.push('/viewequipmentsmechanic');
                     } 
                 } else {
                     alert('Unable to login. Please check the credentials');
