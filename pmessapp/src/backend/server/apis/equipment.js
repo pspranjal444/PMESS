@@ -9,14 +9,14 @@ router.post('/', (req, res) => {
 
     var todaysDateISO = new Date();
 
-    if(maintenanceFrequency == 0) {
+    if (maintenanceFrequency == 0) {
         todaysDateISO.setDate(todaysDateISO.getDate() + 7);
-    } else if(maintenanceFrequency == 1) {
+    } else if (maintenanceFrequency == 1) {
         todaysDateISO.setDate(todaysDateISO.getDate() + 30);
-    } else if(maintenanceFrequency == 2) {
+    } else if (maintenanceFrequency == 2) {
         todaysDateISO.setDate(todaysDateISO.getDate() + 365);
     }
-    
+
     const equipment = new EquipmentDetails({
         _id: new mongoose.Types.ObjectId(),
         equipment_id: equipment_id,
@@ -89,13 +89,13 @@ router.get('/all', (req, res) => {
 // API to get all upcoming equipments that need to be serviced within the upcoming week
 router.get('/weekly', (req, res) => {
     var todaysDatePlusSeven = new Date();
-    todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate()+7);
-    todaysDatePlusSeven =  todaysDatePlusSeven.toLocaleDateString('en-US');
+    todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate() + 7);
+    todaysDatePlusSeven = todaysDatePlusSeven.toLocaleDateString('en-US');
 
     var todaysDate = new Date();
     todaysDate = todaysDate.toLocaleDateString('en-US');
 
-    EquipmentDetails.find({dueDate: {$gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven)}}).exec()
+    EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven) } }).exec()
         .then(result => {
             console.log(result);
             res.status(200).json({
@@ -108,13 +108,13 @@ router.get('/weekly', (req, res) => {
 // API to get all upcoming equipments that need to be serviced within the upcoming month 
 router.get('/monthly', (req, res) => {
     var todaysDatePlusThirty = new Date();
-    todaysDatePlusThirty.setDate(todaysDatePlusThirty.getDate()+30);
-    todaysDatePlusThirty =  todaysDatePlusThirty.toLocaleDateString('en-US');
+    todaysDatePlusThirty.setDate(todaysDatePlusThirty.getDate() + 30);
+    todaysDatePlusThirty = todaysDatePlusThirty.toLocaleDateString('en-US');
 
     var todaysDate = new Date();
     todaysDate = todaysDate.toLocaleDateString('en-US');
 
-    EquipmentDetails.find({dueDate: {$gte: new Date(todaysDate), $lte: new Date(todaysDatePlusThirty)}}).exec()
+    EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusThirty) } }).exec()
         .then(result => {
             console.log(result);
             res.status(200).json({
@@ -127,13 +127,28 @@ router.get('/monthly', (req, res) => {
 // API to get all upcoming equipments that need to be serviced within the upcoming annually
 router.get('/annually', (req, res) => {
     var todaysDatePlusYear = new Date();
-    todaysDatePlusYear.setDate(todaysDatePlusYear.getDate()+365);
-    todaysDatePlusYear =  todaysDatePlusYear.toLocaleDateString('en-US');
+    todaysDatePlusYear.setDate(todaysDatePlusYear.getDate() + 365);
+    todaysDatePlusYear = todaysDatePlusYear.toLocaleDateString('en-US');
 
     var todaysDate = new Date();
     todaysDate = todaysDate.toLocaleDateString('en-US');
 
-    EquipmentDetails.find({dueDate: {$gte: new Date(todaysDate), $lte: new Date(todaysDatePlusYear)}}).exec()
+    EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusYear) } }).exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
+
+// API to get all upcoming equipments that need to be serviced today
+router.get('/today', (req, res) => {
+    var todaysDate = new Date();
+    todaysDate = todaysDate.toLocaleDateString('en-US');
+
+    EquipmentDetails.find({ dueDate: new Date(todaysDate) }).exec()
         .then(result => {
             console.log(result);
             res.status(200).json({
@@ -216,5 +231,58 @@ router.patch('/edit', (req, res) => {
             })
         });
 });
+
+// API to unlock an equipment
+router.patch('/unlock', (req, res) => {
+    EquipmentDetails.update({ equipment_id: req.body.equipment.equipment_id },
+        {
+            $set: {
+                isLocked: false
+            }
+        }).exec().then(result => {
+            res.status(200).json({
+                success: true,
+                message: "Successful"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Unsuccessful"
+            })
+        })
+})
+
+// API to update due date
+router.patch('/updateduedate', (req, res) => {
+    var newDueDate = new Date();
+    console.log(req.body.equipment)
+    if (req.body.equipment.maintenanceFrequency == 0) {
+        newDueDate.setDate(newDueDate.getDate() + 7)
+        newDueDate = newDueDate.toLocaleDateString('en-US');
+    } else if (req.body.equipment.maintenanceFrequency == 1) {
+        newDueDate.setDate(newDueDate.getDate() + 30)
+        newDueDate = newDueDate.toLocaleDateString('en-US');
+    } else if (req.body.equipment.maintenanceFrequency == 2) {
+        newDueDate.setDate(newDueDate.getDate() + 365)
+        newDueDate = newDueDate.toLocaleDateString('en-US');
+    }
+    console.log(newDueDate);
+    EquipmentDetails.updateOne({ equipment_id: req.body.equipment.equipment_id },
+        {
+            $set: {
+                dueDate: new Date(newDueDate)
+            }
+        }).exec().then(result => {
+            res.status(200).json({
+                success: true,
+                message: "Successful"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Unsuccessful"
+            })
+        })
+})
 
 module.exports = router;

@@ -99,6 +99,8 @@ class Equipments extends Component {
 
         return (
             <div>
+                <AdminNavbar />
+                <a href="/reviewmaintenance">Review Maintenance</a>
                 {/* <AdminNavbar /> */}
                 <>
                     <Modal

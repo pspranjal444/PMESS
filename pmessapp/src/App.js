@@ -22,6 +22,7 @@ import Sidebar from './frontend/sidebar/sidebar';
 import Home from './frontend/components/home/home';
 
 import LockedEquipments from './frontend/mechanic/viewequipments/lockedequipments';
+import ReviewMaintenance from './frontend/reviewmaintenance/reviewmaintenance';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path='/annuallyadmin' component={AnnuallyAdmin}/>
         <Route path='/viewequipmentsmechanic' component={ViewEquipmentsMechanic}/>
         <Route path='/lockedequipments' component={LockedEquipments}/>
+        <Route path='/reviewmaintenance' component={ReviewMaintenance}/>
       </BrowserRouter>
   );
 }

@@ -1,14 +1,14 @@
 import Axios from 'axios';
-import React, { Component, useState } from 'react';
-import backend_url from '../../../url/backend_url';
+import React, { Component } from 'react';
+import backend_url from '../../url/backend_url';
 import cookie from 'react-cookies';
-import AdminNavbar from '../../navbar/navbar';
-import frequency from '../../../utility/frequencyConvert';
+import frequency from '../../utility/frequencyConvert';
 import {
     Button,
     Modal
 } from 'antd';
-import severity from '../equipmentseverity';
+import AdminNavbar from '../navbar/navbar';
+import severity from '../mechanic/equipmentseverity';
 
 class ReviewMaintenance extends Component {
     constructor() {
@@ -21,10 +21,9 @@ class ReviewMaintenance extends Component {
             visibleTwo: false,
             visibleThree: false,
             visibleFour: false,
-            problem: '',
-            correctiveAction: '',
-            part: '',
-            severity: '',
+            reviewRemarks: '',
+            reviewOk: '',
+            // maintenanceComplete: '',
             mechanicName: '',
             maintenance_id: '',
             equipment_id: '',
@@ -32,12 +31,10 @@ class ReviewMaintenance extends Component {
         }
 
         this.onChange = this.onChange.bind(this);
-        this.onClick = this.onClick.bind(this);
     }
 
     componentDidMount() {
-        const mechanic_id = cookie.load('user_id')
-        Axios.get(backend_url + '/maintenance/locked/mechanic', { params: { mechanic_id: mechanic_id } }).then(result => {
+        Axios.get(backend_url + '/maintenance/all/incomplete').then(result => {
             this.setState({
                 equipments: result.data.result
             })
@@ -47,25 +44,6 @@ class ReviewMaintenance extends Component {
     onChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
-        })
-    }
-
-    onClick = () => {
-        const { maintenance_id, equipment_id, problem, correctiveAction, part, severity, mechanicName } = this.state;
-        const data = {
-            maintenance_id: maintenance_id,
-            equipment_id: equipment_id,
-            problem: problem,
-            correctiveAction: correctiveAction,
-            part: part,
-            severity: severity,
-            mechanicName: mechanicName,
-            mechanic_id: cookie.load('user_id')
-        }
-        Axios.post(backend_url + '/repair/', { data }).then(result => {
-            if (result.status === 200) {
-                alert('Repair Log added successfully');
-            }
         })
     }
 
@@ -119,7 +97,7 @@ class ReviewMaintenance extends Component {
 
         let data = this.state.equipments.map((equipment) => {
             return (
-                <tr key={equipment.equipment_id}>
+                <tr key={equipment._id}>
                     <td style={{ textAlign: 'center' }}>{equipment.equipment_id}</td>
                     <td style={{ textAlign: 'center' }}>
                         <Button type="primary" onClick={() => {
@@ -146,9 +124,83 @@ class ReviewMaintenance extends Component {
                         </Button>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button type="primary">
+                        <Button type="primary" onClick={() => {
+                            this.setState({
+                                visibleTwo: true
+                            })
+                        }}>
                             Review Maintenance
                         </Button>
+                        <Modal
+                            title="Review Maintenance"
+                            visible={this.state.visibleTwo}
+                            onOk={() => {
+                                this.setState({
+                                    visibleTwo: false
+                                })
+                            }}
+                            onCancel={() => {
+                                this.setState({
+                                    visibleTwo: false
+                                })
+                            }}
+                            width={500}>
+                            <form>
+                                <div class="form-group">
+                                    <label for="problem">Review Remarks</label>
+                                    <textarea class="form-control" id="reviewRemarks" name="reviewRemarks" aria-describedby="emailHelp" placeholder="Enter review remarks" onChange={this.onChange} />
+                                </div>
+
+                                {/* <div class="form-group">
+                                    <label for="maintenanceComplete">Mark Maintenance Complete</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="maintenanceComplete" id="maintenanceComplete" value="true" onChange={this.onChange} />
+                                        <label class="form-check-label" for="markComplete">
+                                            Mark Complete
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="maintenanceComplete" id="maintenanceComplete" value="false" onChange={this.onChange} />
+                                        <label class="form-check-label" for="markIncomplete">
+                                            Mark Incomplete
+                                        </label>
+                                    </div>
+                                </div> */}
+
+                                <div class="form-group">
+                                    <label for="reviewOk">Is review ok ?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="reviewOk" id="reviewOk" value="true" onChange={this.onChange} />
+                                        <label class="form-check-label" for="reviewOk">
+                                            Review Okay
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="reviewOk" id="reviewOk" value="false" onChange={this.onChange} />
+                                        <label class="form-check-label" for="reviewNotOk">
+                                            Review not okay
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" onClick={() => {
+                                    const data = {
+                                        _id: equipment._id,
+                                        reviewRemarks: this.state.reviewRemarks,
+                                        reviewOk: this.state.reviewOk,
+                                        reviewedBy: cookie.load('user_id'),
+                                        // maintenanceComplete: this.state.maintenanceComplete
+                                    }
+                                    Axios.patch(backend_url + '/maintenance/complete', { data }).then(result => {
+                                        if (result.status === 200 && result.data.success === true) {
+                                            alert("Review submitted successfully");
+                                        } else {
+                                            alert("Review could not be submitted successfully");
+                                        }
+                                    })
+                                }}>Submit</button>
+                            </form>
+                        </Modal>
                     </td>
                 </tr>
             )
@@ -175,64 +227,6 @@ class ReviewMaintenance extends Component {
                     <p><strong>Serial No:</strong> {this.state.equipmentDetails.serialNo}</p>
                     <p><strong>Maintenance Frequency:</strong> {frequency[this.state.equipmentDetails.maintenanceFrequency]}</p>
                     <p><strong>Next due date:</strong> {new Date(this.state.equipmentDetails.dueDate).toLocaleDateString()}</p>
-                </Modal>
-
-                <Modal
-                    title="Add Repair Log"
-                    visible={this.state.visibleTwo}
-                    onOk={() => {
-                        this.setState({
-                            visibleTwo: false
-                        })
-                    }}
-                    onCancel={() => {
-                        this.setState({
-                            visibleTwo: false
-                        })
-                    }}
-                    width={500}>
-                    <form>
-                        <div class="form-group">
-                            <label for="problem">Problem</label>
-                            <textarea class="form-control" id="problem" name="problem" aria-describedby="emailHelp" placeholder="Enter problem description" onChange={this.onChange} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="correctiveAction">Corrective Action</label>
-                            <textarea class="form-control" id="correctiveAction" name="correctiveAction" placeholder="Corrective Action taken" onChange={this.onChange} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="part">Part</label>
-                            <input type="text" class="form-control" id="part" name="part" aria-describedby="emailHelp" placeholder="Part" onChange={this.onChange} />
-                        </div>
-                        <div class="form-group">
-                            <label for="severity">Severity</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="severity" id="severity" value="L" onChange={this.onChange} />
-                                <label class="form-check-label" for="Low">
-                                    Low
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="severity" id="severity" value="M" onChange={this.onChange} />
-                                <label class="form-check-label" for="Medium">
-                                    Medium
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="severity" id="severity" value="C" onChange={this.onChange} />
-                                <label class="form-check-label" for="Critical">
-                                    Critical
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="mechanicName">Mechanic Name</label>
-                                <input type="text" class="form-control" id="mechanicName" name="mechanicName" aria-describedby="emailHelp" placeholder="Mechanic Name" onChange={this.onChange} />
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Add</button>
-                    </form>
                 </Modal>
 
                 <Modal
@@ -274,7 +268,7 @@ class ReviewMaintenance extends Component {
                                 <th style={{ textAlign: 'center' }}>Equipment Id</th>
                                 <th style={{ textAlign: 'center' }}>Equipment Details</th>
                                 <th style={{ textAlign: 'center' }}>Repair Log</th>
-                                <th style={{ textAlign: 'center' }}>View Repair Logs</th>
+                                <th style={{ textAlign: 'center' }}>Review</th>
                             </tr>
                         </thead>
                         <tbody>
