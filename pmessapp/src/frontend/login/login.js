@@ -27,7 +27,7 @@ class Login extends Component {
                 if (result.data.success && result.status == 200) {
                     cookie.save('user_id', user_id);
                     if (role === 'A'){
-                        this.props.history.push('/viewequipments')
+                        this.props.history.push('/home')
                     } else {
                         this.props.history.push('/viewequipmentsmechanic');
                     } 
