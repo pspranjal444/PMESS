@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
 import cookie from 'react-cookies';
-
+import util from '../components/utility/getUserType';
 class Login extends Component {
     constructor() {
         super();
@@ -26,7 +26,9 @@ class Login extends Component {
             .then(result => {
                 if (result.data.success && result.status == 200) {
                     cookie.save('user_id', user_id);
-                    if (role === 'A'){
+                    cookie.save('role', role);
+                    //console.log(cookie.load('role'));
+                    if (util.isAdmin()){
                         this.props.history.push('/home')
                     } else {
                         this.props.history.push('/viewequipmentsmechanic');
