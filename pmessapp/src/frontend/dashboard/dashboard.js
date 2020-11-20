@@ -8,14 +8,18 @@ import ViewEquipmentsToday from '../mechanic/viewequipments/viewlockequipmentsto
 import Sidebar from '../sidebar/sidebar';
 
 const { TabPane } = Tabs;
+import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
 
 class Dashboard extends Component {
-    constructor() {
+    constructor(props) {
+
         super();
         this.state = {
             size: 'large',
             tab: <ViewEquipmentsToday/>
         };
+        
     }
 
     render() {
@@ -58,6 +62,9 @@ class Dashboard extends Component {
                         </TabPane>
                     </Tabs>
                 </div>
+                {/* <AdminNavbar /> */}
+                
+                 <Equipments/>
             </div>
         )
     }

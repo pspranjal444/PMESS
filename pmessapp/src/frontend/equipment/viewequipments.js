@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 import backend_url from '../../url/backend_url';
 import frequency from '../../utility/frequencyConvert';
 import AdminNavbar from '../navbar/navbar';
-import { Modal, Button } from 'antd';
+import { Modal, Button, Radio } from 'antd';
+// import {Button as AntButton} from "antd-button-color";
+// import { Button as ReactButton, ButtonGroup } from 'react-bootstrap';
+
+import maintenanceSchedule from '../../backend/model/maintenance-schedule';
+
 
 class Equipments extends Component {
     constructor() {
@@ -45,6 +50,10 @@ class Equipments extends Component {
     }
 
     render() {
+        const mystyle = {
+            paddingBottom: "10%",
+            paddingLeft: "70%"
+        };
         let mss = '';
         if (this.state.maintenanceschedules.length > 0) {
             mss = this.state.maintenanceschedules.map((ms) => {
@@ -92,6 +101,7 @@ class Equipments extends Component {
             <div>
                 <AdminNavbar />
                 <a href="/reviewmaintenance">Review Maintenance</a>
+                {/* <AdminNavbar /> */}
                 <>
                     <Modal
                         title={this.state.equipmentName}
@@ -104,7 +114,7 @@ class Equipments extends Component {
                         <p><strong>Maintenance Frequency:</strong> {frequency[this.state.maintenanceFrequency]}</p>
                         <p><strong>Next due date:</strong> {new Date(this.state.dueDate).toLocaleDateString()}</p>
                         <p>History of maintenance schedules:</p>
-                        <div class="container"  style={{width: "800px"}}>
+                        <div class="container" style={{ width: "800px" }}>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -123,6 +133,21 @@ class Equipments extends Component {
                     </Modal>
                 </>
                 <div class="container">
+                    
+                    <div style={{ mystyle }}>
+
+
+                        <Radio.Group defaultValue="a" buttonStyle="solid" Button type="warning">
+                            <Radio.Button  value="a">Today</Radio.Button>
+                            <Radio.Button value="b">This Week</Radio.Button>
+                            <Radio.Button value="c">This Month</Radio.Button>
+                           
+                        </Radio.Group>
+                        
+
+
+
+                    </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>

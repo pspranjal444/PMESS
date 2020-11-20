@@ -46,10 +46,10 @@ class AddEquipment extends Component {
 
     render() {
         return (
-            <div>
-                <Navbar />
+            <div style={{paddingLeft: "30%"}}>
+               
                 <br /><br /><br /><br /><br />
-                <div class="col-xs-3" style={{ border: "1px solid black", padding: "20px", marginLeft: "50px" }}>
+                <div class="col-xs-5" style={{ border: "1px solid black", padding: "20px", marginLeft: "50px" }}>
                     <h2>Add Equipment</h2>
                     <form>
                         <div class="form-group">

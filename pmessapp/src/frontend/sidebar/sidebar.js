@@ -24,7 +24,7 @@ class Sidebar extends Component {
                 <Menu iconShape="square">
                     <a href="/home">
                     <b><MenuItem  onClick={this.handleNavClick}>Home </MenuItem> </b> </a>
-                       <b> <MenuItem  onClick={this.handleNavClick}>Add User</MenuItem> </b>
+                       <b> <MenuItem  onClick={this.handleNavClick}>Add User</MenuItem> </b>            
                          <SubMenu title="Equipments" >
                             <a href="/addequipment">
                          <MenuItem>Add Equipment</MenuItem>

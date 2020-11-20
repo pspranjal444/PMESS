@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.8.0",
+    "antd-button-color": "^1.0.3",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.3",
@@ -17,11 +18,13 @@
     "mongoose": "^5.10.5",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.4.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
     "react-pro-sidebar": "^0.4.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-side-bar": "^1.0.4",
     "voca": "^1.4.0"
   },
   "scripts": {
