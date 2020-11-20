@@ -6,9 +6,14 @@ class Signup extends Component {
     constructor() {
         super();
         this.state = {
+            firstName: '',
+            lastName: '',
             user_id: '',
             password: '',
+            phone: '',
+            email_id: '',
             role: ''
+
         }
     }
 
@@ -19,8 +24,8 @@ class Signup extends Component {
     }
 
     onClick = () => {
-        const { user_id, password, role } = this.state;
-        axios.post(backend_url + '/user', { user_id, password, role })
+        const { firstName, lastName, user_id, password, phone, email_id, role} = this.state;
+        axios.post(backend_url + '/user', { firstName, lastName, user_id, password, phone, email_id, role })
             .then(result => {
                 if (result.data.success && result.status == 200) {
                     alert('User successfully created');
@@ -40,16 +45,31 @@ class Signup extends Component {
                     <br />
                     <form>
                         <div class="form-group">
-                            <label for="email">User Id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChange} />
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <label for="firstName">First Name: </label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" onChange={this.onChange} />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name: </label>
+                            <input type="lastName" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" onChange={this.onChange} />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_id">User Id</label>
+                            <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter User ID" onChange={this.onChange} />
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" onChange={this.onChange} />
                         </div>
-
+                        <div class="form-check">
+                            <label for="phone">Phone Number: </label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number" onChange={this.onChange} />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID: </label>
+                            <input type="text" class="form-control" id="email_id" name="email_id" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChange} />
+                        </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" id="role" value="A" onChange={this.onChange} />
                             <label class="form-check-label" for="typeAdmin">
