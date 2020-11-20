@@ -26,11 +26,8 @@ class Login extends Component {
             .then(result => {
                 if (result.data.success && result.status == 200) {
                     cookie.save('user_id', user_id);
-                    if (role === 'A'){
-                        this.props.history.push('/dashboard')
                     cookie.save('role', role);
-                    //console.log(cookie.load('role'));
-                    if (util.isAdmin()){
+                    if (util.isAdmin()) {
                         this.props.history.push('/home')
                     } else {
                         this.props.history.push('/viewequipmentsmechanic');
@@ -39,6 +36,7 @@ class Login extends Component {
                     alert('Unable to login. Please check the credentials');
                 }
             })
+            
     }
 
     render() {

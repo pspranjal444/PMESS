@@ -6,10 +6,10 @@ import ViewEquipmentsWeekly from '../mechanic/viewequipments/viewlockequipmentsw
 import ViewEquipmentsMonthly from '../mechanic/viewequipments/viewlockequipmentsmonthly';
 import ViewEquipmentsToday from '../mechanic/viewequipments/viewlockequipmentstoday';
 import Sidebar from '../sidebar/sidebar';
-
-const { TabPane } = Tabs;
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
+const { TabPane } = Tabs;
+
 
 class Dashboard extends Component {
     constructor(props) {
