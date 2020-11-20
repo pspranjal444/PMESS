@@ -158,6 +158,23 @@ router.get('/today', (req, res) => {
         })
 });
 
+// API to get all upcoming equipments that need to be serviced within date range
+router.get('/daterange', (req, res) => {
+    var startDate = req.query.startDate;
+    var endDate = req.query.endDate;
+
+    console.log(req.query)
+
+    EquipmentDetails.find({ dueDate: { $gte: new Date(startDate), $lte: new Date(endDate) } }).exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
+
 // API to mark equipment back in use as true or false
 router.patch('/backinuse', (req, res) => {
     const { equipment_id, isBackInUse } = req.body;
