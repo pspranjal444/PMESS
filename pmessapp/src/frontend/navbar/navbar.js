@@ -11,9 +11,14 @@ import {
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import cookie from "react-cookies";
-import {Link} from 'react-router-dom';
-import {HomeOutlined, UserAddOutlined, LogoutOutlined, ControlOutlined, BookOutlined } from '@ant-design/icons';
-
+import { Link } from "react-router-dom";
+import {
+  HomeOutlined,
+  UserAddOutlined,
+  LogoutOutlined,
+  ControlOutlined,
+  BookOutlined,
+} from "@ant-design/icons";
 
 class SidebarAdmin extends Component {
   constructor(props) {
@@ -37,21 +42,26 @@ class SidebarAdmin extends Component {
             style={{ marginTop: "15px" }}
           />
           <Menu iconShape="square">
-            <Link to="/upcomingadmin">
-              <MenuItem icon={<HomeOutlined/>} key="1">Home</MenuItem>
-            </Link>
-            <Link to="/signup">
-                <MenuItem icon={<UserAddOutlined/>} key="2">Add User</MenuItem>
-            </Link>
-            <SubMenu icon={<ControlOutlined/>} title="Equipments">
+            <MenuItem icon={<HomeOutlined />} key="1">
+              <Link to="/upcomingadmin">Home</Link>
+            </MenuItem>
+            <MenuItem icon={<UserAddOutlined />} key="2">
+              <Link to="/signup">Add User</Link>
+            </MenuItem>
+            <SubMenu icon={<ControlOutlined />} title="Equipments">
               <Link to="/addequipment">
                 <MenuItem key="3">Add Equipment</MenuItem>
               </Link>
 
               <MenuItem>Edit Equipment</MenuItem>
             </SubMenu>
-            <MenuItem icon={<BookOutlined/>} onClick={this.handleNavClick}>Reports</MenuItem>
-            <MenuItem icon={<LogoutOutlined/>} onClick={this.handleLogout}> Logout</MenuItem>
+            <MenuItem icon={<BookOutlined />} onClick={this.handleNavClick}>
+              Reports
+            </MenuItem>
+            <MenuItem icon={<LogoutOutlined />} onClick={this.handleLogout}>
+              {" "}
+              Logout
+            </MenuItem>
           </Menu>
         </ProSidebar>
       </div>
