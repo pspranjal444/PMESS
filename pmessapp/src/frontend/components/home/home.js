@@ -12,6 +12,7 @@ import backend_url from '../../../url/backend_url';
 import frequency from '../../../utility/frequencyConvert';
 import cookie from 'react-cookies';
 import RepairTasks from '../../repairs/repairtasks';
+import ViewEquipmentsOverdue from '../../mechanic/viewequipments/viewlockequipmentsoverdue';
 
 import { Button as SButton, Card, Image } from 'semantic-ui-react';
 
@@ -21,7 +22,7 @@ const { RangePicker } = DatePicker;
 class Home extends Component {
   state = {
     size: "large",
-    tab: <ViewEquipmentsToday />,
+    tab: <ViewEquipmentsOverdue />,
     startDate: '',
     endDate: '',
     keyTab: '',
@@ -71,10 +72,6 @@ class Home extends Component {
   };
 
   render() {
-    // const redirectVar = "";
-    // if(!cookie.load('user_id') || !cookie.load('role')){
-    //   redirectVar = <Redirect to = "/"/>
-    // }
     const { size } = this.state;
     const mystyle = {
       paddingBottom: "10%",
@@ -165,15 +162,20 @@ class Home extends Component {
               <Radio.Group defaultValue="a" buttonStyle="solid" Button type="warning">
                 <Radio.Button value="a" onChange={() => {
                   this.setState({
+                    tab: <ViewEquipmentsOverdue />
+                  })
+                }}>Overdue</Radio.Button>
+                <Radio.Button value="b" onChange={() => {
+                  this.setState({
                     tab: <ViewEquipmentsToday />
                   })
                 }}>Today</Radio.Button>
-                <Radio.Button value="b" onChange={() => {
+                <Radio.Button value="c" onChange={() => {
                   this.setState({
                     tab: <ViewEquipmentsWeekly />
                   })
                 }}>This Week</Radio.Button>
-                <Radio.Button value="c" onChange={() => {
+                <Radio.Button value="d" onChange={() => {
                   this.setState({
                     tab: <ViewEquipmentsMonthly />
                   })
@@ -206,7 +208,7 @@ class Home extends Component {
                               })
                             }}>
                               Lock
-                                  </Button>
+                            </Button>
                           </td>
                           <td style={{ textAlign: 'center' }}>
                             <Button type="primary" disabled={!equipment.isLocked} onClick={() => {

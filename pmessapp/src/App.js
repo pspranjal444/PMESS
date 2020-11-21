@@ -34,7 +34,8 @@ class App extends Component {
       {!cookie.load('user_id') &&
         <Fragment>
           {/* <Route path='/' component={Sidebar} /> */}
-          <Route exact path='/' component={Login} />
+          <Route exact path="/" render={(props) => <Login {...props} />} />
+          {/* <Route exact path='/' component={Login} /> */}
           <Route path='/signup' component={Signup} />
         </Fragment>
       }

@@ -16,7 +16,7 @@ class ViewLockEquipment extends Component {
     }
 
     componentDidMount() {
-        Axios.get(backend_url + '/equipment/weekly')
+        Axios.get(backend_url + '/equipment/overdue')
             .then(result => {
                 this.setState({
                     equipments: result.data.result

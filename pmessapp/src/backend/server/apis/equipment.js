@@ -88,14 +88,14 @@ router.get('/all', (req, res) => {
 })
 
 //API to get all the over-due equipment maintenanceschedules
-router.get('/weekly', (req, res) => {
+router.get('/overdue', (req, res) => {
 
     var todaysDate = new Date();
     todaysDate = todaysDate.toLocaleDateString('en-US');
 
     EquipmentDetails.find({$and:[{ maintenanceDone: false },{ dueDate: {$lt: new Date(todaysDate)} }] }).exec()
         .then(result => {
-             console.log(result);
+             console.log("Overdue: ",result);
             res.status(200).json({
                 success: true,
                 result: result
@@ -104,23 +104,23 @@ router.get('/weekly', (req, res) => {
 });
 
 // API to get all upcoming equipments that need to be serviced within the upcoming week
-// router.get('/weekly', (req, res) => {
-//     var todaysDatePlusSeven = new Date();
-//     todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate() + 7);
-//     todaysDatePlusSeven = todaysDatePlusSeven.toLocaleDateString('en-US');
+router.get('/weekly', (req, res) => {
+    var todaysDatePlusSeven = new Date();
+    todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate() + 7);
+    todaysDatePlusSeven = todaysDatePlusSeven.toLocaleDateString('en-US');
 
-//     var todaysDate = new Date();
-//     todaysDate = todaysDate.toLocaleDateString('en-US');
+    var todaysDate = new Date();
+    todaysDate = todaysDate.toLocaleDateString('en-US');
 
-//     EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven) } }).exec()
-//         .then(result => {
-//             // console.log(result);
-//             res.status(200).json({
-//                 success: true,
-//                 result: result
-//             })
-//         })
-// });
+    EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven) } }).exec()
+        .then(result => {
+            // console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
 
 // API to get all upcoming equipments that need to be serviced within the upcoming month 
 router.get('/monthly', (req, res) => {

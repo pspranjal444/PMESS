@@ -12,7 +12,7 @@ class ViewLockEquipment extends Component {
 
         this.state = {
             equipments: [],
-            time: 'weekly'
+            time: 'overdue'
         }
     }
 
