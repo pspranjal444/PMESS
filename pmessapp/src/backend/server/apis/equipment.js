@@ -86,6 +86,22 @@ router.get('/all', (req, res) => {
         });
 })
 
+//API to get all the over-due equipment maintenanceschedules
+router.get('/overdue', (req, res) => {
+
+    var todaysDate = new Date();
+    todaysDate = todaysDate.toLocaleDateString('en-US');
+
+    EquipmentDetails.find({$and:[{ maintenanceDone: false },{ dueDate: {$lt: new Date(todaysDate)} }] }).exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                success: true,
+                result: result
+            })
+        })
+});
+
 // API to get all upcoming equipments that need to be serviced within the upcoming week
 router.get('/weekly', (req, res) => {
     var todaysDatePlusSeven = new Date();
