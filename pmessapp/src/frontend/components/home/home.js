@@ -14,7 +14,7 @@ import cookie from 'react-cookies';
 import RepairTasks from '../../repairs/repairtasks';
 import ViewEquipmentsOverdue from '../../mechanic/viewequipments/viewlockequipmentsoverdue';
 
-import { Button as SButton, Card, Image } from 'semantic-ui-react';
+import { Button as SButton, Card, Image } from "semantic-ui-react";
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -38,21 +38,17 @@ class Home extends Component {
   //   return Axios.get(backend_url + '/equipment/countOverdue');
   // }
 
-
   componentWillMount() {
-
-    Axios.get(backend_url + '/cardDetails')
-      .then(result => {
-        console.log("card  " ,result);
-        this.setState({
-          cardOutput: result.data.result, 
-        })
-      })
-
+    Axios.get(backend_url + "/cardDetails").then((result) => {
+      console.log("card  ", result);
+      this.setState({
+        cardOutput: result.data.result,
+      });
+    });
 
     // Promise.all([this.getEquipmentCount(), this.getOverdueCount(), this.getRepairCount()]).then(result1 => {
     //   this.setState({
-    //     equipmentCount: result1.data.result1, 
+    //     equipmentCount: result1.data.result1,
     //   }).then(result => {
     //     this.setState({
     //       overdueCount: result.data.result,
@@ -63,11 +59,7 @@ class Home extends Component {
     // })
   }
 
-
-
-
-
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ size: e.target.value });
   };
 
@@ -75,24 +67,23 @@ class Home extends Component {
     const { size } = this.state;
     const mystyle = {
       paddingBottom: "10%",
-      paddingLeft: "70%"
+      paddingLeft: "70%",
     };
-    const dateFormat = 'MM/DD/YYYY';
+    const dateFormat = "MM/DD/YYYY";
     return (
       <div style={{ paddingLeft: "20%" }}>
         <Helmet>
-          <style>{'body{background-color: aliceblue;}'}</style>
+          <style>{"body{background-color: aliceblue;}"}</style>
         </Helmet>
 
         <>
           <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%" }}>
-            <Card color='violet' style={{ marginLeft: "1%", marginRight: "5%" }}>
+            <Card
+              color="violet"
+              style={{ marginLeft: "1%", marginRight: "5%" }}
+            >
               <Card.Content>
-                <Image
-                  floated='right'
-                  size='tiny'
-                  src= 'equipment-icon-4.jpg'
-                />
+                <Image floated="right" size="tiny" src="equipment-icon-4.jpg" />
                 <Card.Header>Equipments Due</Card.Header>
                 <Card.Meta></Card.Meta>
                 <Card.Description>
@@ -100,20 +91,16 @@ class Home extends Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
-                  <SButton basic color='green'>
+                <div className="ui two buttons">
+                  <SButton basic color="green">
                     Approve
                   </SButton>
                 </div>
               </Card.Content>
             </Card>
-            <Card color='teal' style={{ marginLeft: "1%", marginRight: "5%" }}>
+            <Card color="teal" style={{ marginLeft: "1%", marginRight: "5%" }}>
               <Card.Content>
-                <Image
-                  floated='right'
-                  size='tiny'
-                  src='timer.png'
-                />
+                <Image floated="right" size="tiny" src="timer.png" />
                 <Card.Header>Overdue</Card.Header>
                 <Card.Meta>New User</Card.Meta>
                 <Card.Description>
@@ -121,21 +108,16 @@ class Home extends Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
-                  <SButton basic color='green'>
+                <div className="ui two buttons">
+                  <SButton basic color="green">
                     Approve
-          </SButton>
-
+                  </SButton>
                 </div>
               </Card.Content>
             </Card>
-            <Card color='pink' style={{ marginLeft: "1%", marginRight: "5%" }}>
+            <Card color="pink" style={{ marginLeft: "1%", marginRight: "5%" }}>
               <Card.Content>
-                <Image
-                  floated='right'
-                  size='tiny'
-                  src='repairlog.png'
-                />
+                <Image floated="right" size="tiny" src="repairlog.png" />
                 <Card.Header>Repair Logs</Card.Header>
                 <Card.Meta>New User</Card.Meta>
                 <Card.Description>
@@ -143,17 +125,15 @@ class Home extends Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
-                  <SButton basic color='green'>
+                <div className="ui two buttons">
+                  <SButton basic color="green">
                     Approve
-          </SButton>
-
+                  </SButton>
                 </div>
               </Card.Content>
             </Card>
           </Card.Group>
         </>
-
 
         {/* {redirectVar} */}
         <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
@@ -222,49 +202,69 @@ class Home extends Component {
                                     .then(resultComplete => {
                                       console.log(resultComplete)
                                       if (resultComplete.status == 200) {
-                                        return Axios.patch(backend_url + '/equipment/updateduedate', { equipment })
-                                          .then(result => {
-                                            console.log(result)
-                                            if (result.status == 200) {
-                                              return Axios.patch(backend_url + '/equipment/unlock', { equipment })
-                                                .then(result => {
-                                                  console.log(result)
-                                                  if (result.status == 200) {
-                                                    alert('Successfully Marked')
-                                                  }
-                                                })
-                                            }
-                                          })
+                                        return Axios.patch(
+                                          backend_url +
+                                            "/equipment/updateduedate",
+                                          { equipment }
+                                        ).then((result) => {
+                                          console.log(result);
+                                          if (result.status == 200) {
+                                            return Axios.patch(
+                                              backend_url + "/equipment/unlock",
+                                              { equipment }
+                                            ).then((result) => {
+                                              console.log(result);
+                                              if (result.status == 200) {
+                                                alert("Successfully Marked");
+                                              }
+                                            });
+                                          }
+                                        });
                                       }
-                                    })
-                                })
-                            }}>Complete</Button>
-                          </td>
-                        </tr>
-                      )
+                                    });
+                                  });
+                                }}
+                              >
+                                Complete
+                              </Button>
+                            </td>
+                          </tr>
+                        );
+                      });
+                      this.setState({
+                        tab: (
+                          <div class="container">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th style={{ textAlign: "center" }}>
+                                    Equipment Id
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Equipment Name
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Serial Number
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Maintenance Frequency
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Due Date
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>Lock</th>
+                                </tr>
+                              </thead>
+                              <tbody>{data}</tbody>
+                            </table>
+                          </div>
+                        ),
+                      });
                     });
-                    this.setState({
-                      tab:
-                        <div class="container">
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th style={{ textAlign: 'center' }}>Equipment Id</th>
-                                <th style={{ textAlign: 'center' }}>Equipment Name</th>
-                                <th style={{ textAlign: 'center' }}>Serial Number</th>
-                                <th style={{ textAlign: 'center' }}>Maintenance Frequency</th>
-                                <th style={{ textAlign: 'center' }}>Due Date</th>
-                                <th style={{ textAlign: 'center' }}>Lock</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {data}
-                            </tbody>
-                          </table>
-                        </div>
-                    })
-                  })
-                }}>Go</Button>
+                  }}
+                >
+                  Go
+                </Button>
               </span>
             </div>
             {this.state.tab}
