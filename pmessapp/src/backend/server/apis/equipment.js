@@ -27,7 +27,8 @@ router.post('/', (req, res) => {
         isNotInUse: false,
         isBackInUse: true,
         dueDate: todaysDateISO.toLocaleDateString('en-US'),
-        isLocked: false
+        isLocked: false,
+        maintenanceDone: false
     });
 
     EquipmentDetails.find({ equipment_id: equipment_id }).exec().then(result => {
@@ -87,14 +88,14 @@ router.get('/all', (req, res) => {
 })
 
 //API to get all the over-due equipment maintenanceschedules
-router.get('/overdue', (req, res) => {
+router.get('/weekly', (req, res) => {
 
     var todaysDate = new Date();
     todaysDate = todaysDate.toLocaleDateString('en-US');
 
     EquipmentDetails.find({$and:[{ maintenanceDone: false },{ dueDate: {$lt: new Date(todaysDate)} }] }).exec()
         .then(result => {
-            console.log(result);
+             console.log(result);
             res.status(200).json({
                 success: true,
                 result: result
@@ -103,23 +104,23 @@ router.get('/overdue', (req, res) => {
 });
 
 // API to get all upcoming equipments that need to be serviced within the upcoming week
-router.get('/weekly', (req, res) => {
-    var todaysDatePlusSeven = new Date();
-    todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate() + 7);
-    todaysDatePlusSeven = todaysDatePlusSeven.toLocaleDateString('en-US');
+// router.get('/weekly', (req, res) => {
+//     var todaysDatePlusSeven = new Date();
+//     todaysDatePlusSeven.setDate(todaysDatePlusSeven.getDate() + 7);
+//     todaysDatePlusSeven = todaysDatePlusSeven.toLocaleDateString('en-US');
 
-    var todaysDate = new Date();
-    todaysDate = todaysDate.toLocaleDateString('en-US');
+//     var todaysDate = new Date();
+//     todaysDate = todaysDate.toLocaleDateString('en-US');
 
-    EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven) } }).exec()
-        .then(result => {
-            console.log(result);
-            res.status(200).json({
-                success: true,
-                result: result
-            })
-        })
-});
+//     EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusSeven) } }).exec()
+//         .then(result => {
+//             // console.log(result);
+//             res.status(200).json({
+//                 success: true,
+//                 result: result
+//             })
+//         })
+// });
 
 // API to get all upcoming equipments that need to be serviced within the upcoming month 
 router.get('/monthly', (req, res) => {
@@ -151,7 +152,7 @@ router.get('/annually', (req, res) => {
 
     EquipmentDetails.find({ dueDate: { $gte: new Date(todaysDate), $lte: new Date(todaysDatePlusYear) } }).exec()
         .then(result => {
-            console.log(result);
+            // console.log(result);
             res.status(200).json({
                 success: true,
                 result: result
@@ -183,13 +184,44 @@ router.get('/today', (req, res) => {
 
     EquipmentDetails.find({ dueDate: new Date(todaysDate) }).exec()
         .then(result => {
-            console.log(result);
+            // console.log(result);
             res.status(200).json({
                 success: true,
                 result: result
             })
         })
 });
+
+// router.get('/countDueToday',  (req, res) => {
+//     var todaysDate = new Date();
+//     todaysDate = todaysDate.toLocaleDateString('en-US');
+
+//     EquipmentDetails.count({dueDate: new Date(todaysDate)
+// }).exec()
+//     .then(result => {
+//         console.log("due today" ,result);
+//         res.status(200).json({
+//             success: true,
+//             result: result
+//         })
+//     })
+
+// });
+
+// router.get('/countOverdue', (req, res) => {
+
+//     var todaysDate = new Date();
+//     todaysDate = todaysDate.toLocaleDateString('en-US');
+
+//     EquipmentDetails.count({ $and: [{ maintenanceDone: false }, { dueDate: { $lt: new Date(todaysDate) } }] }).exec()
+//         .then(result1 => {
+//             console.log("overdue" ,result);
+//             res.status(200).json({
+//                 success: true,
+//                 result1: result1
+//             })
+//         })
+// });
 
 // API to mark equipment back in use as true or false
 router.patch('/backinuse', (req, res) => {

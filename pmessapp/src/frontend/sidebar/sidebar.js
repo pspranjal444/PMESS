@@ -5,6 +5,7 @@ import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, Side
 import 'react-pro-sidebar/dist/css/styles.css';
 import cookie from 'react-cookies';
 
+
 class Sidebar extends Component {
     constructor(props) {
 
@@ -31,7 +32,7 @@ class Sidebar extends Component {
                 <ProSidebar  style={{position: "fixed !important"}}>
                 <Menu iconShape="square">
                     <a href="/home">
-                    <b><MenuItem  onClick={this.handleNavClick}>Home </MenuItem> </b> </a>
+        <b><MenuItem onClick={this.handleNavClick}>Home </MenuItem> </b> </a>
                        <b> <MenuItem  onClick={this.handleNavClick}>Add User</MenuItem> </b>            
                          <SubMenu title="Equipments" >
                             <a href="/addequipment">

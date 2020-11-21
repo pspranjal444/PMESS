@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Helmet} from 'react-helmet';
 import Axios from 'axios';
 import { Tabs, Radio, DatePicker, Button } from 'antd';
 import ViewEquipments from '../../equipment/viewequipments';
@@ -12,6 +13,7 @@ import frequency from '../../../utility/frequencyConvert';
 import cookie from 'react-cookies';
 import RepairTasks from '../../repairs/repairtasks';
 
+import { Button as SButton, Card, Image } from 'semantic-ui-react';
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -22,8 +24,45 @@ class Home extends Component {
     tab: <ViewEquipmentsToday />,
     startDate: '',
     endDate: '',
-    keyTab: ''
+    keyTab: '',
+    cardOutput: []
   };
+
+  // getEquipmentCount() {
+  //   return Axios.get(backend_url + '/equipment/countDueToday');
+
+  // }
+
+  // getOverdueCount() {
+  //   return Axios.get(backend_url + '/equipment/countOverdue');
+  // }
+
+
+  componentWillMount() {
+
+    Axios.get(backend_url + '/cardDetails')
+      .then(result => {
+        console.log("card  " ,result);
+        this.setState({
+          cardOutput: result.data.result, 
+        })
+      })
+
+
+    // Promise.all([this.getEquipmentCount(), this.getOverdueCount(), this.getRepairCount()]).then(result1 => {
+    //   this.setState({
+    //     equipmentCount: result1.data.result1, 
+    //   }).then(result => {
+    //     this.setState({
+    //       overdueCount: result.data.result,
+    //     })
+    //   }).then(result2 => this.setState({
+    //     repairCount: result2.data.result2,
+    //   }) )
+    // })
+  }
+
+
 
 
 
@@ -44,6 +83,81 @@ class Home extends Component {
     const dateFormat = 'MM/DD/YYYY';
     return (
       <div style={{ paddingLeft: "20%" }}>
+        <Helmet>
+          <style>{'body{background-color: aliceblue;}'}</style>
+        </Helmet>
+
+        <>
+          <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%" }}>
+            <Card color='violet' style={{ marginLeft: "1%", marginRight: "5%" }}>
+              <Card.Content>
+                <Image
+                  floated='right'
+                  size='tiny'
+                  src= 'equipment-icon-4.jpg'
+                />
+                <Card.Header>Equipments Due</Card.Header>
+                <Card.Meta></Card.Meta>
+                <Card.Description>
+                  <strong>{this.state.cardOutput[0]}</strong>
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className='ui two buttons'>
+                  <SButton basic color='green'>
+                    Approve
+                  </SButton>
+                </div>
+              </Card.Content>
+            </Card>
+            <Card color='teal' style={{ marginLeft: "1%", marginRight: "5%" }}>
+              <Card.Content>
+                <Image
+                  floated='right'
+                  size='tiny'
+                  src='timer.png'
+                />
+                <Card.Header>Overdue</Card.Header>
+                <Card.Meta>New User</Card.Meta>
+                <Card.Description>
+                  <strong>{this.state.cardOutput[1]}</strong>
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className='ui two buttons'>
+                  <SButton basic color='green'>
+                    Approve
+          </SButton>
+
+                </div>
+              </Card.Content>
+            </Card>
+            <Card color='pink' style={{ marginLeft: "1%", marginRight: "5%" }}>
+              <Card.Content>
+                <Image
+                  floated='right'
+                  size='tiny'
+                  src='repairlog.png'
+                />
+                <Card.Header>Repair Logs</Card.Header>
+                <Card.Meta>New User</Card.Meta>
+                <Card.Description>
+                  <strong>{this.state.cardOutput[2]}</strong>
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className='ui two buttons'>
+                  <SButton basic color='green'>
+                    Approve
+          </SButton>
+
+                </div>
+              </Card.Content>
+            </Card>
+          </Card.Group>
+        </>
+
+
         {/* {redirectVar} */}
         <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
           <TabPane tab="  Due Equipments " key="1">
@@ -129,7 +243,7 @@ class Home extends Component {
                     });
                     this.setState({
                       tab:
-                        <div class="container"> 
+                        <div class="container">
                           <table class="table table-striped">
                             <thead>
                               <tr>
@@ -154,13 +268,13 @@ class Home extends Component {
             {this.state.tab}
           </TabPane>
           <TabPane tab="Your Tasks" key="2">
-            <LockedEquipments/>
+            <LockedEquipments />
           </TabPane>
           <TabPane tab="Repair Tasks" key="3">
-            <RepairTasks/>
+            <RepairTasks />
           </TabPane>
           <TabPane tab="Review Tasks" key="4">
-            <ReviewMaintenance/>
+            <ReviewMaintenance />
           </TabPane>
         </Tabs>
       </div>

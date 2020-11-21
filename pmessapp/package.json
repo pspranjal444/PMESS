@@ -21,10 +21,13 @@
     "react-bootstrap": "^1.4.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-pro-sidebar": "^0.4.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-side-bar": "^1.0.4",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.1",
     "voca": "^1.4.0"
   },
   "scripts": {
