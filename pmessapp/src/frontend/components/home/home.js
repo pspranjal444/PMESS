@@ -7,15 +7,9 @@ import ViewEquipmentsWeekly from '../../mechanic/viewequipments/viewlockequipmen
 import ViewEquipmentsMonthly from '../../mechanic/viewequipments/viewlockequipmentsmonthly';
 import ReviewMaintenance from '../../reviewmaintenance/reviewmaintenance';
 import LockedEquipments from '../../mechanic/viewequipments/lockedequipments';
-<<<<<<< Updated upstream
-import backend_url from '../../../url/backend_url';
-import frequency from '../../../utility/frequencyConvert';
-import cookie from 'react-cookies';
-=======
 import { cookie } from 'react-cookies';
 import { Redirect } from 'react-router';
 
->>>>>>> Stashed changes
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
