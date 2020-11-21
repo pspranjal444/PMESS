@@ -7,16 +7,11 @@ import ViewEquipmentsWeekly from '../../mechanic/viewequipments/viewlockequipmen
 import ViewEquipmentsMonthly from '../../mechanic/viewequipments/viewlockequipmentsmonthly';
 import ReviewMaintenance from '../../reviewmaintenance/reviewmaintenance';
 import LockedEquipments from '../../mechanic/viewequipments/lockedequipments';
-<<<<<<< HEAD
 import backend_url from '../../../url/backend_url';
 import frequency from '../../../utility/frequencyConvert';
 import cookie from 'react-cookies';
 import RepairTasks from '../../repairs/repairtasks';
-=======
-import { cookie } from 'react-cookies';
-import { Redirect } from 'react-router';
 
->>>>>>> b47e81b51d406c128b9d86893d97d6d49bc17d7a
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
