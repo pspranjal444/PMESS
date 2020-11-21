@@ -7,7 +7,6 @@ import {
     Button,
     Modal
 } from 'antd';
-import AdminNavbar from '../navbar/navbar';
 import severity from '../mechanic/equipmentseverity';
 
 class ReviewMaintenance extends Component {
@@ -23,18 +22,17 @@ class ReviewMaintenance extends Component {
             visibleFour: false,
             reviewRemarks: '',
             reviewOk: '',
-            // maintenanceComplete: '',
             mechanicName: '',
             maintenance_id: '',
             equipment_id: '',
-            repairLogs: []
+            repairLogs: [],
         }
 
         this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
-        Axios.get(backend_url + '/maintenance/all/incomplete').then(result => {
+        Axios.get(backend_url + '/maintenance/notreviewed').then(result => {
             this.setState({
                 equipments: result.data.result
             })
@@ -58,7 +56,6 @@ class ReviewMaintenance extends Component {
         let repairLogsData = this.state.repairLogs.map((repairLog) => {
             return (
                 <tr key={repairLog._id}>
-                    <td style={{ textAlign: 'center' }}>{repairLog.maintenance_id}</td>
                     <td style={{ textAlign: 'center' }}>{repairLog.part}</td>
                     <td style={{ textAlign: 'center', backgroundColor: severityColor[repairLog.severity] }}><strong>{severity[repairLog.severity]}</strong></td>
                     <td style={{ textAlign: 'center' }}>{new Date(repairLog.reviewedDate).toLocaleDateString()}</td>
@@ -88,7 +85,6 @@ class ReviewMaintenance extends Component {
                             <p><strong>Problem:</strong> {repairLog.problem}</p>
                             <p><strong>Corrective Action:</strong> {repairLog.correctiveAction}</p>
                             <p><strong>Mechanic Id:</strong> {repairLog.mechanic_id}</p>
-                            <p><strong>Mechanic Name:</strong> {repairLog.mechanicName}</p>
                         </div>
                     </Modal>
                 </tr>
@@ -100,7 +96,7 @@ class ReviewMaintenance extends Component {
                 <tr key={equipment._id}>
                     <td style={{ textAlign: 'center' }}>{equipment.equipment_id}</td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button type="primary" onClick={() => {
+                        <a type="primary" onClick={() => {
                             Axios.get(backend_url + '/equipment/', { params: { equipment_id: equipment.equipment_id } }).then(result => {
                                 this.setState({
                                     visibleOne: true,
@@ -109,10 +105,10 @@ class ReviewMaintenance extends Component {
                             })
                         }}>
                             More Details
-                        </Button>
+                        </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button type="primary" onClick={() => {
+                        <a type="primary" onClick={() => {
                             Axios.get(backend_url + '/repair/', { params: { maintenance_id: equipment._id } }).then(result => {
                                 this.setState({
                                     visibleThree: true,
@@ -121,7 +117,7 @@ class ReviewMaintenance extends Component {
                             })
                         }}>
                             View Repair Logs
-                        </Button>
+                        </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
                         <Button type="primary" onClick={() => {
@@ -151,22 +147,6 @@ class ReviewMaintenance extends Component {
                                     <textarea class="form-control" id="reviewRemarks" name="reviewRemarks" aria-describedby="emailHelp" placeholder="Enter review remarks" onChange={this.onChange} />
                                 </div>
 
-                                {/* <div class="form-group">
-                                    <label for="maintenanceComplete">Mark Maintenance Complete</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="maintenanceComplete" id="maintenanceComplete" value="true" onChange={this.onChange} />
-                                        <label class="form-check-label" for="markComplete">
-                                            Mark Complete
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="maintenanceComplete" id="maintenanceComplete" value="false" onChange={this.onChange} />
-                                        <label class="form-check-label" for="markIncomplete">
-                                            Mark Incomplete
-                                        </label>
-                                    </div>
-                                </div> */}
-
                                 <div class="form-group">
                                     <label for="reviewOk">Is review ok ?</label>
                                     <div class="form-check">
@@ -185,13 +165,12 @@ class ReviewMaintenance extends Component {
 
                                 <button type="submit" class="btn btn-primary" onClick={() => {
                                     const data = {
-                                        _id: equipment._id,
+                                        maintenance_id: equipment._id,
                                         reviewRemarks: this.state.reviewRemarks,
                                         reviewOk: this.state.reviewOk,
                                         reviewedBy: cookie.load('user_id'),
-                                        // maintenanceComplete: this.state.maintenanceComplete
                                     }
-                                    Axios.patch(backend_url + '/maintenance/complete', { data }).then(result => {
+                                    Axios.patch(backend_url + '/maintenance/review', { data }).then(result => {
                                         if (result.status === 200 && result.data.success === true) {
                                             alert("Review submitted successfully");
                                         } else {
@@ -208,7 +187,6 @@ class ReviewMaintenance extends Component {
 
         return (
             <div>
-                {/* <AdminNavbar /> */}
                 <Modal
                     title={this.state.equipmentDetails.equipmentName}
                     visible={this.state.visibleOne}
@@ -247,7 +225,6 @@ class ReviewMaintenance extends Component {
                         <table class="table table-striped" style={{ width: "910px" }}>
                             <thead>
                                 <tr>
-                                    <th style={{ textAlign: 'center' }}>Maintenance Id</th>
                                     <th style={{ textAlign: 'center' }}>Part</th>
                                     <th style={{ textAlign: 'center' }}>Severity</th>
                                     <th style={{ textAlign: 'center' }}>Reviewed Date</th>

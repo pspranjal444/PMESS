@@ -10,6 +10,7 @@ import LockedEquipments from '../../mechanic/viewequipments/lockedequipments';
 import backend_url from '../../../url/backend_url';
 import frequency from '../../../utility/frequencyConvert';
 import cookie from 'react-cookies';
+import RepairTasks from '../../repairs/repairtasks';
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -19,7 +20,8 @@ class Home extends Component {
     size: "large",
     tab: <ViewEquipmentsToday />,
     startDate: '',
-    endDate: ''
+    endDate: '',
+    keyTab: ''
   };
 
 
@@ -145,11 +147,14 @@ class Home extends Component {
             </div>
             {this.state.tab}
           </TabPane>
-          <TabPane tab="Repair Tasks" key="2">
-            <LockedEquipments />
+          <TabPane tab="Your Tasks" key="2">
+            <LockedEquipments/>
           </TabPane>
-          <TabPane tab="Review Tasks" key="3">
-            <ReviewMaintenance />
+          <TabPane tab="Repair Tasks" key="3">
+            <RepairTasks/>
+          </TabPane>
+          <TabPane tab="Review Tasks" key="4">
+            <ReviewMaintenance/>
           </TabPane>
         </Tabs>
       </div>

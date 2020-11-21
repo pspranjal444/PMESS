@@ -46,36 +46,6 @@ class ViewLockEquipment extends Component {
                             Lock
                         </Button>
                     </td>
-                    <td style={{textAlign: 'center'}}>
-                        <Button type="primary" disabled={!equipment.isLocked} onClick={()=>{
-                            Axios
-                                .get(backend_url + '/maintenance/locked', {params: {equipment_id: equipment.equipment_id}})
-                                .then(result=>{
-                                    console.log(result)
-                                    const maintenance_id = result.data.result[0]._id;
-                                    console.log(maintenance_id)
-                                    return Axios.patch(backend_url+'/maintenance/complete', {maintenance_id})
-                                    .then(resultComplete=>{
-                                        console.log(resultComplete)
-                                        if(resultComplete.status == 200) {
-                                           return Axios.patch(backend_url+'/equipment/updateduedate', {equipment})
-                                           .then(result=>{
-                                               console.log(result)
-                                                if(result.status == 200) {
-                                                    return Axios.patch(backend_url+'/equipment/unlock', {equipment})
-                                                    .then(result=>{
-                                                        console.log(result)
-                                                        if(result.status == 200) {
-                                                            alert('Successfully Marked')
-                                                        }
-                                                    })
-                                                }   
-                                           }) 
-                                        }
-                                    })
-                            })
-                        }}>Complete</Button>
-                    </td>
                 </tr>
             )
         });
@@ -91,7 +61,6 @@ class ViewLockEquipment extends Component {
                                 <th style={{ textAlign: 'center' }}>Maintenance Frequency</th>
                                 <th style={{ textAlign: 'center' }}>Due Date</th>
                                 <th style={{ textAlign: 'center' }}>Lock</th>
-                                <th style={{ textAlign: 'center' }}>Complete</th>
                             </tr>
                         </thead>
                         <tbody>

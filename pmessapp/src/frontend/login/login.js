@@ -29,9 +29,9 @@ class Login extends Component {
                     cookie.save('role', role);
                     if (util.isAdmin()) {
                         //this.props.history.push('/home')
-                        window.location.href = '/home';
-                    } else {
                         window.location.href = '/viewequipmentsmechanic';
+                    } else {
+                        window.location.href = '/home';
                         //this.props.history.push('/viewequipmentsmechanic');
                     } 
                 } else {

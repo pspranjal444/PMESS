@@ -10,7 +10,8 @@ const repairLogschema = new mongoose.Schema({
     mechanic_id: String,
     mechanicName: String,
     reviewedDate: Date,
-    severity: String
+    severity: String,
+    isComplete: Boolean
 });
 
 module.exports = mongoose.model('RepairLog', repairLogschema);

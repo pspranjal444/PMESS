@@ -67,13 +67,13 @@ router.patch('/edit', (req, res) => {
 router.patch('/complete', (req, res) => {
 
     const { maintenance_id } = req.body;
-    console.log(req.body.data)
     MaintenanceSchedule.update({ _id: maintenance_id }, {
         $set: {
             isDelayed: false,
             maintenanceComplete: true,
             maintenanceCompleteDate: Date.now(),
-            isLocked: false
+            isLocked: false,
+            reviewOk: false
         }
     }).exec().then(() => {
         res.status(200).json({
@@ -86,6 +86,48 @@ router.patch('/complete', (req, res) => {
             message: "Maintenance Schedule could not be updated successfully"
         })
     })
+});
+
+// API to mark this maintenance schedule for review
+router.patch('/review', (req, res) => {
+
+    const { maintenance_id, reviewRemarks, reviewedBy, reviewOk } = req.body.data;
+    MaintenanceSchedule.update({ _id: maintenance_id }, {
+        $set: {
+            reviewRemarks: reviewRemarks,
+            reviewedBy: reviewedBy,
+            reviewedDate: Date.now(),
+            reviewOk: reviewOk
+        }
+    }).exec().then(() => {
+        res.status(200).json({
+            success: true,
+            message: "Maintenance Schedule updated successfully"
+        })
+    }).catch(err => {
+        res.status(202).json({
+            success: false,
+            message: "Maintenance Schedule could not be updated successfully"
+        })
+    })
+});
+
+// API to get details for maintenance schedules that have not been reviewed
+router.get('/notreviewed', (req, res) => {
+
+    MaintenanceSchedule.find({ reviewOk: false }).exec()
+        .then(result => {
+            res.status(200).json({
+                success: true,
+                result: result,
+                message: "Maintenance Schedule found"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedule not found"
+            })
+        });
 });
 
 // API to get maintenance schedules for a specific equipment

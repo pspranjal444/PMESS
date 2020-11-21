@@ -2,7 +2,6 @@ import Axios from 'axios';
 import React, { Component, useState } from 'react';
 import backend_url from '../../../url/backend_url';
 import cookie from 'react-cookies';
-import AdminNavbar from '../../navbar/navbar';
 import frequency from '../../../utility/frequencyConvert';
 import {
     Button,
@@ -22,13 +21,10 @@ class LockedEquipments extends Component {
             visibleThree: false,
             visibleFour: false,
             problem: '',
-            correctiveAction: '',
             part: '',
-            severity: '',
-            mechanicName: '',
             maintenance_id: '',
             equipment_id: '',
-            repairLogs: []
+            repairLogs: [],
         }
 
         this.onChange = this.onChange.bind(this);
@@ -51,15 +47,12 @@ class LockedEquipments extends Component {
     }
 
     onClick = () => {
-        const { maintenance_id, equipment_id, problem, correctiveAction, part, severity, mechanicName } = this.state;
+        const { maintenance_id, equipment_id, problem, part } = this.state;
         const data = {
             maintenance_id: maintenance_id,
             equipment_id: equipment_id,
             problem: problem,
-            correctiveAction: correctiveAction,
             part: part,
-            severity: severity,
-            mechanicName: mechanicName,
             mechanic_id: cookie.load('user_id')
         }
         Axios.post(backend_url + '/repair/', { data }).then(result => {
@@ -80,7 +73,6 @@ class LockedEquipments extends Component {
         let repairLogsData = this.state.repairLogs.map((repairLog) => {
             return (
                 <tr key={repairLog._id}>
-                    <td style={{ textAlign: 'center' }}>{repairLog.maintenance_id}</td>
                     <td style={{ textAlign: 'center' }}>{repairLog.part}</td>
                     <td style={{ textAlign: 'center', backgroundColor: severityColor[repairLog.severity] }}><strong>{severity[repairLog.severity]}</strong></td>
                     <td style={{ textAlign: 'center' }}>{new Date(repairLog.reviewedDate).toLocaleDateString()}</td>
@@ -110,7 +102,6 @@ class LockedEquipments extends Component {
                             <p><strong>Problem:</strong> {repairLog.problem}</p>
                             <p><strong>Corrective Action:</strong> {repairLog.correctiveAction}</p>
                             <p><strong>Mechanic Id:</strong> {repairLog.mechanic_id}</p>
-                            <p><strong>Mechanic Name:</strong> {repairLog.mechanicName}</p>
                         </div>
                     </Modal>
                 </tr>
@@ -122,7 +113,7 @@ class LockedEquipments extends Component {
                 <tr key={equipment.equipment_id}>
                     <td style={{ textAlign: 'center' }}>{equipment.equipment_id}</td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button type="primary" onClick={() => {
+                        <a href="#" onClick={() => {
                             Axios.get(backend_url + '/equipment/', { params: { equipment_id: equipment.equipment_id } }).then(result => {
                                 this.setState({
                                     visibleOne: true,
@@ -131,10 +122,10 @@ class LockedEquipments extends Component {
                             })
                         }}>
                             More Details
-                        </Button>
+                        </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button type="primary" onClick={() => {
+                        <a href="#" onClick={() => {
                             this.setState({
                                 visibleTwo: true,
                                 maintenance_id: equipment._id,
@@ -142,10 +133,10 @@ class LockedEquipments extends Component {
                             })
                         }}>
                             Add Repair Log
-                        </Button>
+                        </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button type="primary" onClick={() => {
+                        <a href="#" onClick={() => {
                             Axios.get(backend_url + '/repair/', { params: { maintenance_id: equipment._id } }).then(result => {
                                 this.setState({
                                     visibleThree: true,
@@ -154,7 +145,37 @@ class LockedEquipments extends Component {
                             })
                         }}>
                             View Repair Logs
-                        </Button>
+                        </a>
+                    </td>
+                    <td style={{textAlign: 'center'}}>
+                        <Button type="primary" onClick={()=>{
+                            Axios
+                                .get(backend_url + '/maintenance/locked', {params: {equipment_id: equipment.equipment_id}})
+                                .then(result=>{
+                                    console.log(result)
+                                    const maintenance_id = result.data.result[0]._id;
+                                    console.log(maintenance_id)
+                                    return Axios.patch(backend_url+'/maintenance/complete', {maintenance_id})
+                                    .then(resultComplete=>{
+                                        console.log(resultComplete)
+                                        if(resultComplete.status == 200) {
+                                           return Axios.patch(backend_url+'/equipment/updateduedate', {equipment})
+                                           .then(result=>{
+                                               console.log(result)
+                                                if(result.status == 200) {
+                                                    return Axios.patch(backend_url+'/equipment/unlock', {equipment})
+                                                    .then(result=>{
+                                                        console.log(result)
+                                                        if(result.status == 200) {
+                                                            alert('Successfully Marked')
+                                                        }
+                                                    })
+                                                }   
+                                           }) 
+                                        }
+                                    })
+                            })
+                        }}>Complete</Button>
                     </td>
                 </tr>
             )
@@ -162,7 +183,6 @@ class LockedEquipments extends Component {
 
         return (
             <div>
-                {/* <AdminNavbar /> */}
                 <Modal
                     title={this.state.equipmentDetails.equipmentName}
                     visible={this.state.visibleOne}
@@ -202,41 +222,11 @@ class LockedEquipments extends Component {
                             <label for="problem">Problem</label>
                             <textarea class="form-control" id="problem" name="problem" aria-describedby="emailHelp" placeholder="Enter problem description" onChange={this.onChange} />
                         </div>
-
-                        <div class="form-group">
-                            <label for="correctiveAction">Corrective Action</label>
-                            <textarea class="form-control" id="correctiveAction" name="correctiveAction" placeholder="Corrective Action taken" onChange={this.onChange} />
-                        </div>
-
                         <div class="form-group">
                             <label for="part">Part</label>
                             <input type="text" class="form-control" id="part" name="part" aria-describedby="emailHelp" placeholder="Part" onChange={this.onChange} />
                         </div>
-                        <div class="form-group">
-                            <label for="severity">Severity</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="severity" id="severity" value="L" onChange={this.onChange} />
-                                <label class="form-check-label" for="Low">
-                                    Low
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="severity" id="severity" value="M" onChange={this.onChange} />
-                                <label class="form-check-label" for="Medium">
-                                    Medium
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="severity" id="severity" value="C" onChange={this.onChange} />
-                                <label class="form-check-label" for="Critical">
-                                    Critical
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="mechanicName">Mechanic Name</label>
-                                <input type="text" class="form-control" id="mechanicName" name="mechanicName" aria-describedby="emailHelp" placeholder="Mechanic Name" onChange={this.onChange} />
-                            </div>
-                        </div>
+                        
                         <button type="submit" class="btn btn-primary" onClick={this.onClick}>Add</button>
                     </form>
                 </Modal>
@@ -259,7 +249,6 @@ class LockedEquipments extends Component {
                         <table class="table table-striped" style={{ width: "910px" }}>
                             <thead>
                                 <tr>
-                                    <th style={{ textAlign: 'center' }}>Maintenance Id</th>
                                     <th style={{ textAlign: 'center' }}>Part</th>
                                     <th style={{ textAlign: 'center' }}>Severity</th>
                                     <th style={{ textAlign: 'center' }}>Reviewed Date</th>
@@ -281,6 +270,7 @@ class LockedEquipments extends Component {
                                 <th style={{ textAlign: 'center' }}>Equipment Details</th>
                                 <th style={{ textAlign: 'center' }}>Repair Log</th>
                                 <th style={{ textAlign: 'center' }}>View Repair Logs</th>
+                                <th style={{ textAlign: 'center' }}>Complete</th>
                             </tr>
                         </thead>
                         <tbody>
