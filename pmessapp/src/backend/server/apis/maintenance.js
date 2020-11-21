@@ -4,6 +4,23 @@ const router = express.Router();
 const MaintenanceSchedule = require('../../model/maintenance-schedule');
 const Equipment = require('../../model/equipment-details');
 
+const isDelayedPM = (equipment) => {
+    // console.log("EQUIPMENT due date: ",equipment.dueDate);        
+    const dateDiff = Math.abs(Math.abs((new Date() - equipment.dueDate))/(1000 * 60 * 60 * 24));
+    // console.log("Difference: ",dateDiff);
+    if(dateDiff > 2 && equipment.maintenanceFrequency === 0){       //"PM Delayed (weekly)"
+        return true;
+    } else if(dateDiff > 7 && equipment.maintenanceFrequency === 1){        //"PM Delayed (monthly)"
+        return true;
+    }
+    else if(dateDiff > 28 && equipment.maintenanceFrequency === 2){     //"PM Delayed (yearly)"
+        return true;
+    }
+    else if(new Date() === equipment.dueDate){       //"on time"
+        return false;
+    }
+}
+
 // API to create a new maintenance schedule for an equipment and lock it to particular mechanic
 router.post('/lock', (req, res) => {
     const { equipment_id, mechanic_id } = req.body;
@@ -65,7 +82,7 @@ router.patch('/edit', (req, res) => {
 
 // API to mark maintenance as complete
 router.patch('/complete', (req, res) => {
-
+    
     const { maintenance_id } = req.body;
     MaintenanceSchedule.update({ _id: maintenance_id }, {
         $set: {

@@ -7,10 +7,16 @@ import ViewEquipmentsWeekly from '../../mechanic/viewequipments/viewlockequipmen
 import ViewEquipmentsMonthly from '../../mechanic/viewequipments/viewlockequipmentsmonthly';
 import ReviewMaintenance from '../../reviewmaintenance/reviewmaintenance';
 import LockedEquipments from '../../mechanic/viewequipments/lockedequipments';
+<<<<<<< HEAD
 import backend_url from '../../../url/backend_url';
 import frequency from '../../../utility/frequencyConvert';
 import cookie from 'react-cookies';
 import RepairTasks from '../../repairs/repairtasks';
+=======
+import { cookie } from 'react-cookies';
+import { Redirect } from 'react-router';
+
+>>>>>>> b47e81b51d406c128b9d86893d97d6d49bc17d7a
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -31,6 +37,10 @@ class Home extends Component {
   };
 
   render() {
+    // const redirectVar = "";
+    // if(!cookie.load('user_id') || !cookie.load('role')){
+    //   redirectVar = <Redirect to = "/"/>
+    // }
     const { size } = this.state;
     const mystyle = {
       paddingBottom: "10%",
@@ -39,6 +49,7 @@ class Home extends Component {
     const dateFormat = 'MM/DD/YYYY';
     return (
       <div style={{ paddingLeft: "20%" }}>
+        {/* {redirectVar} */}
         <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
           <TabPane tab="  Due Equipments " key="1">
             <div style={{ mystyle }}>
