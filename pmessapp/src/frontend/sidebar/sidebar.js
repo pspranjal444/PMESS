@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Equipments from "../equipment/viewequipments";
-import AdminNavbar from "../navbar/navbar";
 import {
   ProSidebar,
   Menu,
@@ -12,6 +10,7 @@ import {
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import cookie from "react-cookies";
+import {HomeOutlined, LogoutOutlined} from '@ant-design/icons';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -38,11 +37,9 @@ class Sidebar extends Component {
         <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo-footer.png" height="120px" style={{marginTop: "15px"}}/>
           <Menu iconShape="square">
             <a href="/home">
-              <b>
-                <MenuItem onClick={this.handleNavClick}>Home </MenuItem>{" "}
-              </b>{" "}
+                <MenuItem icon={<HomeOutlined/>} onClick={this.handleNavClick}>Home </MenuItem>
             </a>
-            <b>
+            {/* <b>
               {" "}
               <MenuItem onClick={this.handleNavClick}>Add User</MenuItem>{" "}
             </b>
@@ -53,8 +50,8 @@ class Sidebar extends Component {
 
               <MenuItem>Edit Equipment</MenuItem>
             </SubMenu>
-            <MenuItem onClick={this.handleNavClick}>Reports</MenuItem>
-            <MenuItem onClick={this.handleLogout}> Logout</MenuItem>
+            <MenuItem onClick={this.handleNavClick}>Reports</MenuItem> */}
+            <MenuItem icon={<LogoutOutlined/>} onClick={this.handleLogout}> Logout</MenuItem>
           </Menu>
         </ProSidebar>
       </div>

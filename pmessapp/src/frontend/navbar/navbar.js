@@ -1,60 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Equipments from "../equipment/viewequipments";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarContent,
+} from "react-pro-sidebar";
+import "react-pro-sidebar/dist/css/styles.css";
+import cookie from "react-cookies";
+import {Link} from 'react-router-dom';
+import {HomeOutlined, UserAddOutlined, LogoutOutlined, ControlOutlined, BookOutlined } from '@ant-design/icons';
 
-class AdminNavbar extends Component {
 
-    constructor() {
-        super();
-    }
+class SidebarAdmin extends Component {
+  constructor(props) {
+    super();
+  }
 
-    render() {
-        return (
-            // <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-            //     <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png" height="50px"/>
-            //     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            //         <span class="navbar-toggler-icon"></span>
-            //     </button>
-            //     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            //         <ul class="navbar-nav">
-            //             <li class="nav-item active">
-            //                 <a class="nav-link" href="#">Add Equipment <span class="sr-only">(current)</span></a>
-            //             </li>
-            //             <li class="nav-item">
-            //                 <a class="nav-link" href="#">Schedule</a>
-            //             </li>
-            //             <li class="nav-item">
-            //                 <a class="nav-link" href="#">View/Edit PM's</a>
-            //             </li>
-            //             <li class="nav-item">
-            //                 <a class="nav-link" href="#">Reports</a>
-            //             </li>
-            //         </ul>
-            //     </div>
-            // </nav>
+  handleLogout = () => {
+    console.log("logout");
+    cookie.remove("user_id", { path: "/" });
+    cookie.remove("role", { path: "/" });
+    window.location.href = "/";
+  };
 
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png" height="50px" />
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/addequipment">Add Equipment <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Schedule</a></li>
-                            <li><a href="#">View/Edits PM's</a></li>
-                            <li><a href="#">Reports</a></li>
-                        </ul>
+  render() {
+    return (
+      <div>
+        <ProSidebar style={{ position: "fixed !important" }}>
+          <img
+            src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo-footer.png"
+            height="120px"
+            style={{ marginTop: "15px" }}
+          />
+          <Menu iconShape="square">
+            <Link to="/upcomingadmin">
+              <MenuItem icon={<HomeOutlined/>} key="1">Home</MenuItem>
+            </Link>
+            <Link to="/signup">
+                <MenuItem icon={<UserAddOutlined/>} key="2">Add User</MenuItem>
+            </Link>
+            <SubMenu icon={<ControlOutlined/>} title="Equipments">
+              <Link to="/addequipment">
+                <MenuItem key="3">Add Equipment</MenuItem>
+              </Link>
 
-                    </div>
-                </div>
-            </nav>
-        );
-    }
+              <MenuItem>Edit Equipment</MenuItem>
+            </SubMenu>
+            <MenuItem icon={<BookOutlined/>} onClick={this.handleNavClick}>Reports</MenuItem>
+            <MenuItem icon={<LogoutOutlined/>} onClick={this.handleLogout}> Logout</MenuItem>
+          </Menu>
+        </ProSidebar>
+      </div>
+    );
+  }
 }
 
-export default AdminNavbar;
+export default SidebarAdmin;

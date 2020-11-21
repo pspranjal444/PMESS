@@ -28,11 +28,9 @@ class Login extends Component {
                     cookie.save('user_id', user_id);
                     cookie.save('role', role);
                     if (util.isAdmin()) {
-                        //this.props.history.push('/home')
                         window.location.href = '/upcomingadmin';
                     } else {
                         window.location.href = '/home';
-                        //this.props.history.push('/viewequipmentsmechanic');
                     } 
                 } else {
                     alert('Unable to login. Please check the credentials');
@@ -74,7 +72,6 @@ class Login extends Component {
                             </label>
                         </div>
                         <button type="submit" class="btn btn-primary" onClick={this.onClick}>Login</button>
-                        &nbsp;&nbsp;<a href="/signup">Sign Up</a>
                     </form>
                 </div>
             </div>

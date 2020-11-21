@@ -37,11 +37,9 @@ class Signup extends Component {
 
     render() {
         return (
-            <div style={{ marginLeft: "500px", width: "1300px", marginTop: "100px" }}>
-                <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png" height="50px" style={{ marginLeft: "60px" }} />
-                <br /><br />
+            <div style={{ marginLeft: "500px", width: "1300px", paddingTop: "80px"}}>
                 <div class="col-xs-3" style={{ border: "1px solid black", padding: "20px" }}>
-                    <h2>Sign Up</h2>
+                    <h2>Add User</h2>
                     <br />
                     <form>
                         <div class="form-group">
@@ -82,8 +80,7 @@ class Signup extends Component {
                                 Mechanic
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Sign Up</button>
-                        &nbsp;&nbsp;<a href="/">Login</a>
+                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Create User</button>
                     </form>
                 </div>
             </div>
