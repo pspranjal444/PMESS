@@ -27,11 +27,7 @@ class Login extends Component {
                 if (result.data.success && result.status == 200) {
                     cookie.save('user_id', user_id);
                     cookie.save('role', role);
-                    if (util.isAdmin()) {
-                        window.location.href = '/upcomingadmin';
-                    } else {
-                        window.location.href = '/home';
-                    } 
+                    window.location.href = '/home';
                 } else {
                     alert('Unable to login. Please check the credentials');
                 }

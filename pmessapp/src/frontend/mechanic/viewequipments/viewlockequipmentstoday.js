@@ -27,6 +27,8 @@ class ViewLockEquipmentsToday extends Component {
 
 
     render() {
+        const user_id = cookie.load('user_id');
+        const role = cookie.load('role');
         let data = this.state.equipments.map((equipment) => {
             return (
                 <tr key={equipment.equipment_id}>
@@ -34,6 +36,7 @@ class ViewLockEquipmentsToday extends Component {
                     <td style={{ textAlign: 'center' }}>{equipment.equipmentName}</td>
                     <td style={{ textAlign: 'center' }}>{equipment.serialNo}</td>
                     <td style={{ textAlign: 'center' }}>{frequency[equipment.maintenanceFrequency]}</td>
+                    {user_id && role=='M' && 
                     <td style={{ textAlign: 'center' }}>
                         <Button type="primary" disabled={equipment.isLocked} onClick={() => {
                             const mechanic_id = cookie.load('user_id');
@@ -44,7 +47,7 @@ class ViewLockEquipmentsToday extends Component {
                         }}>
                             Lock
                         </Button>
-                    </td>
+                    </td>}
                 </tr>
             )
         });
@@ -58,7 +61,7 @@ class ViewLockEquipmentsToday extends Component {
                                 <th style={{ textAlign: 'center' }}>Equipment Name</th>
                                 <th style={{ textAlign: 'center' }}>Serial Number</th>
                                 <th style={{ textAlign: 'center' }}>Maintenance Frequency</th>
-                                <th style={{ textAlign: 'center' }}>Lock</th>
+                                {user_id && role=='M' && <th style={{ textAlign: 'center' }}>Lock</th>}
                             </tr>
                         </thead>
                         <tbody>

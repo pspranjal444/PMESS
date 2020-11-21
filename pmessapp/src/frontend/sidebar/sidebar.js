@@ -15,13 +15,7 @@ import {HomeOutlined, LogoutOutlined} from '@ant-design/icons';
 class Sidebar extends Component {
   constructor(props) {
     super();
-    // this.handleNavClick = this.handleNavClick.bind(this);
   }
-
-  // handleNavClick = (event) => {
-  //     //event.preventDefault();
-  //     console.log('test');
-  // }
 
   handleLogout = () => {
     console.log("logout");
@@ -39,18 +33,6 @@ class Sidebar extends Component {
             <a href="/home">
                 <MenuItem icon={<HomeOutlined/>} onClick={this.handleNavClick}>Home </MenuItem>
             </a>
-            {/* <b>
-              {" "}
-              <MenuItem onClick={this.handleNavClick}>Add User</MenuItem>{" "}
-            </b>
-            <SubMenu title="Equipments">
-              <a href="/addequipment">
-                <MenuItem>Add Equipment</MenuItem>
-              </a>
-
-              <MenuItem>Edit Equipment</MenuItem>
-            </SubMenu>
-            <MenuItem onClick={this.handleNavClick}>Reports</MenuItem> */}
             <MenuItem icon={<LogoutOutlined/>} onClick={this.handleLogout}> Logout</MenuItem>
           </Menu>
         </ProSidebar>

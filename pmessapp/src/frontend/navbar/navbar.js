@@ -43,7 +43,7 @@ class SidebarAdmin extends Component {
           />
           <Menu iconShape="square">
             <MenuItem icon={<HomeOutlined />} key="1">
-              <Link to="/upcomingadmin">Home</Link>
+              <Link to="/home">Home</Link>
             </MenuItem>
             <MenuItem icon={<UserAddOutlined />} key="2">
               <Link to="/signup">Add User</Link>

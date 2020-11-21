@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import {Helmet} from 'react-helmet';
-import Axios from 'axios';
-import { Tabs, Radio, DatePicker, Button } from 'antd';
-import ViewEquipments from '../../equipment/viewequipments';
-import ViewEquipmentsToday from '../../mechanic/viewequipments/viewlockequipmentstoday';
-import ViewEquipmentsWeekly from '../../mechanic/viewequipments/viewlockequipmentsweekly';
-import ViewEquipmentsMonthly from '../../mechanic/viewequipments/viewlockequipmentsmonthly';
-import ReviewMaintenance from '../../reviewmaintenance/reviewmaintenance';
-import LockedEquipments from '../../mechanic/viewequipments/lockedequipments';
-import backend_url from '../../../url/backend_url';
-import frequency from '../../../utility/frequencyConvert';
-import cookie from 'react-cookies';
-import RepairTasks from '../../repairs/repairtasks';
-import ViewEquipmentsOverdue from '../../mechanic/viewequipments/viewlockequipmentsoverdue';
+import React, { Component, Fragment } from "react";
+import { Helmet } from "react-helmet";
+import Axios from "axios";
+import { Tabs, Radio, DatePicker, Button } from "antd";
+import ViewEquipmentsToday from "../../mechanic/viewequipments/viewlockequipmentstoday";
+import ViewEquipmentsWeekly from "../../mechanic/viewequipments/viewlockequipmentsweekly";
+import ViewEquipmentsMonthly from "../../mechanic/viewequipments/viewlockequipmentsmonthly";
+import ReviewMaintenance from "../../reviewmaintenance/reviewmaintenance";
+import LockedEquipments from "../../mechanic/viewequipments/lockedequipments";
+import backend_url from "../../../url/backend_url";
+import frequency from "../../../utility/frequencyConvert";
+import cookie from "react-cookies";
+import RepairTasks from "../../repairs/repairtasks";
+import ViewEquipmentsOverdue from "../../mechanic/viewequipments/viewlockequipmentsoverdue";
 
 import { Button as SButton, Card, Image } from "semantic-ui-react";
 
@@ -23,10 +22,10 @@ class Home extends Component {
   state = {
     size: "large",
     tab: <ViewEquipmentsOverdue />,
-    startDate: '',
-    endDate: '',
-    keyTab: '',
-    cardOutput: []
+    startDate: "",
+    endDate: "",
+    keyTab: "",
+    cardOutput: [],
   };
 
   // getEquipmentCount() {
@@ -70,6 +69,8 @@ class Home extends Component {
       paddingLeft: "70%",
     };
     const dateFormat = "MM/DD/YYYY";
+    const user_id = cookie.load("user_id");
+    const role = cookie.load("role");
     return (
       <div style={{ paddingLeft: "20%" }}>
         <Helmet>
@@ -139,95 +140,172 @@ class Home extends Component {
         <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
           <TabPane tab="  Due Equipments " key="1">
             <div style={{ mystyle }}>
-              <Radio.Group defaultValue="a" buttonStyle="solid" Button type="warning">
-                <Radio.Button value="a" onChange={() => {
-                  this.setState({
-                    tab: <ViewEquipmentsOverdue />
-                  })
-                }}>Overdue</Radio.Button>
-                <Radio.Button value="b" onChange={() => {
-                  this.setState({
-                    tab: <ViewEquipmentsToday />
-                  })
-                }}>Today</Radio.Button>
-                <Radio.Button value="c" onChange={() => {
-                  this.setState({
-                    tab: <ViewEquipmentsWeekly />
-                  })
-                }}>This Week</Radio.Button>
-                <Radio.Button value="d" onChange={() => {
-                  this.setState({
-                    tab: <ViewEquipmentsMonthly />
-                  })
-                }}>This Month</Radio.Button>
+              <Radio.Group
+                defaultValue="a"
+                buttonStyle="solid"
+                Button
+                type="warning"
+              >
+                <Radio.Button
+                  value="a"
+                  onChange={() => {
+                    this.setState({
+                      tab: <ViewEquipmentsOverdue />,
+                    });
+                  }}
+                >
+                  Overdue
+                </Radio.Button>
+                <Radio.Button
+                  value="b"
+                  onChange={() => {
+                    this.setState({
+                      tab: <ViewEquipmentsToday />,
+                    });
+                  }}
+                >
+                  Today
+                </Radio.Button>
+                <Radio.Button
+                  value="c"
+                  onChange={() => {
+                    this.setState({
+                      tab: <ViewEquipmentsWeekly />,
+                    });
+                  }}
+                >
+                  This Week
+                </Radio.Button>
+                <Radio.Button
+                  value="d"
+                  onChange={() => {
+                    this.setState({
+                      tab: <ViewEquipmentsMonthly />,
+                    });
+                  }}
+                >
+                  This Month
+                </Radio.Button>
               </Radio.Group>
               <span style={{ marginLeft: "40px" }}>
-                <RangePicker format={dateFormat} onChange={(dates, dateStrings) => {
-                  this.setState({
-                    startDate: dateStrings[0],
-                    endDate: dateStrings[1]
-                  })
-                }} />&nbsp;&nbsp;
-                <Button type="primary" onClick={() => {
-                  Axios.get(backend_url + '/equipment/daterange', { params: { startDate: this.state.startDate, endDate: this.state.endDate } }).then(result => {
-                    let equipments = result.data.result;
-                    let data = equipments.map((equipment) => {
-                      return (
-                        <tr key={equipment.equipment_id}>
-                          <td style={{ textAlign: 'center' }}>{equipment.equipment_id}</td>
-                          <td style={{ textAlign: 'center' }}>{equipment.equipmentName}</td>
-                          <td style={{ textAlign: 'center' }}>{equipment.serialNo}</td>
-                          <td style={{ textAlign: 'center' }}>{frequency[equipment.maintenanceFrequency]}</td>
-                          <td style={{ textAlign: 'center' }}>{new Date(equipment.dueDate).toLocaleDateString()}</td>
-                          <td style={{ textAlign: 'center' }}>
-                            <Button type="primary" disabled={equipment.isLocked} onClick={() => {
-                              const mechanic_id = cookie.load('user_id');
-                              const equipment_id = equipment.equipment_id;
-                              Axios.post(backend_url + '/maintenance/lock', { equipment_id, mechanic_id }).then(result => {
-                                alert(result.data.message);
-                              })
-                            }}>
-                              Lock
-                            </Button>
-                          </td>
-                          <td style={{ textAlign: 'center' }}>
-                            <Button type="primary" disabled={!equipment.isLocked} onClick={() => {
-                              Axios
-                                .get(backend_url + '/maintenance/locked', { params: { equipment_id: equipment.equipment_id } })
-                                .then(result => {
-                                  console.log(result)
-                                  const maintenance_id = result.data.result[0]._id;
-                                  console.log(maintenance_id)
-                                  return Axios.patch(backend_url + '/maintenance/complete', { maintenance_id })
-                                    .then(resultComplete => {
-                                      console.log(resultComplete)
-                                      if (resultComplete.status == 200) {
-                                        return Axios.patch(
-                                          backend_url +
-                                            "/equipment/updateduedate",
-                                          { equipment }
+                <RangePicker
+                  format={dateFormat}
+                  onChange={(dates, dateStrings) => {
+                    this.setState({
+                      startDate: dateStrings[0],
+                      endDate: dateStrings[1],
+                    });
+                  }}
+                />
+                &nbsp;&nbsp;
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    Axios.get(backend_url + "/equipment/daterange", {
+                      params: {
+                        startDate: this.state.startDate,
+                        endDate: this.state.endDate,
+                      },
+                    }).then((result) => {
+                      let equipments = result.data.result;
+                      let data = equipments.map((equipment) => {
+                        return (
+                          <tr key={equipment.equipment_id}>
+                            <td style={{ textAlign: "center" }}>
+                              {equipment.equipment_id}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              {equipment.equipmentName}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              {equipment.serialNo}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              {frequency[equipment.maintenanceFrequency]}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              {new Date(equipment.dueDate).toLocaleDateString()}
+                            </td>
+                            {cookie.load("user_id") &&
+                              cookie.load("role") == "M" && (
+                                <Fragment>
+                                  <td style={{ textAlign: "center" }}>
+                                    <Button
+                                      type="primary"
+                                      disabled={equipment.isLocked}
+                                      onClick={() => {
+                                        const mechanic_id = cookie.load(
+                                          "user_id"
+                                        );
+                                        const equipment_id =
+                                          equipment.equipment_id;
+                                        Axios.post(
+                                          backend_url + "/maintenance/lock",
+                                          { equipment_id, mechanic_id }
+                                        ).then((result) => {
+                                          alert(result.data.message);
+                                        });
+                                      }}
+                                    >
+                                      Lock
+                                    </Button>
+                                  </td>
+                                  <td style={{ textAlign: "center" }}>
+                                    <Button
+                                      type="primary"
+                                      disabled={!equipment.isLocked}
+                                      onClick={() => {
+                                        Axios.get(
+                                          backend_url + "/maintenance/locked",
+                                          {
+                                            params: {
+                                              equipment_id:
+                                                equipment.equipment_id,
+                                            },
+                                          }
                                         ).then((result) => {
                                           console.log(result);
-                                          if (result.status == 200) {
-                                            return Axios.patch(
-                                              backend_url + "/equipment/unlock",
-                                              { equipment }
-                                            ).then((result) => {
-                                              console.log(result);
-                                              if (result.status == 200) {
-                                                alert("Successfully Marked");
-                                              }
-                                            });
-                                          }
+                                          const maintenance_id =
+                                            result.data.result[0]._id;
+                                          console.log(maintenance_id);
+                                          return Axios.patch(
+                                            backend_url +
+                                              "/maintenance/complete",
+                                            { maintenance_id }
+                                          ).then((resultComplete) => {
+                                            console.log(resultComplete);
+                                            if (resultComplete.status == 200) {
+                                              return Axios.patch(
+                                                backend_url +
+                                                  "/equipment/updateduedate",
+                                                { equipment }
+                                              ).then((result) => {
+                                                console.log(result);
+                                                if (result.status == 200) {
+                                                  return Axios.patch(
+                                                    backend_url +
+                                                      "/equipment/unlock",
+                                                    { equipment }
+                                                  ).then((result) => {
+                                                    console.log(result);
+                                                    if (result.status == 200) {
+                                                      alert(
+                                                        "Successfully Marked"
+                                                      );
+                                                    }
+                                                  });
+                                                }
+                                              });
+                                            }
+                                          });
                                         });
-                                      }
-                                    });
-                                  });
-                                }}
-                              >
-                                Complete
-                              </Button>
-                            </td>
+                                      }}
+                                    >
+                                      Complete
+                                    </Button>
+                                  </td>
+                                </Fragment>
+                              )}
                           </tr>
                         );
                       });
@@ -252,7 +330,12 @@ class Home extends Component {
                                   <th style={{ textAlign: "center" }}>
                                     Due Date
                                   </th>
-                                  <th style={{ textAlign: "center" }}>Lock</th>
+                                  {cookie.load("user_id") &&
+                                    cookie.load("role") == "M" && (
+                                      <th style={{ textAlign: "center" }}>
+                                        Lock
+                                      </th>
+                                    )}
                                 </tr>
                               </thead>
                               <tbody>{data}</tbody>
@@ -272,12 +355,16 @@ class Home extends Component {
           <TabPane tab="Your Tasks" key="2">
             <LockedEquipments />
           </TabPane>
-          <TabPane tab="Repair Tasks" key="3">
-            <RepairTasks />
-          </TabPane>
-          <TabPane tab="Review Tasks" key="4">
-            <ReviewMaintenance />
-          </TabPane>
+          {user_id && role == "M" && (
+            <Fragment>
+              <TabPane tab="Repair Tasks" key="3">
+                <RepairTasks />
+              </TabPane>
+              <TabPane tab="Review Tasks" key="4">
+                <ReviewMaintenance />
+              </TabPane>
+            </Fragment>
+          )}
         </Tabs>
       </div>
     );
