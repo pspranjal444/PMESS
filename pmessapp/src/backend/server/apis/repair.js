@@ -91,8 +91,25 @@ router.get('/all', (req, res) => {
         });
 })
 
+// API to get all repair logs for a specific maintenance_id
+router.get('/all/maintenance', (req, res) => {
 
-
+    const {maintenance_id} = req.query;
+    
+    RepairLog.find({maintenance_id: maintenance_id}).exec()
+        .then(result => {
+            res.status(200).json({
+                success: true,
+                result: result,
+                message: "Maintenance Schedules found"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedules not found"
+            })
+        });
+})
 
 // API to get all incompleted repair logs
 router.get('/all/incomplete', (req, res) => {

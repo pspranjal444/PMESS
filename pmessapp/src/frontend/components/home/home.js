@@ -352,11 +352,20 @@ class Home extends Component {
             </div>
             {this.state.tab}
           </TabPane>
-          <TabPane tab="Your Tasks" key="2">
-            <LockedEquipments />
-          </TabPane>
+          
+          {user_id && role == "A" && (
+            <Fragment>
+              <TabPane tab="In progress tasks" key="2">
+                <LockedEquipments />
+              </TabPane>
+            </Fragment>
+          )}
+
           {user_id && role == "M" && (
             <Fragment>
+              <TabPane tab="Your Tasks" key="2">
+                <LockedEquipments />
+              </TabPane>
               <TabPane tab="Repair Tasks" key="3">
                 <RepairTasks />
               </TabPane>

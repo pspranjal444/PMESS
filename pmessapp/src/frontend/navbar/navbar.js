@@ -49,17 +49,20 @@ class SidebarAdmin extends Component {
               <Link to="/signup">Add User</Link>
             </MenuItem>
             <SubMenu icon={<ControlOutlined />} title="Equipments">
-              <Link to="/addequipment">
-                <MenuItem key="3">Add Equipment</MenuItem>
-              </Link>
-
-              <MenuItem>Edit Equipment</MenuItem>
+              <MenuItem key="3">
+                <Link to="/addequipment">Add Equipment</Link>
+              </MenuItem>
+              <MenuItem key="4">
+                <Link to="">Edit Equipment</Link>
+              </MenuItem>
+              <MenuItem key="5">
+                <Link to="/viewequipments">View Equipments</Link>
+              </MenuItem>
             </SubMenu>
             <MenuItem icon={<BookOutlined />} onClick={this.handleNavClick}>
               Reports
             </MenuItem>
             <MenuItem icon={<LogoutOutlined />} onClick={this.handleLogout}>
-              {" "}
               Logout
             </MenuItem>
           </Menu>
