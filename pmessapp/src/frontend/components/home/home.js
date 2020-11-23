@@ -14,6 +14,7 @@ import RepairTasks from "../../repairs/repairtasks";
 import ViewEquipmentsOverdue from "../../mechanic/viewequipments/viewlockequipmentsoverdue";
 
 import { Button as SButton, Card, Image } from "semantic-ui-react";
+import InProgressTasks from "../../inprogresstasks/inprogresstasks";
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -356,7 +357,7 @@ class Home extends Component {
           {user_id && role == "A" && (
             <Fragment>
               <TabPane tab="In progress tasks" key="2">
-                <LockedEquipments />
+                <InProgressTasks />
               </TabPane>
             </Fragment>
           )}

@@ -220,6 +220,32 @@ router.get('/all/complete', (req, res) => {
         });
 })
 
+// API to get maintenance schedules for equipments completed within a given week
+router.get('/all/complete/withinweek', (req, res) => {
+    var todaysDateMinusSeven = new Date();
+    todaysDateMinusSeven.setDate(todaysDateMinusSeven.getDate() - 7);
+    todaysDateMinusSeven = todaysDateMinusSeven.toLocaleDateString('en-US');
+
+    var todaysDate = new Date();
+    // todaysDate = todaysDate.toLocaleDateString('en-US');
+    todaysDate.setDate(todaysDate.getDate() + 1);
+    todaysDate = todaysDate.toLocaleDateString('en-US');
+
+    MaintenanceSchedule.find({$and: [{ maintenanceComplete: true }, {maintenanceCompleteDate: {$gte: new Date(todaysDateMinusSeven), $lte: new Date(todaysDate)}}]}).exec()
+        .then(result => {
+            res.status(200).json({
+                success: true,
+                result: result,
+                message: "Maintenance Schedules found"
+            })
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedules not found"
+            })
+        });
+})
+
 // API to get maintenance schedule for an ongoing maintenance
 router.get('/locked', (req, res) => {
     const { equipment_id } = req.query;
