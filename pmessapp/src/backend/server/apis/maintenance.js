@@ -7,7 +7,7 @@ const Equipment = require('../../model/equipment-details');
 const isDelayedPM = (equipment) => {
     // console.log("EQUIPMENT due date: ",equipment.dueDate);        
     const dateDiff = Math.abs(Math.abs((new Date() - equipment.dueDate))/(1000 * 60 * 60 * 24));
-    // console.log("Difference: ",dateDiff);
+    console.log("Difference: ",dateDiff);
     if(dateDiff > 2 && equipment.maintenanceFrequency === 0){       //"PM Delayed (weekly)"
         return true;
     } else if(dateDiff > 7 && equipment.maintenanceFrequency === 1){        //"PM Delayed (monthly)"
@@ -19,6 +19,15 @@ const isDelayedPM = (equipment) => {
     else if(new Date() === equipment.dueDate){       //"on time"
         return false;
     }
+}
+
+//Is Review delayed
+const isDelayedReview = (maintenanceCompleteDate) => {
+    console.log("Maintenance date: ",maintenanceCompleteDate)
+    const dateDiff = Math.abs(Math.abs((new Date() - maintenanceCompleteDate))/(1000 * 60 * 60 * 24)); 
+    console.log("Date Diff: ",dateDiff)   
+    return dateDiff > 7 ? true : false;
+
 }
 
 // API to create a new maintenance schedule for an equipment and lock it to particular mechanic
@@ -80,53 +89,100 @@ router.patch('/edit', (req, res) => {
     })
 });
 
+//API to mark delayed PM completion
+router.patch('/delayedpm',(req,res) => {
+    console.log("IN DELAYED PMMMMMMMM")
+    const { maintenance_id, eq_id } = req.body;
+    //To calculate if the maintenance is delayed -> completed after the overdue date
+    var isDelayed = "";
+
+    Equipment.find({equipment_id:eq_id}).exec()
+    .then(result => {
+        isDelayed = isDelayedPM(result[0]);
+        console.log("PM is delayed: ",isDelayed)
+    }).then(() => {
+        MaintenanceSchedule.update({ _id: maintenance_id }, {
+            $set: {
+                isDelayed: isDelayed
+            }
+        }).exec().then(() => {
+            Equipment.update({ equipment_id: eq_id }, {
+                $set: {
+                    maintenanceDone: true
+                }
+            }).exec().then(() => {
+                res.status(200).json({
+                    success: true,
+                    message: "Maintenance Schedule and equipment updated successfully"
+                })
+            })
+            
+        }).catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedule could not be updated successfully"
+            })
+        })
+    })
+})
+
 // API to mark maintenance as complete
 router.patch('/complete', (req, res) => {
     
-    const { maintenance_id } = req.body;
+    const { maintenance_id} = req.body;
     MaintenanceSchedule.update({ _id: maintenance_id }, {
         $set: {
-            isDelayed: false,
             maintenanceComplete: true,
             maintenanceCompleteDate: Date.now(),
             isLocked: false,
             reviewOk: false
         }
     }).exec().then(() => {
-        res.status(200).json({
-            success: true,
-            message: "Maintenance Schedule updated successfully"
+            res.status(200).json({
+                success: true,
+                message: "Maintenance Schedule and equipment updated successfully"
+            })
         })
-    }).catch(err => {
+        .catch(err => {
         res.status(202).json({
             success: false,
             message: "Maintenance Schedule could not be updated successfully"
         })
-    })
+    })    
 });
 
 // API to mark this maintenance schedule for review
 router.patch('/review', (req, res) => {
 
     const { maintenance_id, reviewRemarks, reviewedBy, reviewOk } = req.body.data;
-    MaintenanceSchedule.update({ _id: maintenance_id }, {
-        $set: {
-            reviewRemarks: reviewRemarks,
-            reviewedBy: reviewedBy,
-            reviewedDate: Date.now(),
-            reviewOk: reviewOk
-        }
-    }).exec().then(() => {
-        res.status(200).json({
-            success: true,
-            message: "Maintenance Schedule updated successfully"
+    //is review deyaled
+    MaintenanceSchedule.find({ _id: maintenance_id }).exec()
+        .then(result => {
+            console.log("REEEEEEEE: ",result)
+            const maintenanceCompleteDate = result[0].maintenanceCompleteDate;
+            const isReviewDelayed = isDelayedReview(maintenanceCompleteDate)
+            console.log("REVIEWW DELAYEDDD: ",isReviewDelayed)
+            MaintenanceSchedule.update({ _id: maintenance_id }, {
+                $set: {
+                    reviewRemarks: reviewRemarks,
+                    reviewedBy: reviewedBy,
+                    reviewedDate: Date.now(),
+                    reviewOk: reviewOk,
+                    reviewDelayed: isReviewDelayed
+                }
+            }).exec().then(() => {
+                res.status(200).json({
+                    success: true,
+                    message: "Maintenance Schedule updated successfully"
+                })
+            })
         })
-    }).catch(err => {
-        res.status(202).json({
-            success: false,
-            message: "Maintenance Schedule could not be updated successfully"
+        .catch(err => {
+            res.status(202).json({
+                success: false,
+                message: "Maintenance Schedule could not be updated successfully"
+            })
         })
-    })
 });
 
 // API to get details for maintenance schedules that have not been reviewed

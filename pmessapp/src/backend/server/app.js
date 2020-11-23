@@ -7,6 +7,7 @@ const equipment = require('./apis/equipment');
 const maintenance = require('./apis/maintenance');
 const repair = require('./apis/repair');
 const cardDetails = require('./apis/cardData');
+const report = require('./apis/report');
 const cors = require('cors');
 
 mongoose.connect('mongodb+srv://svlabs:mproject295a@cluster0.cs0zx.mongodb.net/pmess?retryWrites=true&w=majority');
@@ -25,5 +26,6 @@ app.use('/equipment', equipment);
 app.use('/maintenance', maintenance);
 app.use('/repair', repair);
 app.get('/cardDetails', cardDetails);
+app.use('/report',report);
 
 module.exports = app;

@@ -148,32 +148,41 @@ class LockedEquipments extends Component {
                         </a>
                     </td>
                     <td style={{textAlign: 'center'}}>
-                        <Button type="primary" onClick={()=>{
+                    <Button type="primary" onClick={()=>{
                             Axios
                                 .get(backend_url + '/maintenance/locked', {params: {equipment_id: equipment.equipment_id}})
                                 .then(result=>{
-                                    console.log(result)
+                                    console.log("get locked: ",result)
                                     const maintenance_id = result.data.result[0]._id;
-                                    console.log(maintenance_id)
-                                    return Axios.patch(backend_url+'/maintenance/complete', {maintenance_id})
-                                    .then(resultComplete=>{
-                                        console.log(resultComplete)
-                                        if(resultComplete.status == 200) {
-                                           return Axios.patch(backend_url+'/equipment/updateduedate', {equipment})
-                                           .then(result=>{
-                                               console.log(result)
-                                                if(result.status == 200) {
-                                                    return Axios.patch(backend_url+'/equipment/unlock', {equipment})
-                                                    .then(result=>{
-                                                        console.log(result)
+                                    const eq_id = result.data.result[0].equipment_id;
+                                    console.log("maintenainace ID: ",maintenance_id, "eq ID: ",eq_id)
+                                    
+                                    return Axios.patch(backend_url+'/maintenance/delayedpm', {maintenance_id, eq_id})
+                                    .then(result =>{
+                                        console.log("Delayed PM",result)
+                                        if(result.status == 200){
+                                            return Axios.patch(backend_url+'/maintenance/complete', {maintenance_id})
+                                            .then(resultComplete=>{
+                                                console.log(resultComplete)
+                                                if(resultComplete.status == 200) {
+                                                   return Axios.patch(backend_url+'/equipment/updateduedate', {equipment})
+                                                   .then(result=>{
+                                                       console.log(result)
                                                         if(result.status == 200) {
-                                                            alert('Successfully Marked')
-                                                        }
-                                                    })
-                                                }   
-                                           }) 
+                                                            return Axios.patch(backend_url+'/equipment/unlock', {equipment})
+                                                            .then(result=>{
+                                                                console.log(result)
+                                                                if(result.status == 200) {
+                                                                    alert('Successfully Marked')
+                                                                }
+                                                            })
+                                                        }   
+                                                   }) 
+                                                }
+                                            })
                                         }
                                     })
+                                    
                             })
                         }}>Complete</Button>
                     </td>

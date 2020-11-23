@@ -13,7 +13,8 @@ const maintenanceScheduleSchema = new mongoose.Schema({
     reviewedBy: String,
     reviewedDate: Date,
     reviewRemarks: String,
-    reviewOk: Boolean
+    reviewOk: Boolean,
+    reviewDelayed: Boolean
 });
 
 module.exports = mongoose.model('MaintenanceSchedule', maintenanceScheduleSchema);
