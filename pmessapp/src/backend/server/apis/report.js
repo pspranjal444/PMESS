@@ -6,12 +6,12 @@ const MaintenanceSchedule = require('../../model/maintenance-schedule');
 const RepairLog = require('../../model/repair-log');
 
 // API to create a new equipment entry
-router.get('/userActivity', async(req, res) => {
+router.get('/userActivity', (req, res) => {
     const mech_id = req.query.mechanic_id
     const start = req.query.start
     const end = req.query.end
     const output = []
-    await MaintenanceSchedule.count({$and:[{ maintenanceComplete: true},{mechanic_id: mech_id},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
+    MaintenanceSchedule.count({$and:[{ maintenanceComplete: true},{mechanic_id: mech_id},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
         .then(result => {
             output.push({"PM":result})
         }).then(() => {
@@ -37,7 +37,109 @@ router.get('/userActivity', async(req, res) => {
                 })
             })
         })
+})
 
+const allPM = () =>{
+
+}
+router.get('/pmreviewreport',(req,res) => {
+    const {start, end, taskType, completionType} = req.query;
+    if(taskType == "PM"){
+        if(completionType == "All")
+        {
+            MaintenanceSchedule.find({maintenanceCompleteDate:{$gte:start, $lte:end}}).exec()
+            .then(result => {
+                res.status(200).json({
+                    success: true,
+                    result: result,
+                    message: "Maintenance Schedules found"
+                })
+            }).catch(err => {
+                res.status(202).json({
+                    success: false,
+                    message: "Maintenance Schedules not found"
+                })
+            });
+        }
+        if(completionType == "On Time"){
+            MaintenanceSchedule.find({$and:[{maintenanceComplete:true},{isDelayed:false},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
+            .then(result => {
+                res.status(200).json({
+                    success: true,
+                    result: result,
+                    message: "Maintenance Schedules found"
+                })
+            }).catch(err => {
+                res.status(202).json({
+                    success: false,
+                    message: "Maintenance Schedules not found"
+                })
+            });
+        }
+        if(completionType == "Delayed"){
+            MaintenanceSchedule.find({$and:[{maintenanceComplete:true},{isDelayed:true},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
+            .then(result => {
+                res.status(200).json({
+                    success: true,
+                    result: result,
+                    message: "Maintenance Schedules found"
+                })
+            }).catch(err => {
+                res.status(202).json({
+                    success: false,
+                    message: "Maintenance Schedules not found"
+                })
+            });
+        }
+    }
+    if(taskType == "Review"){
+        if(completionType == "All")
+        {
+            MaintenanceSchedule.find({reviewedDate:{$gte:start, $lte:end}}).exec()
+            .then(result => {
+                res.status(200).json({
+                    success: true,
+                    result: result,
+                    message: "Maintenance Schedules found"
+                })
+            }).catch(err => {
+                res.status(202).json({
+                    success: false,
+                    message: "Maintenance Schedules not found"
+                })
+            });
+        }
+        if(completionType == "On Time"){
+            MaintenanceSchedule.find({$and:[{reviewOk:true},{reviewDelayed:false},{reviewedDate:{$gte:start, $lte:end}}]}).exec()
+            .then(result => {
+                res.status(200).json({
+                    success: true,
+                    result: result,
+                    message: "Maintenance Schedules found"
+                })
+            }).catch(err => {
+                res.status(202).json({
+                    success: false,
+                    message: "Maintenance Schedules not found"
+                })
+            });
+        }
+        if(completionType == "Delayed"){
+            MaintenanceSchedule.find({$and:[{reviewOk:true},{reviewDelayed:true},{reviewedDate:{$gte:start, $lte:end}}]}).exec()
+            .then(result => {
+                res.status(200).json({
+                    success: true,
+                    result: result,
+                    message: "Maintenance Schedules found"
+                })
+            }).catch(err => {
+                res.status(202).json({
+                    success: false,
+                    message: "Maintenance Schedules not found"
+                })
+            });
+        }
+    }
 
 })
 
