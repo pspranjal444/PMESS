@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { Component } from "react";
 import backend_url from "../../url/backend_url";
 import { Modal, Button, Menu, Dropdown, message } from "antd";
-import { CheckCircleTwoTone } from "@ant-design/icons";
+import { CheckCircleTwoTone, ExclamationCircleTwoTone } from "@ant-design/icons";
 import frequencyConvert from "../../utility/frequencyConvert";
 import severity from "../mechanic/equipmentseverity";
 
@@ -166,7 +166,7 @@ class Equipments extends Component {
               </Button>
             </td>
             <td>
-              <CheckCircleTwoTone twoToneColor="#52c41a"></CheckCircleTwoTone>
+              {ms.maintenanceComplete ? <CheckCircleTwoTone twoToneColor="#52c41a"></CheckCircleTwoTone> : <ExclamationCircleTwoTone twoToneColor="#ffdb58"></ExclamationCircleTwoTone>}
             </td>
             <Modal
               title="Repair Details"
