@@ -2,8 +2,9 @@ import Axios from "axios";
 import React, { Component } from "react";
 import backend_url from "../../url/backend_url";
 import { Modal, Button, Menu, Dropdown, message } from "antd";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import frequencyConvert from "../../utility/frequencyConvert";
-import severity from '../mechanic/equipmentseverity';
+import severity from "../mechanic/equipmentseverity";
 
 class Equipments extends Component {
   constructor() {
@@ -18,10 +19,10 @@ class Equipments extends Component {
       dueDate: "",
       maintenanceschedules: [],
       view: false,
-      repairLogs: '',
+      repairLogs: "",
       visibleTwo: false,
-      problem: '',
-      correctiveAction: ''
+      problem: "",
+      correctiveAction: "",
     };
   }
 
@@ -49,10 +50,10 @@ class Equipments extends Component {
 
   render() {
     const severityColor = {
-      "L": "green",
-      "M": "yellow",
-      "C": "red"
-    }
+      L: "green",
+      M: "yellow",
+      C: "red",
+    };
 
     let menu = this.state.equipments.map((equipment) => {
       return (
@@ -74,78 +75,129 @@ class Equipments extends Component {
                 : "In progress"}
             </td>
             <td style={{ textAlign: "center" }}>
-              {ms.maintenanceComplete ? "Completed" : ms.mechanic_id + " is working" }
+              {ms.maintenanceComplete
+                ? "Completed"
+                : ms.mechanic_id + " is working"}
             </td>
             <td style={{ textAlign: "center" }}>
-              <Button onClick={()=>{
-                Axios.get(backend_url+'/repair/all/maintenance', {params: {maintenance_id: ms._id}}).then(result=>{
-                  const repairLogs = result.data.result;
-                  if (repairLogs) {
-                    let data = repairLogs.map((repairLog)=>{
-                      return(
-                      <tr key={repairLog._id}>
-                        <td style={{textAlign: 'center'}}>{repairLog.part}</td>
-                        <td style={{textAlign: 'center', backgroundColor: severityColor[repairLog.severity] }}>{severity[repairLog.severity]}</td>
-                        <td style={{textAlign: 'center'}}>{repairLog.mechanic_id}</td>
-                        <td style={{textAlign: 'center'}}>{new Date(repairLog.reviewedDate).toLocaleDateString()}</td>
-                        <td style={{textAlign: 'center'}}><a onClick={()=>{
-                          this.setState({
-                            visibleTwo: true,
-                            problem: repairLog.problem,
-                            correctiveAction: repairLog.correctiveAction
-                          })
-                        }}>More</a></td>
-                      </tr>)
-                    })
-                    
-                    this.setState({
-                      repairLogs: <div class="container">
-                                    <table class="table table-striped" style={{ width: "910px" }}>
-                                      <thead>
-                                        <tr>
-                                          <th style={{ textAlign: 'center' }}>Part</th>
-                                          <th style={{ textAlign: 'center' }}>Severity</th>
-                                          <th style={{ textAlign: 'center' }}>Mechanic Id</th>
-                                          <th style={{ textAlign: 'center' }}>Reviewed Date</th>
-                                          <th style={{ textAlign: 'center' }}>Details</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {data}
-                                      </tbody>
-                                    </table>
-                                  </div>,
-                      visibleOne: true
+              <Button
+                onClick={() => {
+                  Axios.get(backend_url + "/repair/all/maintenance", {
+                    params: { maintenance_id: ms._id },
+                  }).then((result) => {
+                    const repairLogs = result.data.result;
+                    if (repairLogs) {
+                      let data = repairLogs.map((repairLog) => {
+                        return (
+                          <tr key={repairLog._id}>
+                            <td style={{ textAlign: "center" }}>
+                              {repairLog.part}
+                            </td>
+                            <td
+                              style={{
+                                textAlign: "center",
+                                backgroundColor:
+                                  severityColor[repairLog.severity],
+                              }}
+                            >
+                              {severity[repairLog.severity]}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              {repairLog.mechanic_id}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              {new Date(
+                                repairLog.reviewedDate
+                              ).toLocaleDateString()}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                              <a
+                                onClick={() => {
+                                  this.setState({
+                                    visibleTwo: true,
+                                    problem: repairLog.problem,
+                                    correctiveAction:
+                                      repairLog.correctiveAction,
+                                  });
+                                }}
+                              >
+                                More
+                              </a>
+                            </td>
+                          </tr>
+                        );
+                      });
 
-                    })
-                  }
-                })
-              }}>Related Reports</Button>
+                      this.setState({
+                        repairLogs: (
+                          <div class="container">
+                            <table
+                              class="table table-striped"
+                              style={{ width: "910px" }}
+                            >
+                              <thead>
+                                <tr>
+                                  <th style={{ textAlign: "center" }}>Part</th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Severity
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Mechanic Id
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Reviewed Date
+                                  </th>
+                                  <th style={{ textAlign: "center" }}>
+                                    Details
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>{data}</tbody>
+                            </table>
+                          </div>
+                        ),
+                        visibleOne: true,
+                      });
+                    }
+                  });
+                }}
+              >
+                Related Reports
+              </Button>
+            </td>
+            <td>
+              <CheckCircleTwoTone twoToneColor="#52c41a"></CheckCircleTwoTone>
             </td>
             <Modal
               title="Repair Details"
               visible={this.state.visibleTwo}
-              onOk={()=>{
+              onOk={() => {
                 this.setState({
                   visibleOne: true,
-                  visibleTwo: false
-                })
+                  visibleTwo: false,
+                });
               }}
-              onCancel={()=>{
+              onCancel={() => {
                 this.setState({
                   visibleOne: true,
-                  visibleTwo: false
-                })
+                  visibleTwo: false,
+                });
               }}
-              width={1000}>
-                <p><strong>Problem:</strong> {this.state.problem}</p>
-                <p><strong>Corrective Action:</strong> {this.state.correctiveAction}</p>
+              width={1000}
+            >
+              <p>
+                <strong>Problem:</strong> {this.state.problem}
+              </p>
+              <p>
+                <strong>Corrective Action:</strong>{" "}
+                {this.state.correctiveAction}
+              </p>
             </Modal>
           </tr>
         );
       });
     }
-    
+
     return (
       <div class="container">
         <div style={{ marginTop: "50px", marginLeft: "400px" }}>
@@ -206,49 +258,49 @@ class Equipments extends Component {
         </div>
         {this.state.view && (
           <div class="container">
-          <table class="table table-borderless" style={{ border: "None" }}>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>Equipment Id:</strong> {this.state.equipment_id}
-                </td>
-                <td>
-                  <strong>Equipment Name:</strong> {this.state.equipmentName}
-                </td>
-                <td>
-                  <strong>Serial No:</strong> {this.state.serialNo}{" "}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Maintenance Frequency:</strong>{" "}
-                  {frequencyConvert[this.state.maintenanceFrequency]}
-                </td>
-                <td>
-                  <strong>Next Due Date:</strong>{" "}
-                  {this.state.dueDate}
-                </td>
-                <td>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <br/>
-          <br/>
-          <p><strong>History of maintenance schedules:</strong></p>
-              <div class="container" style={{ width: "800px" }}>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th style={{ textAlign: "center" }}>Mechanic Id</th>
-                      <th style={{ textAlign: "center" }}>Complete Date</th>
-                      <th style={{ textAlign: "center" }}>In Progress?</th>
-                      <th style={{ textAlign: "center" }}>View Repairs</th>
-                    </tr>
-                  </thead>
-                  <tbody>{mss}</tbody>
-                </table>
-              </div>
+            <table class="table table-borderless" style={{ border: "None" }}>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Equipment Id:</strong> {this.state.equipment_id}
+                  </td>
+                  <td>
+                    <strong>Equipment Name:</strong> {this.state.equipmentName}
+                  </td>
+                  <td>
+                    <strong>Serial No:</strong> {this.state.serialNo}{" "}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Maintenance Frequency:</strong>{" "}
+                    {frequencyConvert[this.state.maintenanceFrequency]}
+                  </td>
+                  <td>
+                    <strong>Next Due Date:</strong> {this.state.dueDate}
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <br />
+            <p>
+              <strong>History of maintenance schedules:</strong>
+            </p>
+            <div class="container" style={{ width: "800px" }}>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style={{ textAlign: "center" }}>Mechanic Id</th>
+                    <th style={{ textAlign: "center" }}>Complete Date</th>
+                    <th style={{ textAlign: "center" }}>In Progress?</th>
+                    <th style={{ textAlign: "center" }}>View Repairs</th>
+                  </tr>
+                </thead>
+                <tbody>{mss}</tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
