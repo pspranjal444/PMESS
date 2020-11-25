@@ -192,37 +192,6 @@ router.get('/today', (req, res) => {
         })
 });
 
-// router.get('/countDueToday',  (req, res) => {
-//     var todaysDate = new Date();
-//     todaysDate = todaysDate.toLocaleDateString('en-US');
-
-//     EquipmentDetails.count({dueDate: new Date(todaysDate)
-// }).exec()
-//     .then(result => {
-//         console.log("due today" ,result);
-//         res.status(200).json({
-//             success: true,
-//             result: result
-//         })
-//     })
-
-// });
-
-// router.get('/countOverdue', (req, res) => {
-
-//     var todaysDate = new Date();
-//     todaysDate = todaysDate.toLocaleDateString('en-US');
-
-//     EquipmentDetails.count({ $and: [{ maintenanceDone: false }, { dueDate: { $lt: new Date(todaysDate) } }] }).exec()
-//         .then(result1 => {
-//             console.log("overdue" ,result);
-//             res.status(200).json({
-//                 success: true,
-//                 result1: result1
-//             })
-//         })
-// });
-
 // API to mark equipment back in use as true or false
 router.patch('/backinuse', (req, res) => {
     const { equipment_id, isBackInUse } = req.body;
