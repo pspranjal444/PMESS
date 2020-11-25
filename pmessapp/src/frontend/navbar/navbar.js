@@ -14,7 +14,7 @@ import cookie from "react-cookies";
 import { Link } from "react-router-dom";
 import {
   HomeOutlined,
-  UserAddOutlined,
+  UserOutlined,
   LogoutOutlined,
   ControlOutlined,
   BookOutlined,
@@ -45,17 +45,22 @@ class SidebarAdmin extends Component {
             <MenuItem icon={<HomeOutlined />} key="1">
               <Link to="/home">Home</Link>
             </MenuItem>
-            <MenuItem icon={<UserAddOutlined />} key="2">
-              <Link to="/signup">Add User</Link>
-            </MenuItem>
-            <SubMenu icon={<ControlOutlined />} title="Equipments">
+            <SubMenu icon={<UserOutlined />} title="Users">
+              <MenuItem key="2">
+                <Link to="/signup">Add User</Link>
+              </MenuItem>
               <MenuItem key="3">
+                <Link to="/viewusers">View Users</Link>
+              </MenuItem>
+            </SubMenu>
+            <SubMenu icon={<ControlOutlined />} title="Equipments">
+              <MenuItem key="4">
                 <Link to="/addequipment">Add Equipment</Link>
               </MenuItem>
-              <MenuItem key="4">
+              <MenuItem key="5">
                 <Link to="">Edit Equipment</Link>
               </MenuItem>
-              <MenuItem key="5">
+              <MenuItem key="6">
                 <Link to="/viewequipments">View Equipments</Link>
               </MenuItem>
             </SubMenu>
