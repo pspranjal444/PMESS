@@ -47,7 +47,7 @@ class EditEquipment extends Component {
     };
 
     Axios.post(backend_url + "/equipment/edit", { data }).then((res) => {
-      if (res.data.success && res.status == 200) {
+      if (res.success && res.status == 200) {
         alert(res.data.message);
       } else {
         alert("Equipment could not be added successfully");
