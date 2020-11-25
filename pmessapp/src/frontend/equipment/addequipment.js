@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../navbar/navbar';
 import frequency from '../../utility/frequency';
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
@@ -81,7 +80,7 @@ class AddEquipment extends Component {
                                         })
                                     }}>Weekly</button>
                                     <button class="dropdown-item" type="button" onClick={() => {
-                                        document.getElementById("dropdownMenu2").innerHTML = "Monthy";
+                                        document.getElementById("dropdownMenu2").innerHTML = "Monthly";
                                         this.setState({
                                             maintenanceFrequency: frequency.MONTHLY
                                         })

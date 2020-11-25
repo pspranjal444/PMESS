@@ -240,17 +240,15 @@ router.patch('/needsreview', (req, res) => {
 
 // API to edit equipment details
 router.patch('/edit', (req, res) => {
-    const { equipment_id, equipmentName, serialNo, maintenanceFrequency, needsReview, isNotInUse, isBackInUse } = req.body;
+    const { _id, equipment_id, equipmentName, serialNo, maintenanceFrequency } = req.body.data;
 
-    EquipmentDetails.update({ equipment_id: equipment_id },
+    EquipmentDetails.update({ _id: _id },
         {
             $set: {
+                equipment_id: equipment_id,
                 equipmentName: equipmentName,
                 serialNo: serialNo,
                 maintenanceFrequency: maintenanceFrequency,
-                needsReview: needsReview,
-                isNotInUse: isNotInUse,
-                isBackInUse: isBackInUse
             }
         })
         .exec().then(result => {

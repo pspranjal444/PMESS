@@ -58,7 +58,7 @@ class SidebarAdmin extends Component {
                 <Link to="/addequipment">Add Equipment</Link>
               </MenuItem>
               <MenuItem key="5">
-                <Link to="">Edit Equipment</Link>
+                <Link to="/editequipments">Edit Equipment</Link>
               </MenuItem>
               <MenuItem key="6">
                 <Link to="/viewequipments">View Equipments</Link>
