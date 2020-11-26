@@ -79,4 +79,20 @@ router.get('/', (req, res) => {
         })
 });
 
-module.exports = router;
+// API to get details of all users
+router.get('/all', (req, res) => {
+    UserDetails.find({}).exec().then(result=>{
+        res.status(200).json({
+            success: true,
+            result: result,
+            message: "Details of all users"
+        })
+    }).catch(err=>{
+        res.status(202).json({
+            success: false,
+            message: "Error while finding users"
+        })
+    })
+});
+
+module.exports = router

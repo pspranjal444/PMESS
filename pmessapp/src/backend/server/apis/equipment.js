@@ -192,37 +192,6 @@ router.get('/today', (req, res) => {
         })
 });
 
-// router.get('/countDueToday',  (req, res) => {
-//     var todaysDate = new Date();
-//     todaysDate = todaysDate.toLocaleDateString('en-US');
-
-//     EquipmentDetails.count({dueDate: new Date(todaysDate)
-// }).exec()
-//     .then(result => {
-//         console.log("due today" ,result);
-//         res.status(200).json({
-//             success: true,
-//             result: result
-//         })
-//     })
-
-// });
-
-// router.get('/countOverdue', (req, res) => {
-
-//     var todaysDate = new Date();
-//     todaysDate = todaysDate.toLocaleDateString('en-US');
-
-//     EquipmentDetails.count({ $and: [{ maintenanceDone: false }, { dueDate: { $lt: new Date(todaysDate) } }] }).exec()
-//         .then(result1 => {
-//             console.log("overdue" ,result);
-//             res.status(200).json({
-//                 success: true,
-//                 result1: result1
-//             })
-//         })
-// });
-
 // API to mark equipment back in use as true or false
 router.patch('/backinuse', (req, res) => {
     const { equipment_id, isBackInUse } = req.body;
@@ -271,17 +240,15 @@ router.patch('/needsreview', (req, res) => {
 
 // API to edit equipment details
 router.patch('/edit', (req, res) => {
-    const { equipment_id, equipmentName, serialNo, maintenanceFrequency, needsReview, isNotInUse, isBackInUse } = req.body;
+    const { _id, equipment_id, equipmentName, serialNo, maintenanceFrequency } = req.body.data;
 
-    EquipmentDetails.update({ equipment_id: equipment_id },
+    EquipmentDetails.update({ _id: _id },
         {
             $set: {
+                equipment_id: equipment_id,
                 equipmentName: equipmentName,
                 serialNo: serialNo,
                 maintenanceFrequency: maintenanceFrequency,
-                needsReview: needsReview,
-                isNotInUse: isNotInUse,
-                isBackInUse: isBackInUse
             }
         })
         .exec().then(result => {

@@ -29,15 +29,6 @@ class Home extends Component {
     cardOutput: [],
   };
 
-  // getEquipmentCount() {
-  //   return Axios.get(backend_url + '/equipment/countDueToday');
-
-  // }
-
-  // getOverdueCount() {
-  //   return Axios.get(backend_url + '/equipment/countOverdue');
-  // }
-
   componentWillMount() {
     Axios.get(backend_url + "/cardDetails").then((result) => {
       console.log("card  ", result);
@@ -46,17 +37,6 @@ class Home extends Component {
       });
     });
 
-    // Promise.all([this.getEquipmentCount(), this.getOverdueCount(), this.getRepairCount()]).then(result1 => {
-    //   this.setState({
-    //     equipmentCount: result1.data.result1,
-    //   }).then(result => {
-    //     this.setState({
-    //       overdueCount: result.data.result,
-    //     })
-    //   }).then(result2 => this.setState({
-    //     repairCount: result2.data.result2,
-    //   }) )
-    // })
   }
 
   onChange = (e) => {

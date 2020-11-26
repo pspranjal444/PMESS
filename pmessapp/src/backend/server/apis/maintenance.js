@@ -283,7 +283,6 @@ router.get('/all/complete/withinweek', (req, res) => {
     todaysDateMinusSeven = todaysDateMinusSeven.toLocaleDateString('en-US');
 
     var todaysDate = new Date();
-    // todaysDate = todaysDate.toLocaleDateString('en-US');
     todaysDate.setDate(todaysDate.getDate() + 1);
     todaysDate = todaysDate.toLocaleDateString('en-US');
 

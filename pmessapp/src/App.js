@@ -12,6 +12,8 @@ import Sidebar from "./frontend/sidebar/sidebar";
 import Home from "./frontend/components/home/home";
 import cookie from "react-cookies";
 import ViewEquipments from './frontend/equipment/viewequipments';
+import EditEquipments from './frontend/equipment/editequipment';
+import ViewUsers from './frontend/user/viewusers';
 
 class App extends Component {
   render() {
@@ -34,6 +36,8 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/home" component={Home} />
             <Route path="/viewequipments" component={ViewEquipments}/>
+            <Route path="/viewusers" component={ViewUsers}/>
+            <Route path="/editequipments" component={EditEquipments}/>
           </Fragment>
         )}
         {cookie.load("user_id") && cookie.load("role") == "M" && (

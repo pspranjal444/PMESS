@@ -129,23 +129,4 @@ router.get('/all/incomplete', (req, res) => {
         });
 })
 
-// router.get('/getRepairCount', (req, res) => {
-
-//     RepairLog.count({ isComplete: false }).exec()
-//         .then(result2 => {
-//             console.log("repair Count" ,result);
-//             res.status(200).json({
-//                 success: true,
-//                 result2: result2,
-//                 message: "Maintenance Schedules found"
-//             })
-//         }).catch(err => {
-//             res.status(202).json({
-//                 success: false,
-//                 message: "Maintenance Schedules not found"
-//             })
-//         });
-
-// })
-
 module.exports = router;
