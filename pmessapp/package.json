@@ -21,6 +21,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-cookies": "^0.1.1",
+    "react-cool-tabs": "^1.1.6",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-pro-sidebar": "^0.4.4",

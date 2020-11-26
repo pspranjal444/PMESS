@@ -4,6 +4,7 @@ import AdminNavbar from "./frontend/navbar/navbar";
 import Signup from "./frontend/signup/signup";
 import AddEquipment from "./frontend/equipment/addequipment";
 import Dashboard from "./frontend/dashboard/dashboard";
+import ReportHome from "./frontend/components/reports/reportHome";
 import Login from "./frontend/login/login";
 import { Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -29,6 +30,7 @@ class App extends Component {
             <Route path="/" component={AdminNavbar} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/addequipment" component={AddEquipment} />
+            <Route path="/reports" component={ReportHome} />
             <Route path="/signup" component={Signup} />
             <Route path="/home" component={Home} />
             <Route path="/viewequipments" component={ViewEquipments}/>

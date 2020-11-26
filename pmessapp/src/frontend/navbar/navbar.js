@@ -20,6 +20,7 @@ import {
   BookOutlined,
 } from "@ant-design/icons";
 
+
 class SidebarAdmin extends Component {
   constructor(props) {
     super();
@@ -60,7 +61,8 @@ class SidebarAdmin extends Component {
               </MenuItem>
             </SubMenu>
             <MenuItem icon={<BookOutlined />} onClick={this.handleNavClick}>
-              Reports
+              <Link to="/reports">Reports</Link>
+              
             </MenuItem>
             <MenuItem icon={<LogoutOutlined />} onClick={this.handleLogout}>
               Logout

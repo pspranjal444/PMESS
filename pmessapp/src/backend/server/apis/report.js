@@ -6,14 +6,15 @@ const MaintenanceSchedule = require('../../model/maintenance-schedule');
 const RepairLog = require('../../model/repair-log');
 
 // API to create a new equipment entry
-router.get('/userActivity', (req, res) => {
-    const mech_id = req.query.mechanic_id
-    const start = req.query.start
-    const end = req.query.end
+router.post('/userActivity', (req, res) => {
+    const mech_id = req.body.query.mechanic_id
+    const start = req.body.query.start
+    const end = req.body.query.end
     const output = []
+    console.log('query',req);
     MaintenanceSchedule.count({$and:[{ maintenanceComplete: true},{mechanic_id: mech_id},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
         .then(result => {
-            output.push({"PM":result})
+            output.push({"PM":result})  
         }).then(() => {
              RepairLog.count({$and:[{mechanic_id:mech_id},{isComplete:true},{reviewedDate:{$gte:start, $lte:end}}] }).exec()
             .then(result => {
@@ -42,8 +43,14 @@ router.get('/userActivity', (req, res) => {
 const allPM = () =>{
 
 }
-router.get('/pmreviewreport',(req,res) => {
-    const {start, end, taskType, completionType} = req.query;
+router.post('/pmreviewreport',(req,res) => {
+    
+    const {start, end, taskType, completionType} = req.body.query;
+
+    // const mech_id = req.body.query.mechanic_id
+    // const start = req.body.query.start
+    // const end = req.body.query.end
+    // const output = []
     if(taskType == "PM"){
         if(completionType == "All")
         {
