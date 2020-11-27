@@ -56,6 +56,7 @@ router.post('/pmreviewreport',(req,res) => {
         {
             MaintenanceSchedule.find({maintenanceCompleteDate:{$gte:start, $lte:end}}).exec()
             .then(result => {
+                // console.log("All: ",result);
                 res.status(200).json({
                     success: true,
                     result: result,
@@ -71,6 +72,7 @@ router.post('/pmreviewreport',(req,res) => {
         if(completionType == "On Time"){
             MaintenanceSchedule.find({$and:[{maintenanceComplete:true},{isDelayed:false},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
             .then(result => {
+                // console.log("On Time: ",result);
                 res.status(200).json({
                     success: true,
                     result: result,
@@ -86,6 +88,7 @@ router.post('/pmreviewreport',(req,res) => {
         if(completionType == "Delayed"){
             MaintenanceSchedule.find({$and:[{maintenanceComplete:true},{isDelayed:true},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
             .then(result => {
+                // console.log("Delayed: ",result);
                 res.status(200).json({
                     success: true,
                     result: result,
@@ -104,6 +107,7 @@ router.post('/pmreviewreport',(req,res) => {
         {
             MaintenanceSchedule.find({reviewedDate:{$gte:start, $lte:end}}).exec()
             .then(result => {
+                // console.log("All REVIEWWW: ",result);
                 res.status(200).json({
                     success: true,
                     result: result,
@@ -119,6 +123,7 @@ router.post('/pmreviewreport',(req,res) => {
         if(completionType == "On Time"){
             MaintenanceSchedule.find({$and:[{reviewOk:true},{reviewDelayed:false},{reviewedDate:{$gte:start, $lte:end}}]}).exec()
             .then(result => {
+                // console.log("On Time REVIEWWW: ",result);
                 res.status(200).json({
                     success: true,
                     result: result,
@@ -134,6 +139,7 @@ router.post('/pmreviewreport',(req,res) => {
         if(completionType == "Delayed"){
             MaintenanceSchedule.find({$and:[{reviewOk:true},{reviewDelayed:true},{reviewedDate:{$gte:start, $lte:end}}]}).exec()
             .then(result => {
+                // console.log("Delayed REVIEWWW: ",result);
                 res.status(200).json({
                     success: true,
                     result: result,

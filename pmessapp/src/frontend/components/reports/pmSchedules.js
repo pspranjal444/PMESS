@@ -174,10 +174,13 @@ class pmSchedules extends Component {
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th>Equipment Id</th>
-                                <th>Task Type</th>
+                                <th>Equipment ID</th>
+                                <th>Completed By</th>
                                 <th>Completed Date</th>
+                                {this.state.taskFilter == "Review" &&
+                                    <th>Review Remarks</th>}
                                 <th>Completed Status</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -185,10 +188,23 @@ class pmSchedules extends Component {
                                 return(
                                     <tr> 
                                          
-                                        <td>{eachRecord.equipment_id}</td>
-                                        <td>{this.state.taskFilter}</td>
+                                        <td>{eachRecord.equipment_id}</td>    
+                                        {this.state.taskFilter == "PM"
+                                        && 
+                                        <>
+                                        <td>{eachRecord.mechanic_id}</td>
                                         <td>{eachRecord.maintenanceCompleteDate}</td>
-                                        <td>{this.state.completionType}</td>
+                                        <td>{eachRecord.isDelayed ? 'Delayed' : 'On Time' }</td>
+                                        </>}
+                                        {this.state.taskFilter == "Review"
+                                        &&
+                                        <> 
+                                        <td>{eachRecord.reviewedBy}</td>
+                                         <td>{eachRecord.reviewedDate}</td>
+                                         <td>{eachRecord.reviewRemarks}</td>
+                                         <td>{eachRecord.reviewDelayed ? 'Delayed' : 'On Time' }</td>
+                                        </>}
+                                        
 
                                     </tr>
                                 )
