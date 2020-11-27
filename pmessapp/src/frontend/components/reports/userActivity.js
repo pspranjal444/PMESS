@@ -143,7 +143,6 @@ class UserActivity extends Component {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>PM</th>
                                 <th>Repair</th>
                                 <th>Review</th>
@@ -151,7 +150,6 @@ class UserActivity extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
                                 <td>{this.state.response[0].PM}</td>
                                 <td>{this.state.response[1].Repair}</td>
                                 <td>{this.state.response[2].Reviews}</td>    

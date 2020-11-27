@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import backend_url from "../../url/backend_url";
 import cookie from "react-cookies";
 import { Button, Modal } from "antd";
+import severity from "../mechanic/equipmentseverity";
 
 class RepairTask extends Component {
   constructor() {
@@ -31,11 +32,18 @@ class RepairTask extends Component {
   };
 
   render() {
+    const severityColor = {
+      "L": "green",
+      "M": "yellow",
+      "C": "red"
+    }
     let data = this.state.repairs.map((repairLog) => {
       return (
         <tr key={repairLog._id}>
           <td style={{ textAlign: "center" }}>{repairLog.equipment_id}</td>
           <td style={{ textAlign: "center" }}>{repairLog.part}</td>
+          <td style={{ textAlign: "center" }}>{repairLog.filedBy}</td>
+          <td style={{ textAlign: "center ", backgroundColor: severityColor[repairLog.severity]}}>{severity[repairLog.severity]}</td>
           <td style={{ textAlign: "center" }}>
             <a
               href="#"
@@ -112,7 +120,7 @@ class RepairTask extends Component {
                 />
               </div>
 
-              <div class="form-group">
+              {/* <div class="form-group">
                 <label for="severity">Severity</label>
                 <div class="form-check">
                   <input
@@ -153,7 +161,7 @@ class RepairTask extends Component {
                     Critical
                   </label>
                 </div>
-              </div>
+              </div> */}
 
               <Button
                 type="primary"
@@ -190,6 +198,8 @@ class RepairTask extends Component {
             <tr>
               <th style={{ textAlign: "center" }}>Equipment Id</th>
               <th style={{ textAlign: "center" }}>Part</th>
+              <th style={{ textAlign: "center" }}>Created By</th>
+              <th style={{ textAlign: "center" }}>Severity</th>
               <th style={{ textAlign: "center" }}>Details</th>
               <th style={{ textAlign: "center" }}>Complete</th>
             </tr>

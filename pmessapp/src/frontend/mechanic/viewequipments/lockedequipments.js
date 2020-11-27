@@ -25,6 +25,7 @@ class LockedEquipments extends Component {
             maintenance_id: '',
             equipment_id: '',
             repairLogs: [],
+            severity:""
         }
 
         this.onChange = this.onChange.bind(this);
@@ -47,12 +48,14 @@ class LockedEquipments extends Component {
     }
 
     onClick = () => {
-        const { maintenance_id, equipment_id, problem, part } = this.state;
+        const { maintenance_id, equipment_id, problem, part, severity } = this.state;
+        console.log("On Click REPAIIIRRR: ",severity)
         const data = {
             maintenance_id: maintenance_id,
             equipment_id: equipment_id,
             problem: problem,
             part: part,
+            severity: severity,
             mechanic_id: cookie.load('user_id')
         }
         Axios.post(backend_url + '/repair/', { data }).then(result => {
@@ -235,6 +238,48 @@ class LockedEquipments extends Component {
                             <label for="part">Part</label>
                             <input type="text" class="form-control" id="part" name="part" aria-describedby="emailHelp" placeholder="Part" onChange={this.onChange} />
                         </div>
+                        <div class="form-group">
+                            <label for="severity">Severity</label>
+                            <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="severity"
+                                id="severity"
+                                value="L"
+                                onChange={this.onChange}
+                            />
+                            <label class="form-check-label" for="Low">
+                                Low
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="severity"
+                                id="severity"
+                                value="M"
+                                onChange={this.onChange}
+                            />
+                            <label class="form-check-label" for="Medium">
+                                Medium
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="severity"
+                                id="severity"
+                                value="C"
+                                onChange={this.onChange}
+                            />
+                            <label class="form-check-label" for="Critical">
+                                Critical
+                            </label>
+                            </div>
+                        </div>    
                         
                         <button type="submit" class="btn btn-primary" onClick={this.onClick}>Add</button>
                     </form>

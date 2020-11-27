@@ -200,9 +200,9 @@ class pmSchedules extends Component {
                                         &&
                                         <> 
                                         <td>{eachRecord.reviewedBy}</td>
-                                         <td>{eachRecord.reviewedDate}</td>
-                                         <td>{eachRecord.reviewRemarks}</td>
-                                         <td>{eachRecord.reviewDelayed ? 'Delayed' : 'On Time' }</td>
+                                        <td>{eachRecord.reviewedDate}</td>
+                                        <td>{eachRecord.reviewRemarks}</td>
+                                        <td>{eachRecord.reviewDelayed ? 'Delayed' : 'On Time' }</td>
                                         </>}
                                         
 

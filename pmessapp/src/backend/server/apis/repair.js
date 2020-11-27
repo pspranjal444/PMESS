@@ -5,7 +5,7 @@ const RepairLog = require('../../model/repair-log');
 
 // API to create a new repair log entry
 router.post('/', (req, res) => {
-    const { maintenance_id, equipment_id, problem, part, mechanic_id } = req.body.data;
+    const { maintenance_id, equipment_id, problem, part, mechanic_id, severity } = req.body.data;
 
     const log = new RepairLog({
         _id: new mongoose.Types.ObjectId(),
@@ -13,7 +13,9 @@ router.post('/', (req, res) => {
         equipment_id: equipment_id,
         problem: problem,
         part: part,
-        isComplete: false
+        severity: severity,
+        isComplete: false,
+        filedBy: mechanic_id
     });
 
     log.save().then(() => {
@@ -36,7 +38,7 @@ router.patch('/complete', (req, res) => {
     RepairLog.update({ _id: _id }, { $set: 
         { 
             correctiveAction: correctiveAction, 
-            severity: severity, 
+            // severity: severity, 
             mechanic_id: mechanic_id, 
             reviewedDate: Date.now(),
             isComplete: true
