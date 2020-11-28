@@ -294,7 +294,7 @@ class Equipments extends Component {
             <br />
             <br />
             <p style={{fontSize:"19px", color: "#393E46"}}>
-              <strong>History of maintenance schedules:</strong>
+              <strong>History of Maintenance Schedules:</strong>
             </p>
             <div class="container" style={{ width: "900px", marginLeft:"80px", marginRight:"130px" }}>
               <table class="table table-striped">

@@ -53,71 +53,142 @@ class Home extends Component {
     const role = cookie.load("role");
     return (
       <div style={{ paddingLeft: "20%" }}>
-        <Helmet>
-          <style>{"body{background-color: #E7EED2;}"}</style>
-        </Helmet>  
-        
-        <div class="container">
-         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
-        </div>   
-    
-        <>
-          <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%", marginLeft:"40px" }}>
+        {user_id && role == "A" && (
+            <div>
+            <Helmet>
+            <style>{"body{background-color: #e6ffe6;}"}</style>
+            </Helmet>  
+            <div class="container">
+            <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+            </div> 
+            <>
+          <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%", marginLeft:"40px", color:"white"}}>
             <Card
               color="violet"
-              style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#E7DFD5"}}
+              style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#00BCD4"}}
             >
               <Card.Content>
-                <Image floated="right" size="tiny" src="equipment-icon-4.jpg" />
-                <Card.Header>Equipments Due</Card.Header>
+                <Image floated="right" size="tiny" src="equipment-icon-4.jpg"/>
+                <Card.Header style={{fontSize:"20px", marginTop:"20px", marginLeft:"15px"}}>Equipments Due</Card.Header>
                 <Card.Meta></Card.Meta>
-                <Card.Description>
-                  <strong>{this.state.cardOutput[0]}</strong>
+                <Card.Description style={{fontSize:"60px", marginLeft:"80px", marginTop:"-80px", marginBottom:"10px"}}>
+                {this.state.cardOutput[0]}
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                  <SButton basic color="green">
+                  <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
                     View
-                  </SButton>
+                  </Button>
                 </div>
               </Card.Content>
             </Card>
-            <Card color="teal" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#E7DFD5" }}>
+            <Card color="teal" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#FCBF1E" }}>
               <Card.Content>
                 <Image floated="right" size="tiny" src="timer.png" />
-                <Card.Header>Overdue</Card.Header>
-                <Card.Description>
-                  <strong>{this.state.cardOutput[1]}</strong>
+                <Card.Header style={{fontSize:"20px", marginTop:"20px", marginLeft:"15px"}}>Overdue</Card.Header>
+                <Card.Description style={{fontSize:"60px", marginLeft:"80px", marginTop:"-80px", marginBottom:"10px"}}>
+                  {this.state.cardOutput[1]}
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                  <SButton basic color="green">
+                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px", marginLeft:"10px"}}>
                     View
-                  </SButton>
+                  </Button>
                 </div>
               </Card.Content>
             </Card>
-            <Card color="pink" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#E7DFD5" }}>
+            <Card color="pink" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#F78259" }}>
               <Card.Content>
                 <Image floated="right" size="tiny" src="repairlog.png" />
-                <Card.Header>Repair Logs</Card.Header>
-                <Card.Description>
-                  <strong>{this.state.cardOutput[2]}</strong>
+                <Card.Header style={{fontSize:"20px", marginTop:"20px", marginLeft:"15px"}}>Repair Logs</Card.Header>
+                <Card.Description style={{fontSize:"60px", marginLeft:"80px", marginTop:"-80px", marginBottom:"10px"}}>
+                  {this.state.cardOutput[2]}
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                  <SButton basic color="green">
+                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
                     View
-                  </SButton>
+                  </Button>
                 </div>
               </Card.Content>
             </Card>
           </Card.Group>
         </>
+            </div>
+          )}
 
+          {user_id && role == "M" && (
+            <div>
+            <Helmet>
+            <style>{"body{background-color: #EEEEEE;}"}</style>
+            </Helmet>  
+            <div class="container">
+            <img src="admin-settings-male.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Stephen Parker (Mechanic)</strong>
+            </div> 
+            <>
+            <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%", marginLeft:"40px", color:"white"}}>
+            <Card
+              color="violet"
+              style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#00BCD4"}}
+            >
+              <Card.Content>
+                <Image floated="right" size="tiny" src="equipment-icon-4.jpg"/>
+                <Card.Header style={{fontSize:"20px", marginTop:"20px", marginLeft:"15px"}}>Equipments Due</Card.Header>
+                <Card.Meta></Card.Meta>
+                <Card.Description style={{fontSize:"60px", marginLeft:"80px", marginTop:"-80px", marginBottom:"10px"}}>
+                {this.state.cardOutput[0]}
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className="ui two buttons">
+                  <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
+                    View
+                  </Button>
+                </div>
+              </Card.Content>
+            </Card>
+            <Card color="teal" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#FCBF1E" }}>
+              <Card.Content>
+                <Image floated="right" size="tiny" src="timer.png" />
+                <Card.Header style={{fontSize:"20px", marginTop:"20px", marginLeft:"15px"}}>Overdue</Card.Header>
+                <Card.Description style={{fontSize:"60px", marginLeft:"80px", marginTop:"-80px", marginBottom:"10px"}}>
+                  {this.state.cardOutput[1]}
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className="ui two buttons">
+                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px", marginLeft:"10px"}}>
+                    View
+                  </Button>
+                </div>
+              </Card.Content>
+            </Card>
+            <Card color="pink" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#F78259" }}>
+              <Card.Content>
+                <Image floated="right" size="tiny" src="repairlog.png" />
+                <Card.Header style={{fontSize:"20px", marginTop:"20px", marginLeft:"15px"}}>Repair Logs</Card.Header>
+                <Card.Description style={{fontSize:"60px", marginLeft:"80px", marginTop:"-80px", marginBottom:"10px"}}>
+                  {this.state.cardOutput[2]}
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className="ui two buttons">
+                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
+                    View
+                  </Button>
+                </div>
+              </Card.Content>
+            </Card>
+          </Card.Group>
+        </>
+            </div>
+          )}
+          
+    
+       
         {/* {redirectVar} */}
         <Tabs defaultActiveKey="1" type="card" size={this.state.size} style={{marginBottom:"30px", color:"black"}}>
           <TabPane tab="  Due Equipments " key="1">
@@ -215,7 +286,7 @@ class Home extends Component {
                                 <Fragment>
                                   <td style={{ textAlign: "center" }}>
                                     <Button
-                                      type="primary"
+                                      buttonStyle={{backgroundColor:"#B6CDBD"}}
                                       disabled={equipment.isLocked}
                                       onClick={() => {
                                         const mechanic_id = cookie.load(
@@ -231,7 +302,7 @@ class Home extends Component {
                                         });
                                       }}
                                     >
-                                      Lock
+                                    Lock
                                     </Button>
                                   </td>
                                 </Fragment>
