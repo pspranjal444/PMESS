@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import backend_url from "../../url/backend_url";
 import Axios from "axios";
+import { Helmet } from "react-helmet";
 import roleconvert from "./roleconvert";
 import { Radio } from "antd";
 
@@ -38,10 +39,20 @@ class ViewUsers extends Component {
       }
     });
     return (
+      <div style={{ paddingLeft: "20%" }}>
+      <Helmet>
+          <style>{"body{background-color: #E7EED2;}"}</style>
+        </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div> 
       <div class="container">
-        <h2 style={{ marginTop: "100px", textAlign: "center" }}>
+        <h2 style={{textAlign:"center" , color: "#393E46", marginTop: "80px", fontSize:"36px"}}>
           User Details
         </h2>
+        <br/>
+        <br/>
         <Radio.Group defaultValue="a" buttonStyle="solid" Button type="warning" style={{marginLeft: "30px"}}>
           <Radio.Button
             value="a"
@@ -66,7 +77,7 @@ class ViewUsers extends Component {
         </Radio.Group>
         <table
           class="table table-striped"
-          style={{ marginTop: "50px", marginLeft: "30px" }}
+          style={{ marginTop: "50px", marginLeft: "30px", width:"1000px" }}
         >
           <thead>
             <tr>
@@ -81,6 +92,7 @@ class ViewUsers extends Component {
           <tbody>{data}</tbody>
         </table>
       </div>
+    </div>  
     );
   }
 }

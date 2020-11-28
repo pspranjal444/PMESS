@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import frequency from '../../utility/frequency';
 import axios from 'axios';
+import { Helmet } from "react-helmet";
 import backend_url from '../../url/backend_url';
 
 class AddEquipment extends Component {
@@ -45,31 +46,39 @@ class AddEquipment extends Component {
 
     render() {
         return (
-            <div style={{paddingLeft: "30%"}}>
-               
+            <div style={{paddingLeft: "20%"}}>
+                 <Helmet>
+          <style>{"body{background-color: #E7EED2;}"}</style>
+        </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div> 
                 <br /><br /><br /><br /><br />
-                <div class="col-xs-5" style={{ border: "1px solid black", padding: "20px", marginLeft: "50px" }}>
-                    <h2>Add Equipment</h2>
+                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"320px", marginTop:"10px", width:"450px", backgroundColor:"#9ad3bc"}}>
+                    <h2 style={{textAlign:"center" , color: "#393E46", fontSize:"30px"}}>Add New Equipment</h2>
+                    <br />
+                    <img src="xxx017-512.png" style={{height:"120px", width:"120px", marginLeft:"120px"}}/>
                     <form>
                         <div class="form-group">
-                            <label for="equipment_id">Equipment Id</label>
-                            <input type="text" class="form-control" id="equipment_id" name="equipment_id" placeholder="Enter equipment id" onChange={this.onChange} />
+                            <label for="equipment_id" style={{fontSize:"17px", color: "#393E46"}}>Equipment Id</label>
+                            <input type="text" class="form-control" id="equipment_id" name="equipment_id" placeholder="e.g., FA10080" style={{borderRadius:"20px"}} onChange={this.onChange} />
                         </div>
 
                         <div class="form-group">
-                            <label for="equipmentName">Equipment Name</label>
-                            <input type="text" class="form-control" id="equipmentName" name="equipmentName" placeholder="Equipment Name" onChange={this.onChange} />
+                            <label for="equipmentName" style={{fontSize:"17px", color: "#393E46"}}>Equipment Name</label>
+                            <input type="text" class="form-control" id="equipmentName" name="equipmentName" placeholder="e.g., Shrink Wrappers" style={{borderRadius:"20px"}}  onChange={this.onChange} />
                         </div>
 
                         <div class="form-group">
-                            <label for="serialNo">Serial Number</label>
-                            <input type="text" class="form-control" id="serialNo" name="serialNo" placeholder="Serial Number" onChange={this.onChange} />
+                            <label for="serialNo" style={{fontSize:"17px", color: "#393E46"}}>Serial Number</label>
+                            <input type="text" class="form-control" id="serialNo" name="serialNo" placeholder="e.g., AA10198BFG" style={{borderRadius:"20px"}}  onChange={this.onChange} />
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Maintenance Frequency</label>
+                            <label for="exampleInputPassword1" style={{fontSize:"17px", color: "#393E46"}} >Maintenance Frequency</label>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" style={{borderRadius:"20px"}} type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Maintenance Frequency
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -90,12 +99,15 @@ class AddEquipment extends Component {
                                         this.setState({
                                             maintenanceFrequency: frequency.ANNUALLY
                                         })
-                                    }}>Annually</button>
+                                    }}>Anually</button>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Submit</button>
-
+                        <br/>
+                        <br/>
+                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#dddddd", color:"black", borderRadius:"20px", borderColor:"#dddddd",fontSize:"17px", marginLeft:"130px", width:"130px"}}  onClick={this.onClick}>Submit</button>
+                        
+                    
                     </form>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Helmet} from "react-helmet";
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
 import cookie from 'react-cookies';
@@ -37,40 +38,49 @@ class Login extends Component {
 
     render() {
         return (
-            <div style={{ marginLeft: "500px", width: "1300px", marginTop: "100px" }}>
-                <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png" height="50px" style={{ marginLeft: "60px" }} />
-                <br /><br />
-                <div class="col-xs-3" style={{ border: "1px solid black", padding: "20px" }}>
-                    <h2>Login</h2>
+            <div style={{ marginLeft: "500px", width: "1300px", marginTop: "100px"}}>
+                 <Helmet>
+          <style>{"body{background-color: #e0ece4;}"}</style>
+        </Helmet>
+                <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png"  style={{ marginLeft: "100px", height:"60px" }} />
+                <br /><br/>
+                <h2 style={{color: "#3b6978", marginLeft:"-60px", fontSize:"36px"}}>Equipment Preventive Maintainence System</h2><br/><br/>
+               
+                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"30px", width:"450px", backgroundColor:"#cedebd"}}>
+                    <h2 style={{textAlign:"center" , color: "#393E46"}}>Member Login</h2>
                     <br />
                     <form>
                         <div class="form-group">
-                            <label for="email">User Id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChange} />
+                            <i class="fa fa-user" aria-hidden="true" style={{height:"25px", width: "25px"}}></i>
+                            <label for="email" style={{fontSize:"17px", color: "#393E46"}}>Username</label>
+                            <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="emailHelp" style={{borderRadius:"20px"}} placeholder="Enter e-mail" onChange={this.onChange} />
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" onChange={this.onChange} />
+                            <i class="fa fa-key" aria-hidden="true" style={{height:"25px", width: "25px"}}></i>
+                            <label for="password" style={{fontSize:"17px", color: "#393E46"}}>Password</label>
+                            <input type="password" class="form-control" id="password" name="password" style={{borderRadius:"20px"}} placeholder="Enter password" onChange={this.onChange} />
                         </div>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" id="role" value="A" onChange={this.onChange} />
-                            <label class="form-check-label" for="typeAdmin">
-                                Administrator
-                            </label>
+                            <label class="form-check-label" style={{fontSize:"17px", color: "#393E46"}} for="typeAdmin">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator
+                            </label> 
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" id="role" value="M" onChange={this.onChange} />
-                            <label class="form-check-label" for="typeMechanic">
-                                Mechanic
+                            <label class="form-check-label" style={{fontSize:"17px", color: "#393E46"}} for="typeMechanic">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanic
                             </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Login</button>
+                        </div><br/>
+
+                        <button type="submit" class="btn btn-primary" style={{marginLeft:"150px", width:"90px", borderRadius:"20px", fontSize:"16px", backgroundColor:"#3b6978", borderColor:"#3b6978"}} onClick={this.onClick}>Login</button>
                     </form>
                 </div>
             </div>
+      
         );
     }
 }

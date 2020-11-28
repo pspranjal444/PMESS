@@ -29,7 +29,7 @@ class InProgressTasks extends Component {
               value="a"
               onChange={() => {
                 this.setState({
-                  tab: <ThisWeek />,
+                  tab: <ThisWeek/>,
                 });
               }}
             >
