@@ -39,37 +39,40 @@ class SidebarAdmin extends Component {
         <ProSidebar style={{ position: "fixed !important" }}>
           <img
             src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo-footer.png"
-            height="120px"
-            style={{ marginTop: "15px" }}
+            height="100px"
+            style={{ marginTop: "35px", width:"150px", marginLeft:"60px"}}
           />
+          <br/>
+          <br/>
+          <br/>
           <Menu iconShape="square">
             <MenuItem icon={<HomeOutlined />} key="1">
-              <Link to="/home">Home</Link>
+              <Link to="/home" style={{fontSize:"18px"}}>Home</Link>
             </MenuItem>
-            <SubMenu icon={<UserOutlined />} title="Users">
+            <SubMenu icon={<UserOutlined />} style={{fontSize:"18px"}} title="Users">
               <MenuItem key="2">
-                <Link to="/signup">Add User</Link>
+                <Link to="/signup" style={{fontSize:"16px"}} >Add User</Link>
               </MenuItem>
               <MenuItem key="3">
-                <Link to="/viewusers">View Users</Link>
+                <Link to="/viewusers" style={{fontSize:"16px"}}>View Users</Link>
               </MenuItem>
             </SubMenu>
-            <SubMenu icon={<ControlOutlined />} title="Equipments">
+            <SubMenu icon={<ControlOutlined />} style={{fontSize:"18px"}} title="Equipments">
               <MenuItem key="4">
-                <Link to="/addequipment">Add Equipment</Link>
+                <Link to="/addequipment" style={{fontSize:"16px"}}>Add Equipment</Link>
               </MenuItem>
               <MenuItem key="5">
-                <Link to="/editequipments">Edit Equipment</Link>
+                <Link to="/editequipments" style={{fontSize:"16px"}}>Edit Equipment</Link>
               </MenuItem>
               <MenuItem key="6">
-                <Link to="/viewequipments">View Equipments</Link>
+                <Link to="/viewequipments" style={{fontSize:"16px"}}>View Equipments</Link>
               </MenuItem>
             </SubMenu>
             <MenuItem icon={<BookOutlined />} onClick={this.handleNavClick}>
-              <Link to="/reports">Reports</Link>
+              <Link to="/reports" style={{fontSize:"18px"}}>Reports</Link>
               
             </MenuItem>
-            <MenuItem icon={<LogoutOutlined />} onClick={this.handleLogout}>
+            <MenuItem icon={<LogoutOutlined />} style={{fontSize:"18px"}} onClick={this.handleLogout}>
               Logout
             </MenuItem>
           </Menu>

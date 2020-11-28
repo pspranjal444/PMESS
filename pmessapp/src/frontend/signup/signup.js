@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
 
@@ -37,50 +38,65 @@ class Signup extends Component {
 
     render() {
         return (
-            <div style={{ marginLeft: "500px", width: "1300px", paddingTop: "80px"}}>
-                <div class="col-xs-3" style={{ border: "1px solid black", padding: "20px" }}>
-                    <h2>Add User</h2>
+            <div style={{ paddingLeft: "20%" }}>
+                 <Helmet>
+          <style>{"body{background-color: #E7EED2;}"}</style>
+        </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div>  
+                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"320px", marginTop:"80px", width:"450px", backgroundColor:"#acbd86"}}>
+                    <h2 style={{textAlign:"center" , color: "#393E46", fontSize:"36px"}}>Add New User</h2>
                     <br />
+                    <img src="add-male-user.png" style={{height:"150px", width:"150px", marginLeft:"100px"}}/>
                     <form>
                         <div class="form-group">
-                            <label for="firstName">First Name: </label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" onChange={this.onChange} />
+                            <label for="firstName" style={{fontSize:"17px", color: "#393E46"}}>First Name: </label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="e.g., Mary" style={{borderRadius:"20px"}} onChange={this.onChange} />
                         </div>
 
                         <div class="form-group">
-                            <label for="lastName">Last Name: </label>
-                            <input type="lastName" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" onChange={this.onChange} />
+                            <label for="lastName" style={{fontSize:"17px", color: "#393E46"}}>Last Name: </label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g., Parker" style={{borderRadius:"20px"}} onChange={this.onChange} />
                         </div>
                         <div class="form-group">
-                            <label for="user_id">User Id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter User ID" onChange={this.onChange} />
+                            <label for="user_id" style={{fontSize:"17px", color: "#393E46"}}>Employee Id:</label>
+                            <input type="text" class="form-control" id="user_id" name="user_id" placeholder="e.g., 6344202987" style={{borderRadius:"20px"}} onChange={this.onChange} />
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" onChange={this.onChange} />
+                            <label for="phone" style={{fontSize:"17px", color: "#393E46"}}>Contact Number:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="e.g., +1-(xxx)-(xxx)-(xxxx)" style={{borderRadius:"20px"}} onChange={this.onChange} />
                         </div>
-                        <div class="form-check">
-                            <label for="phone">Phone Number: </label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number" onChange={this.onChange} />
-                        </div>
+
+
                         <div class="form-group">
-                            <label for="email">Email ID: </label>
-                            <input type="text" class="form-control" id="email_id" name="email_id" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.onChange} />
+                            <label for="email" style={{fontSize:"17px", color: "#393E46"}}>Email ID: </label>
+                            <input type="text" class="form-control" id="email_id" name="email_id" aria-describedby="emailHelp" placeholder="e.g., abc345@s-vlabs.com" style={{borderRadius:"20px"}}  onChange={this.onChange} />
                         </div>
+
+                        <div class="form-group">
+                            <label for="password" style={{fontSize:"17px", color: "#393E46"}}>Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="e.g., *********" style={{borderRadius:"20px"}} onChange={this.onChange} />
+                        </div>
+                        
+                        
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" id="role" value="A" onChange={this.onChange} />
-                            <label class="form-check-label" for="typeAdmin">
-                                Administrator
+                            <label class="form-check-label" style={{fontSize:"17px", color: "#393E46"}} for="typeAdmin">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" id="role" value="M" onChange={this.onChange} />
-                            <label class="form-check-label" for="typeMechanic">
-                                Mechanic
+                            <label class="form-check-label" style={{fontSize:"17px", color: "#393E46"}} for="typeMechanic">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanic
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Create User</button>
+                        <br/>
+                        <br/>
+                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#dddddd", color:"black", borderRadius:"20px", borderColor:"#dddddd",fontSize:"17px", marginLeft:"130px"}} onClick={this.onClick}>Create User</button>
                     </form>
                 </div>
             </div>

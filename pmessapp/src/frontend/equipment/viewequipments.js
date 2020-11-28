@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { Component } from "react";
 import backend_url from "../../url/backend_url";
+import { Helmet } from "react-helmet";
 import { Modal, Button, Menu, Dropdown, message } from "antd";
 import { CheckCircleTwoTone, ExclamationCircleTwoTone } from "@ant-design/icons";
 import frequencyConvert from "../../utility/frequencyConvert";
@@ -80,7 +81,7 @@ class Equipments extends Component {
                 : ms.mechanic_id + " is working"}
             </td>
             <td style={{ textAlign: "center" }}>
-              <Button
+              <Button style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97"}}
                 onClick={() => {
                   Axios.get(backend_url + "/repair/all/maintenance", {
                     params: { maintenance_id: ms._id },
@@ -133,23 +134,15 @@ class Equipments extends Component {
                           <div class="container">
                             <table
                               class="table table-striped"
-                              style={{ width: "910px" }}
+                              style={{ width: "800px" }}
                             >
                               <thead>
-                                <tr>
+                                <tr style={{fontSize:"17px", color: "#393E46"}}>
                                   <th style={{ textAlign: "center" }}>Part</th>
-                                  <th style={{ textAlign: "center" }}>
-                                    Severity
-                                  </th>
-                                  <th style={{ textAlign: "center" }}>
-                                    Mechanic Id
-                                  </th>
-                                  <th style={{ textAlign: "center" }}>
-                                    Reviewed Date
-                                  </th>
-                                  <th style={{ textAlign: "center" }}>
-                                    Details
-                                  </th>
+                                  <th style={{ textAlign: "center" }}>Severity</th>
+                                  <th style={{ textAlign: "center"}}>Mechanic Id</th>
+                                  <th style={{ textAlign: "center" }}>Reviewed Date</th>
+                                  <th style={{ textAlign: "center"}}>Details</th>
                                 </tr>
                               </thead>
                               <tbody>{data}</tbody>
@@ -169,7 +162,8 @@ class Equipments extends Component {
               {ms.maintenanceComplete ? <CheckCircleTwoTone twoToneColor="#52c41a"></CheckCircleTwoTone> : <ExclamationCircleTwoTone twoToneColor="#ffdb58"></ExclamationCircleTwoTone>}
             </td>
             <Modal
-              title="Repair Details"
+              title="REPAIR DETAILS"
+              bodyStyle={{backgroundColor:"#B6CDBD"}}
               visible={this.state.visibleTwo}
               onOk={() => {
                 this.setState({
@@ -183,12 +177,12 @@ class Equipments extends Component {
                   visibleTwo: false,
                 });
               }}
-              width={1000}
+              width={800}
             >
-              <p>
+              <p style={{fontSize:"17px", color: "#393E46"}}>
                 <strong>Problem:</strong> {this.state.problem}
               </p>
-              <p>
+              <p style={{fontSize:"17px", color: "#393E46"}}>
                 <strong>Corrective Action:</strong>{" "}
                 {this.state.correctiveAction}
               </p>
@@ -199,14 +193,27 @@ class Equipments extends Component {
     }
 
     return (
+      <div style={{ paddingLeft: "20%" }}>
+      <Helmet>
+          <style>{"body{background-color: #E7EED2;}"}</style>
+        </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div> 
+
+        <h2 style={{textAlign:"center" , color: "#393E46", marginTop: "80px", fontSize:"36px"}}>
+          Equipement Details
+        </h2>
+
       <div class="container">
-        <div style={{ marginTop: "50px", marginLeft: "400px" }}>
-          <label>
+        <div style={{ marginTop: "50px", marginLeft: "240px" }}>
+          <label style={{fontSize:"17px", color: "#393E46"}}>
             Please select an equipment from the dropdown:&nbsp;&nbsp;
           </label>
           <Dropdown.Button
             overlay={
-              <Menu
+              <Menu style={{fontSize:"17px", color: "#393E46", width:"170px"}}
                 onClick={(e) => {
                   message.info("Item Opened");
                   const equipment_id = e.key;
@@ -243,11 +250,12 @@ class Equipments extends Component {
 
           <>
             <Modal
+              bodyStyle={{backgroundColor:"#E4EDD8"}}
               title={this.state.equipmentName}
               visible={this.state.visibleOne}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
-              width={1000}
+              width={870}
             >
               {this.state.repairLogs}
             </Modal>
@@ -258,25 +266,25 @@ class Equipments extends Component {
         </div>
         {this.state.view && (
           <div class="container">
-            <table class="table table-borderless" style={{ border: "None" }}>
+            <table class="table table-borderless" style={{ border: "2px", borderRadius:"10px", backgroundColor:"#cfd3ce", width:"1060px"}}>
               <tbody>
                 <tr>
-                  <td>
+                  <td style={{fontSize:"17px", color: "#393E46"}}>
                     <strong>Equipment Id:</strong> {this.state.equipment_id}
                   </td>
-                  <td>
+                  <td style={{fontSize:"17px", color: "#393E46"}}>
                     <strong>Equipment Name:</strong> {this.state.equipmentName}
                   </td>
-                  <td>
+                  <td style={{fontSize:"17px", color: "#393E46"}}>
                     <strong>Serial No:</strong> {this.state.serialNo}{" "}
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{fontSize:"17px", color: "#393E46"}}>
                     <strong>Maintenance Frequency:</strong>{" "}
                     {frequencyConvert[this.state.maintenanceFrequency]}
                   </td>
-                  <td>
+                  <td style={{fontSize:"17px", color: "#393E46"}}>
                     <strong>Next Due Date:</strong> {this.state.dueDate}
                   </td>
                   <td></td>
@@ -285,10 +293,10 @@ class Equipments extends Component {
             </table>
             <br />
             <br />
-            <p>
+            <p style={{fontSize:"19px", color: "#393E46"}}>
               <strong>History of maintenance schedules:</strong>
             </p>
-            <div class="container" style={{ width: "800px" }}>
+            <div class="container" style={{ width: "900px", marginLeft:"80px", marginRight:"130px" }}>
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -296,6 +304,7 @@ class Equipments extends Component {
                     <th style={{ textAlign: "center" }}>Complete Date</th>
                     <th style={{ textAlign: "center" }}>In Progress?</th>
                     <th style={{ textAlign: "center" }}>View Repairs</th>
+                    <th style={{ textAlign: "left" }}>Status</th>
                   </tr>
                 </thead>
                 <tbody>{mss}</tbody>
@@ -304,6 +313,7 @@ class Equipments extends Component {
           </div>
         )}
       </div>
+     </div> 
     );
   }
 }

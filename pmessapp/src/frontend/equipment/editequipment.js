@@ -1,5 +1,6 @@
 import Modal from "antd/lib/modal/Modal";
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import backend_url from "../../url/backend_url";
 import frequency from "../../utility/frequency";
 import frequencyConvert from "../../utility/frequencyConvert";
@@ -83,6 +84,7 @@ class EditEquipment extends Component {
             </a>
           </td>
           <Modal
+            bodyStyle={{backgroundColor:"#E5F4E7"}}
             visible={this.state.visible}
             onOk={() => {
               this.setState({
@@ -97,46 +99,49 @@ class EditEquipment extends Component {
           >
             <form>
               <div class="form-group">
-                <label for="equipment_id">Equipment Id</label>
+                <label for="equipment_id" style={{fontSize:"17px", color: "#393E46"}}>Equipment Id</label>
                 <input
                   type="text"
                   class="form-control"
                   id="equipment_id"
                   name="equipment_id"
-                  placeholder="Enter equipment id"
+                  placeholder="e.g., FA10800"
                   onChange={this.onChange}
                   value={this.state.equipment_id}
+                  style={{borderRadius:"20px"}} 
                 />
               </div>
 
               <div class="form-group">
-                <label for="equipmentName">Equipment Name</label>
+                <label for="equipmentName" style={{fontSize:"17px", color: "#393E46"}}>Equipment Name</label>
                 <input
                   type="text"
                   class="form-control"
                   id="equipmentName"
                   name="equipmentName"
-                  placeholder="Equipment Name"
+                  placeholder="e.g., Heat Tunnel"
                   onChange={this.onChange}
                   value={this.state.equipmentName}
+                  style={{borderRadius:"20px"}} 
                 />
               </div>
 
               <div class="form-group">
-                <label for="serialNo">Serial Number</label>
+                <label for="serialNo" style={{fontSize:"17px", color: "#393E46"}}>Serial Number</label>
                 <input
                   type="text"
                   class="form-control"
                   id="serialNo"
                   name="serialNo"
-                  placeholder="Serial Number"
+                  placeholder="e.g., HTN89AX4"
                   onChange={this.onChange}
                   value={this.state.serialNo}
+                  style={{borderRadius:"20px"}} 
                 />
               </div>
 
               <div class="form-group">
-                <label for="exampleInputPassword1">Maintenance Frequency</label>
+                <label for="exampleInputPassword1" style={{fontSize:"17px", color: "#393E46"}}>Maintenance Frequency</label>
                 <div class="dropdown">
                   <button
                     class="btn btn-secondary dropdown-toggle"
@@ -145,6 +150,7 @@ class EditEquipment extends Component {
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
+                    style={{borderRadius:"20px", width:"90px"}} 
                   >
                     {frequencyConvert[this.state.maintenanceFrequency]}
                   </button>
@@ -195,6 +201,7 @@ class EditEquipment extends Component {
                 type="submit"
                 class="btn btn-primary"
                 onClick={this.onClick}
+                style={{backgroundColor:"#0D625E", color:"aliceblue", borderRadius:"20px", borderColor:"#0D625E",fontSize:"16px", marginLeft:"160px", width:"130px"}} 
               >
                 Submit
               </button>
@@ -204,13 +211,21 @@ class EditEquipment extends Component {
       );
     });
     return (
+      <div style={{ paddingLeft: "20%" }}>
+      <Helmet>
+          <style>{"body{background-color: #E7EED2;}"}</style>
+        </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div> 
       <div class="container">
-        <h2 style={{ marginTop: "100px", textAlign: "center" }}>
+        <h2 style={{textAlign:"center" , color: "#393E46", marginTop: "80px", fontSize:"32px"}}>
           Update Equipment
         </h2>
         <table
           class="table table-striped"
-          style={{ marginLeft: "50px", marginTop: "50px" }}
+          style={{ marginTop: "50px", marginLeft: "30px", width:"1000px" }}
         >
           <thead>
             <tr>
@@ -224,6 +239,7 @@ class EditEquipment extends Component {
           <tbody>{data}</tbody>
         </table>
       </div>
+     </div> 
     );
   }
 }

@@ -55,14 +55,18 @@ class Home extends Component {
     return (
       <div style={{ paddingLeft: "20%" }}>
         <Helmet>
-          <style>{"body{background-color: aliceblue;}"}</style>
-        </Helmet>
-
+          <style>{"body{background-color: #E7EED2;}"}</style>
+        </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div>   
+    
         <>
-          <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%" }}>
+          <Card.Group style={{ paddingBottom: "2%", paddingTop: "2%", marginLeft:"40px" }}>
             <Card
               color="violet"
-              style={{ marginLeft: "1%", marginRight: "5%" }}
+              style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#E7DFD5"}}
             >
               <Card.Content>
                 <Image floated="right" size="tiny" src="equipment-icon-4.jpg" />
@@ -75,16 +79,15 @@ class Home extends Component {
               <Card.Content extra>
                 <div className="ui two buttons">
                   <SButton basic color="green">
-                    Approve
+                    View
                   </SButton>
                 </div>
               </Card.Content>
             </Card>
-            <Card color="teal" style={{ marginLeft: "1%", marginRight: "5%" }}>
+            <Card color="teal" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#E7DFD5" }}>
               <Card.Content>
                 <Image floated="right" size="tiny" src="timer.png" />
                 <Card.Header>Overdue</Card.Header>
-                <Card.Meta>New User</Card.Meta>
                 <Card.Description>
                   <strong>{this.state.cardOutput[1]}</strong>
                 </Card.Description>
@@ -92,16 +95,15 @@ class Home extends Component {
               <Card.Content extra>
                 <div className="ui two buttons">
                   <SButton basic color="green">
-                    Approve
+                    View
                   </SButton>
                 </div>
               </Card.Content>
             </Card>
-            <Card color="pink" style={{ marginLeft: "1%", marginRight: "5%" }}>
+            <Card color="pink" style={{ marginLeft: "1%", marginRight: "5%", backgroundColor:"#E7DFD5" }}>
               <Card.Content>
                 <Image floated="right" size="tiny" src="repairlog.png" />
                 <Card.Header>Repair Logs</Card.Header>
-                <Card.Meta>New User</Card.Meta>
                 <Card.Description>
                   <strong>{this.state.cardOutput[2]}</strong>
                 </Card.Description>
@@ -109,7 +111,7 @@ class Home extends Component {
               <Card.Content extra>
                 <div className="ui two buttons">
                   <SButton basic color="green">
-                    Approve
+                    View
                   </SButton>
                 </div>
               </Card.Content>
@@ -118,7 +120,7 @@ class Home extends Component {
         </>
 
         {/* {redirectVar} */}
-        <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
+        <Tabs defaultActiveKey="1" type="card" size={this.state.size} style={{marginBottom:"30px"}}>
           <TabPane tab="  Due Equipments " key="1">
             <div style={{ mystyle }}>
               <Radio.Group
@@ -179,7 +181,9 @@ class Home extends Component {
                   }}
                 />
                 &nbsp;&nbsp;
-                <Button
+
+            
+                <Button style={{backgroundColor:"#709078", borderRadius:"20px", borderColor:"#709078"}}
                   type="primary"
                   onClick={() => {
                     Axios.get(backend_url + "/equipment/daterange", {
@@ -283,7 +287,7 @@ class Home extends Component {
           {user_id && role == "A" && (
             <Fragment>
               <TabPane tab="In progress tasks" key="2">
-                <InProgressTasks />
+                <InProgressTasks/>
               </TabPane>
             </Fragment>
           )}

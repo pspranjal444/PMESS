@@ -60,7 +60,8 @@ class InProgress extends Component {
               </a>
             </td>
             <Modal
-              title={"Equipment Id: " + repairLog.equipment_id}
+              bodyStyle={{backgroundColor:"#B6CDBD"}}
+              title={"EQUIPMENT ID: " + repairLog.equipment_id}
               visible={this.state.visibleTwo}
               onOk={() => {
                 this.setState({
@@ -74,17 +75,17 @@ class InProgress extends Component {
                   visibleTwo: false,
                 });
               }}
-              width={1000}
+              width={800}
             >
               <div class="container">
-                <p>
+                <p style={{fontSize:"17px"}}>
                   <strong>Problem:</strong> {repairLog.problem}
                 </p>
-                <p>
+                <p style={{fontSize:"17px"}}>
                   <strong>Corrective Action:</strong>{" "}
                   {repairLog.correctiveAction}
                 </p>
-                <p>
+                <p style={{fontSize:"17px"}}>
                   <strong>Mechanic Id:</strong> {repairLog.mechanic_id}
                 </p>
               </div>
@@ -119,7 +120,8 @@ class InProgress extends Component {
             </a>
           </td>
           <Modal
-            title="Details"
+            bodyStyle={{backgroundColor:"#E4EDD8"}}
+            title ="DETAILS"
             visible={this.state.visibleOne}
             onOk={() => {
               this.setState({
@@ -131,13 +133,14 @@ class InProgress extends Component {
                 visibleOne: false,
               });
             }}
-            width={1000}
+            width={800}
           >
-            <p>Equipment Id: {ms.equipment_id}</p>
-            <p>Mechanic Id: {ms.mechanic_id}</p>
-            <p>Repair Logs:</p>
+          
+            <p style={{fontSize:"17px"}}><b>Equipment Id:</b> {ms.equipment_id}</p>
+            <p style={{fontSize:"17px"}}><b>Mechanic Id:</b> {ms.mechanic_id}</p>
+            <p style={{fontSize:"17px"}}><b>Repair Logs:</b></p>
             <div class="container">
-              <table class="table table-striped" style={{ width: "910px" }}>
+              <table class="table table-striped" style={{ width: "700px", marginLeft:"8px", marginRight:"50px" }}>
                 <thead>
                   <tr>
                     <th style={{ textAlign: "center" }}>Part</th>
@@ -148,15 +151,15 @@ class InProgress extends Component {
                 </thead>
                 <tbody>{repairLogData}</tbody>
               </table>
-            </div>
+            </div> 
           </Modal>
         </tr>
       );
     });
     return (
       <div class="container">
-        <div class="container" style={{ width: "800px" }}>
-          <table class="table table-striped">
+        <div class="container">
+          <table class="table table-striped" style={{ width: "800px", marginLeft:"120px" }} >
             <thead>
               <tr>
                 <th style={{ textAlign: "center" }}>Equipment Id</th>
