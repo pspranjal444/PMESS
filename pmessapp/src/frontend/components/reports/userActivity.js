@@ -7,6 +7,8 @@ import {
 import {  Table, ToggleButton, ToggleButtonGroup, Form as BForm, Modal } from "react-bootstrap";
 import Axios from "axios";
 import backend_url from "../../../url/backend_url";
+import TableFilter from 'react-table-filter';
+
 //import
 
 
@@ -25,7 +27,8 @@ class UserActivity extends Component {
             toggleCustomDate:false,
             startDate:"",
             endDate:"",
-            
+            details:""
+            // response:[]
         };
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
@@ -78,8 +81,9 @@ class UserActivity extends Component {
         }
         Axios.post(backend_url + '/report/userActivity', { query })
             .then(res => {
+                console.log("User Activity: ",res.data.result);
                 this.setState({response:res.data.result})
-                console.log(res.data.result);
+                
             })
     }
      
@@ -101,6 +105,40 @@ class UserActivity extends Component {
             dateFilter: e
         });
         console.log('Filter', this.state.dateFilter);
+    }
+    
+    viewDetails = () =>{
+        const types = ["PM","Repair","Reviews"]
+        var i = 0;
+        const data = this.state.response.map((type) => {
+            console.log("type: ", type)             
+                const mapOver = type[types[i]]
+                const currType = types[i]
+                i++
+                console.log("mapOver: ", mapOver)
+                return (mapOver.map((content) => {
+                    
+                        return(
+                        <tr>
+                            <td>{currType}</td>
+                            {/* <td>Task ID</td> */}
+                            <td>{content.equipment_id}</td>
+                            {currType == "PM" &&
+                                <td>{content.maintenanceCompleteDate}</td>  
+                            }
+                            {currType == "Repair" &&
+                                <td>{content.reviewedDate}</td>    
+                            }
+                            {currType == "Reviews" &&
+                                <td>{content.reviewedDate}</td>
+                            }
+                            
+                        </tr>)
+                   
+                })
+                )
+        })
+        this.setState({details:data},console.log("DETAILSSSS: ",this.state.details))
     }
    // customDate = ({value})
 
@@ -150,13 +188,29 @@ class UserActivity extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{this.state.response[0].PM}</td>
-                                <td>{this.state.response[1].Repair}</td>
-                                <td>{this.state.response[2].Reviews}</td>    
+                                <td>{this.state.response[0].PM.length}</td>
+                                <td>{this.state.response[1].Repair.length}</td>
+                                <td>{this.state.response[2].Reviews.length}</td>    
                             </tr> 
                         </tbody>
                     </Table>
                  }
+                 <button onClick={this.viewDetails}>View Details</button>
+                    <TableFilter rows={this.state.details}>               
+                    {/* rows={this.state.details}         */}
+                        <thead>
+                            <tr>
+                                <th filterkey="TaskType">Task Type</th>
+                                {/* <th>Task ID</th> */}
+                                <th filterkey="EquipmentID">Equipment ID</th>
+                                <th filterkey="Completion">Completed On</th>                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.details}
+                        </tbody>
+                    </TableFilter>
+                 
             </Form>
         )
     }

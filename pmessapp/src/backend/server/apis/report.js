@@ -12,16 +12,16 @@ router.post('/userActivity', (req, res) => {
     const end = req.body.query.end
     const output = []
     console.log('query',req);
-    MaintenanceSchedule.count({$and:[{ maintenanceComplete: true},{mechanic_id: mech_id},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
+    MaintenanceSchedule.find({$and:[{ maintenanceComplete: true},{mechanic_id: mech_id},{maintenanceCompleteDate:{$gte:start, $lte:end}}]}).exec()
         .then(result => {
             output.push({"PM":result})  
         }).then(() => {
-             RepairLog.count({$and:[{mechanic_id:mech_id},{isComplete:true},{reviewedDate:{$gte:start, $lte:end}}] }).exec()
+             RepairLog.find({$and:[{mechanic_id:mech_id},{isComplete:true},{reviewedDate:{$gte:start, $lte:end}}] }).exec()
             .then(result => {
                 output.push({"Repair":result})
             })
             .then(() => {
-                MaintenanceSchedule.count({$and:[{ reviewOk: true},{reviewedBy: mech_id},{reviewedDate:{$gte:start, $lte:end}}]}).exec()
+                MaintenanceSchedule.find({$and:[{ reviewOk: true},{reviewedBy: mech_id},{reviewedDate:{$gte:start, $lte:end}}]}).exec()
                 .then(result => {
                         output.push({"Reviews":result})
                         res.status(200).json({
