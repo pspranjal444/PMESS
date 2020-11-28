@@ -196,20 +196,19 @@ class UserActivity extends Component {
                     </Table>
                  }
                  <button onClick={this.viewDetails}>View Details</button>
-                    <TableFilter rows={this.state.details}>               
-                    {/* rows={this.state.details}         */}
+                    <Table>               
                         <thead>
                             <tr>
-                                <th filterkey="TaskType">Task Type</th>
+                                <th>Task Type</th>
                                 {/* <th>Task ID</th> */}
-                                <th filterkey="EquipmentID">Equipment ID</th>
-                                <th filterkey="Completion">Completed On</th>                               
+                                <th>Equipment ID</th>
+                                <th>Completed On</th>                               
                             </tr>
                         </thead>
                         <tbody>
                             {this.state.details}
                         </tbody>
-                    </TableFilter>
+                    </Table>
                  
             </Form>
         )
