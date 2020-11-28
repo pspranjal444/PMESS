@@ -200,7 +200,7 @@ class UserActivity extends Component {
                     </Table>
                  }
                  <Button onClick={this.viewDetails} style={{borderRadius:"20px", width:"140px", fontSize:"15px", height:"38px", backgroundColor:"#5C6E91", color:"white"}}>View Details</Button>
-                    <Table striped bordered hover style={{width:"1000px", marginLeft:"40px", marginRight:"40px", textAlign:"center", fontSize:"16px", borderRadius:"20px"}}>               
+                    <Table striped bordered hover style={{width:"1000px", marginLeft:"40px", marginRight:"40px", textAlign:"center", fontSize:"16px",}}>               
                         <thead>
                             <tr>
                                 <th>Task Type</th>

@@ -128,7 +128,7 @@ class Home extends Component {
                 Button
                 type="warning"
               >
-                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
+                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
                   value="a"
                   onChange={() => {
                     this.setState({
@@ -138,7 +138,7 @@ class Home extends Component {
                 >
                   Overdue
                 </Radio.Button>
-                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
+                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
                   value="b"
                   onChange={() => {
                     this.setState({
@@ -148,7 +148,7 @@ class Home extends Component {
                 >
                   Today
                 </Radio.Button>
-                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
+                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
                   value="c"
                   onChange={() => {
                     this.setState({
@@ -158,7 +158,7 @@ class Home extends Component {
                 >
                   This Week
                 </Radio.Button>
-                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
+                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
                   value="d"
                   onChange={() => {
                     this.setState({
