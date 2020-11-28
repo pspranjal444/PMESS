@@ -127,12 +127,12 @@ class pmSchedules extends Component {
         return (
             <Form>
 
-                Select Date Type
+                <strong>Select Date Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                 <ToggleButtonGroup type="radio" name="dateFilter" value={this.state.dateFilter} onChange={this.handleFilterChange}>
-                    <ToggleButton value={'Today'}>Today</ToggleButton>
-                    <ToggleButton value={'This Week'}>This Week</ToggleButton>
-                    <ToggleButton value={'This Month'}>This Month</ToggleButton>
-                    <ToggleButton value={'Custom Date'} onChange={this.handleDateToggle}>Custom Date</ToggleButton>
+                    <ToggleButton value={'Today'} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>Today</ToggleButton>
+                    <ToggleButton value={'This Week'} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>This Week</ToggleButton>
+                    <ToggleButton value={'This Month'} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>This Month</ToggleButton>
+                    <ToggleButton value={'Custom Date'} onChange={this.handleDateToggle} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>Custom Date</ToggleButton>
                     {this.state.toggleCustomDate &&
                         <>
                             <BForm.Group controlId="formBasicCollege">
@@ -150,27 +150,27 @@ class pmSchedules extends Component {
                 
                 <br/>
                 <br />
-                Select Task Type 
-                <ToggleButtonGroup type="radio" name="taskFilter" value={this.state.taskFilter} onChange={this.handleTaskFilter}>
+                <strong>Select Task Type&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</strong>
+                <ToggleButtonGroup type="radio" name="taskFilter" value={this.state.taskFilter} onChange={this.handleTaskFilter} >
                     
-                    <ToggleButton value={'PM'}>PM</ToggleButton>
-                    <ToggleButton value={'Review'}>Review</ToggleButton>
+                    <ToggleButton value={'PM'} style={{backgroundColor:'#7E7474', borderColor:'#7E7474'}}>PM</ToggleButton>
+                    <ToggleButton value={'Review'} style={{backgroundColor:'#7E7474', borderColor:'#7E7474'}}>Review</ToggleButton>
 
                 </ToggleButtonGroup>
-                
+               
                 < br />
                 <br />
-                Select Completion Type
+                <strong>Select Completion Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                 <ToggleButtonGroup type="radio" name="completionType" value={this.state.completionType} onChange={this.handleCompletionType}>
-                    <ToggleButton value={'All'}>All</ToggleButton>
-                    <ToggleButton value={'On Time'}>On Time</ToggleButton>
-                    <ToggleButton value={'Delayed'}>Delayed</ToggleButton>
+                    <ToggleButton value={'All'} style={{backgroundColor:'#C4B6B6', borderColor:'#C4B6B6', color:"black"}}>All</ToggleButton>
+                    <ToggleButton value={'On Time'} style={{backgroundColor:'#C4B6B6', borderColor:'#C4B6B6', color:"black"}}>On Time</ToggleButton>
+                    <ToggleButton value={'Delayed'} style={{backgroundColor:'#C4B6B6', borderColor:'#C4B6B6', color:"black"}}>Delayed</ToggleButton>
                 </ToggleButtonGroup>
 
-
-                <Form.Field control={Button} onClick={this.submitForm}>Submit</Form.Field>
+               
+                <Form.Field control={Button} onClick={this.submitForm} style={{backgroundColor:"#595B83", borderRadius:"20px", borderColor:"#595B83", color:"white", width:"100px", fontSize:"15px"}}>Submit</Form.Field>
                 {this.state.response != undefined &&
-                    <Table striped bordered hover>
+                    <Table striped bordered hover style={{width:"1000px", marginLeft:"40px", marginRight:"40px", textAlign:"center", fontSize:"16px", borderRadius:"20px"}}>
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}

@@ -44,7 +44,7 @@ class Login extends Component {
         </Helmet>
                 <img src="https://s-vlabs.com/wp-content/themes/mobilefirst/images/logo@2x.png"  style={{ marginLeft: "100px", height:"60px" }} />
                 <br /><br/>
-                <h2 style={{color: "#3b6978", marginLeft:"-60px", fontSize:"36px"}}>Equipment Preventive Maintainence System</h2><br/><br/>
+                <h2 style={{color: "#3b6978", marginLeft:"-60px", fontSize:"36px"}}>Equipment Preventive Maintenance System</h2><br/><br/>
                
                 <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"30px", width:"450px", backgroundColor:"#cedebd"}}>
                     <h2 style={{textAlign:"center" , color: "#393E46"}}>Member Login</h2>

@@ -5,6 +5,7 @@ import { Tabs, Radio } from 'antd';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import UserActivity from './userActivity';
+import {Helmet} from "react-helmet";
 import PMSchedules from './pmSchedules';
 import pmSchedules from './pmSchedules';
 
@@ -27,10 +28,17 @@ class ReportHome extends Component {
      
 
         return (
-            <div>
+                <div style={{ paddingLeft: "2.5%" }}>
+                <Helmet>
+                <style>{"body{background-color: #E7EED2;}"}</style>
+                </Helmet>  
+        
+        <div class="container">
+         <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"880px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
+        </div>   
                 <div style={{ paddingLeft: "20%" }}>
                     <Tabs defaultActiveKey="1" type="card" size={this.state.size}>
-                        <TabPane tab="  User Activity " key="1">
+                        <TabPane tab=" User Activity " key="1">
                             
                             {this.state.tab}
                         </TabPane>

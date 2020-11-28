@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet} from "react-helmet";
 import Axios from "axios";
 import { Tabs, Radio, DatePicker, Button } from "antd";
 import ViewEquipmentsToday from "../../mechanic/viewequipments/viewlockequipmentstoday";
@@ -12,7 +12,6 @@ import frequency from "../../../utility/frequencyConvert";
 import cookie from "react-cookies";
 import RepairTasks from "../../repairs/repairtasks";
 import ViewEquipmentsOverdue from "../../mechanic/viewequipments/viewlockequipmentsoverdue";
-
 import { Button as SButton, Card, Image } from "semantic-ui-react";
 import InProgressTasks from "../../inprogresstasks/inprogresstasks";
 
@@ -120,7 +119,7 @@ class Home extends Component {
         </>
 
         {/* {redirectVar} */}
-        <Tabs defaultActiveKey="1" type="card" size={this.state.size} style={{marginBottom:"30px"}}>
+        <Tabs defaultActiveKey="1" type="card" size={this.state.size} style={{marginBottom:"30px", color:"black"}}>
           <TabPane tab="  Due Equipments " key="1">
             <div style={{ mystyle }}>
               <Radio.Group
@@ -129,7 +128,7 @@ class Home extends Component {
                 Button
                 type="warning"
               >
-                <Radio.Button
+                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
                   value="a"
                   onChange={() => {
                     this.setState({
@@ -139,7 +138,7 @@ class Home extends Component {
                 >
                   Overdue
                 </Radio.Button>
-                <Radio.Button
+                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
                   value="b"
                   onChange={() => {
                     this.setState({
@@ -149,7 +148,7 @@ class Home extends Component {
                 >
                   Today
                 </Radio.Button>
-                <Radio.Button
+                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
                   value="c"
                   onChange={() => {
                     this.setState({
@@ -159,7 +158,7 @@ class Home extends Component {
                 >
                   This Week
                 </Radio.Button>
-                <Radio.Button
+                <Radio.Button style={{backgroundColor:'#b0a160', borderColor:'#b0a160', fontSize:"17px"}} 
                   value="d"
                   onChange={() => {
                     this.setState({
