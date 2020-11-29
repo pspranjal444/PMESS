@@ -79,7 +79,7 @@ class LockedEquipments extends Component {
                     <td style={{ textAlign: 'center' }}>{repairLog.part}</td>
                     <td style={{ textAlign: 'center', backgroundColor: severityColor[repairLog.severity] }}><strong>{severity[repairLog.severity]}</strong></td>
                     <td style={{ textAlign: 'center' }}>{new Date(repairLog.reviewedDate).toLocaleDateString()}</td>
-                    <td style={{ textAlign: 'center' }}><a href="#" onClick={() => {
+                    <td style={{ textAlign: 'center' }}><a href="#" style={{color:"#0779E4"}} onClick={() => {
                         this.setState({
                             visibleThree: false,
                             visibleFour: true
@@ -117,7 +117,7 @@ class LockedEquipments extends Component {
                 <tr key={equipment.equipment_id}>
                     <td style={{ textAlign: 'center' }}>{equipment.equipment_id}</td>
                     <td style={{ textAlign: 'center' }}>
-                        <a href="#" onClick={() => {
+                        <a href="#" style={{color:"#0779E4"}} onClick={() => {
                             Axios.get(backend_url + '/equipment/', { params: { equipment_id: equipment.equipment_id } }).then(result => {
                                 this.setState({
                                     visibleOne: true,
@@ -129,7 +129,7 @@ class LockedEquipments extends Component {
                         </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                        <a href="#" onClick={() => {
+                        <a href="#" style={{color:"#0779E4"}} onClick={() => {
                             this.setState({
                                 visibleTwo: true,
                                 maintenance_id: equipment._id,
@@ -140,7 +140,7 @@ class LockedEquipments extends Component {
                         </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                        <a href="#" onClick={() => {
+                        <a href="#" style={{color:"#0779E4"}} onClick={() => {
                             Axios.get(backend_url + '/repair/', { params: { maintenance_id: equipment._id } }).then(result => {
                                 this.setState({
                                     visibleThree: true,

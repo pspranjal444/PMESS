@@ -53,7 +53,7 @@ class Login extends Component {
                         <div class="form-group">
                             <i class="fa fa-user" aria-hidden="true" style={{height:"25px", width: "25px"}}></i>
                             <label for="email" style={{fontSize:"17px", color: "#393E46"}}>Username</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="emailHelp" style={{borderRadius:"20px"}} placeholder="Enter e-mail" onChange={this.onChange} />
+                            <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="emailHelp" style={{borderRadius:"20px"}} placeholder="Enter user id" onChange={this.onChange} />
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
 

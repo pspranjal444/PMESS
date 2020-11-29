@@ -47,6 +47,7 @@ class RepairTask extends Component {
           <td style={{ textAlign: "center" }}>
             <a
               href="#"
+              style={{color:"#0779E4"}}
               onClick={() => {
                 this.setState({
                   visibleOne: true,
@@ -69,6 +70,7 @@ class RepairTask extends Component {
             </Button>
           </td>
           <Modal
+            bodyStyle={{backgroundColor:"#E8E3C7"}}
             title={"Equipment Id: " + repairLog.equipment_id}
             visible={this.state.visibleOne}
             onOk={() => {
@@ -81,19 +83,20 @@ class RepairTask extends Component {
                 visibleOne: false,
               });
             }}
-            width={1000}
+            width={700}
           >
             <div class="container">
-              <p>
+              <p style={{fontSize:"17px"}}>
                 <strong>Problem:</strong> {repairLog.problem}
               </p>
-              <p>
+              <p style={{fontSize:"17px"}}>
                 <strong>Part:</strong> {repairLog.part}
               </p>
             </div>
           </Modal>
 
           <Modal
+            bodyStyle={{backgroundColor:"#E8E3C7"}}
             title={"Equipment Id: " + repairLog.equipment_id}
             visible={this.state.visibleTwo}
             onOk={() => {
@@ -110,13 +113,14 @@ class RepairTask extends Component {
           >
             <form>
               <div class="form-group">
-                <label for="correctiveAction">Corrective Action</label>
+                <label for="correctiveAction" style={{fontSize:"17px"}}><strong>Corrective Action</strong></label>
                 <textarea
                   class="form-control"
                   id="correctiveAction"
                   name="correctiveAction"
                   placeholder="Corrective Action taken"
                   onChange={this.onChange}
+                  style={{borderRadius:"10px"}}
                 />
               </div>
 
@@ -163,7 +167,7 @@ class RepairTask extends Component {
                 </div>
               </div> */}
 
-              <Button
+              <Button style={{backgroundColor:"#403121", color:"white", borderRadius:"20px", borderColor:"#403121", width:"90px"}}
                 type="primary"
                 onClick={() => {
                   const { severity, correctiveAction } = this.state;

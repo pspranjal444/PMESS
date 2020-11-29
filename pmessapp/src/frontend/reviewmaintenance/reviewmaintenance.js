@@ -73,6 +73,7 @@ class ReviewMaintenance extends Component {
           </td>
           <td style={{ textAlign: "center" }}>
             <a
+              style={{color:"#0779E4"}}
               href="#"
               onClick={() => {
                 this.setState({
@@ -85,6 +86,7 @@ class ReviewMaintenance extends Component {
             </a>
           </td>
           <Modal
+            bodyStyle={{backgroundColor:"#E8E3C7"}}
             title={"Equipment Id: " + repairLog.equipment_id}
             visible={this.state.visibleFour}
             onOk={() => {
@@ -99,16 +101,16 @@ class ReviewMaintenance extends Component {
                 visibleFour: false,
               });
             }}
-            width={1000}
+            width={700}
           >
             <div class="container">
-              <p>
+              <p style={{fontSize:"17px"}}>
                 <strong>Problem:</strong> {repairLog.problem}
               </p>
-              <p>
+              <p style={{fontSize:"17px"}}>
                 <strong>Corrective Action:</strong> {repairLog.correctiveAction}
               </p>
-              <p>
+              <p style={{fontSize:"17px"}}>
                 <strong>Mechanic Id:</strong> {repairLog.mechanic_id}
               </p>
             </div>
@@ -137,6 +139,7 @@ class ReviewMaintenance extends Component {
             <td style={{ textAlign: "center" }}>
               <a
                 type="primary"
+                style={{color:"#0779E4"}}
                 onClick={() => {
                   Axios.get(backend_url + "/equipment/", {
                     params: { equipment_id: equipment.equipment_id },
@@ -153,6 +156,7 @@ class ReviewMaintenance extends Component {
             </td>
             <td style={{ textAlign: "center" }}>
               <a
+                style={{color:"#0779E4"}}
                 type="primary"
                 onClick={() => {
                   Axios.get(backend_url + "/repair/", {
@@ -180,7 +184,8 @@ class ReviewMaintenance extends Component {
                 Review Maintenance
               </Button>
               <Modal
-                title="Review Maintenance"
+                bodyStyle={{backgroundColor:"#E8E3C7"}}
+                title="REVIEW MAINTENANCE"
                 visible={this.state.visibleTwo}
                 onOk={() => {
                   this.setState({
@@ -196,7 +201,7 @@ class ReviewMaintenance extends Component {
               >
                 <form>
                   <div class="form-group">
-                    <label for="problem">Review Remarks</label>
+                    <label for="problem" style={{fontSize:"17px"}}><strong>Review Remarks</strong></label>
                     <textarea
                       class="form-control"
                       id="reviewRemarks"
@@ -204,11 +209,12 @@ class ReviewMaintenance extends Component {
                       aria-describedby="emailHelp"
                       placeholder="Enter review remarks"
                       onChange={this.onChange}
+                      style={{borderRadius:"10px"}}
                     />
                   </div>
 
                   <div class="form-group">
-                    <label for="reviewOk">Is review ok ?</label>
+                    <label for="reviewOk" style={{fontSize:"17px"}}><strong>Is review ok ?</strong></label>
                     <div class="form-check">
                       <input
                         class="form-check-input"
@@ -217,9 +223,10 @@ class ReviewMaintenance extends Component {
                         id="reviewOk"
                         value="true"
                         onChange={this.onChange}
+                        style={{borderRadius:"10px"}}
                       />
-                      <label class="form-check-label" for="reviewOk">
-                        Review Okay
+                      <label class="form-check-label" for="reviewOk" style={{fontSize:"17px"}}>
+                        <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Review Okay</strong>
                       </label>
                     </div>
                     <div class="form-check">
@@ -230,14 +237,15 @@ class ReviewMaintenance extends Component {
                         id="reviewOk"
                         value="false"
                         onChange={this.onChange}
+                        style={{borderRadius:"10px"}}
                       />
-                      <label class="form-check-label" for="reviewNotOk">
-                        Review not okay
+                      <label class="form-check-label" for="reviewNotOk" style={{fontSize:"17px"}}>
+                      <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Review not okay</strong>
                       </label>
                     </div>
                   </div>
 
-                  <button
+                  <button style={{backgroundColor:"#403121", color:"white", borderRadius:"20px", borderColor:"#403121", width:"90px"}}
                     type="submit"
                     class="btn btn-primary"
                     onClick={() => {
@@ -274,6 +282,7 @@ class ReviewMaintenance extends Component {
     return (
       <div>
         <Modal
+          bodyStyle={{backgroundColor:"#E8E3C7"}}
           title={this.state.equipmentDetails.equipmentName}
           visible={this.state.visibleOne}
           onOk={() => {
@@ -306,7 +315,8 @@ class ReviewMaintenance extends Component {
         </Modal>
 
         <Modal
-          title="View Repair Logs"
+          bodyStyle={{backgroundColor:"#E8E3C7"}}
+          title="VIEW REPAIR LOGS"
           visible={this.state.visibleThree}
           onOk={() => {
             this.setState({
@@ -318,10 +328,10 @@ class ReviewMaintenance extends Component {
               visibleThree: false,
             });
           }}
-          width={1000}
+          width={785}
         >
           <div class="container">
-            <table class="table table-striped" style={{ width: "910px" }}>
+            <table class="table table-striped" style={{ width: "700px", marginRight:"2px" }}>
               <thead>
                 <tr>
                   <th style={{ textAlign: "center" }}>Part</th>
