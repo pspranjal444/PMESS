@@ -14,6 +14,7 @@ import cookie from "react-cookies";
 import ViewEquipments from './frontend/equipment/viewequipments';
 import EditEquipments from './frontend/equipment/editequipment';
 import ViewUsers from './frontend/user/viewusers';
+import Credits from './frontend/credits/credits';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
         {!cookie.load("user_id") && (
           <Fragment>
             <Route exact path="/" component={Login} />
+            <Route path="/credits" component={Credits}/>
           </Fragment>
         )}
         {/* Logged In  Components*/}

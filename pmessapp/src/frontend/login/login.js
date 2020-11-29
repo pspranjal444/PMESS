@@ -3,7 +3,8 @@ import {Helmet} from "react-helmet";
 import axios from 'axios';
 import backend_url from '../../url/backend_url';
 import cookie from 'react-cookies';
-import util from '../components/utility/getUserType';
+import './login.css';
+
 class Login extends Component {
     constructor() {
         super();
@@ -38,7 +39,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div style={{ marginLeft: "500px", width: "1300px", marginTop: "100px"}}>
+            <div style={{ marginLeft: "500px", width: "20000px", marginTop: "10px"}}>
                  <Helmet>
           <style>{"body{background-color: #e0ece4;}"}</style>
         </Helmet>
@@ -79,6 +80,7 @@ class Login extends Component {
                         <button type="submit" class="btn btn-primary" style={{marginLeft:"150px", width:"90px", borderRadius:"20px", fontSize:"16px", backgroundColor:"#3b6978", borderColor:"#3b6978"}} onClick={this.onClick}>Login</button>
                     </form>
                 </div>
+                <div className="mover-1" style={{position: "absolute", bottom:"0px", marginLeft: "225px", marginBottom: "30px"}}><a href="/credits">Designed by Ankita Chikodi, Shravani Pande, Nehal Sharma, Pranjal Sharma</a></div>
             </div>
       
         );

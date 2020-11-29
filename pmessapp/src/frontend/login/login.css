@@ -1,0 +1,10 @@
+.mover-1 {
+    animation: moveSlideshow 30s linear infinite;
+  }
+  
+  @keyframes moveSlideshow {  
+    0%    { -webkit-transform: translateX(-200%)}
+    100% { 
+      -webkit-transform: translateX(200%);  
+    }
+  }
