@@ -129,10 +129,10 @@ class pmSchedules extends Component {
 
                 <strong>Select Date Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                 <ToggleButtonGroup type="radio" name="dateFilter" value={this.state.dateFilter} onChange={this.handleFilterChange}>
-                    <ToggleButton value={'Today'} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>Today</ToggleButton>
-                    <ToggleButton value={'This Week'} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>This Week</ToggleButton>
-                    <ToggleButton value={'This Month'} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>This Month</ToggleButton>
-                    <ToggleButton value={'Custom Date'} onChange={this.handleDateToggle} style={{backgroundColor:'#39311D', borderColor:'#39311D'}}>Custom Date</ToggleButton>
+                    <ToggleButton value={'Today'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>Today</ToggleButton>
+                    <ToggleButton value={'This Week'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>This Week</ToggleButton>
+                    <ToggleButton value={'This Month'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>This Month</ToggleButton>
+                    <ToggleButton value={'Custom Date'} onChange={this.handleDateToggle} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>Custom Date</ToggleButton>
                     {this.state.toggleCustomDate &&
                         <>
                             <BForm.Group controlId="formBasicCollege">
@@ -153,8 +153,8 @@ class pmSchedules extends Component {
                 <strong>Select Task Type&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</strong>
                 <ToggleButtonGroup type="radio" name="taskFilter" value={this.state.taskFilter} onChange={this.handleTaskFilter} >
                     
-                    <ToggleButton value={'PM'} style={{backgroundColor:'#7E7474', borderColor:'#7E7474'}}>PM</ToggleButton>
-                    <ToggleButton value={'Review'} style={{backgroundColor:'#7E7474', borderColor:'#7E7474'}}>Review</ToggleButton>
+                    <ToggleButton value={'PM'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>PM</ToggleButton>
+                    <ToggleButton value={'Review'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>Review</ToggleButton>
 
                 </ToggleButtonGroup>
                
@@ -162,9 +162,9 @@ class pmSchedules extends Component {
                 <br />
                 <strong>Select Completion Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                 <ToggleButtonGroup type="radio" name="completionType" value={this.state.completionType} onChange={this.handleCompletionType}>
-                    <ToggleButton value={'All'} style={{backgroundColor:'#C4B6B6', borderColor:'#C4B6B6', color:"black"}}>All</ToggleButton>
-                    <ToggleButton value={'On Time'} style={{backgroundColor:'#C4B6B6', borderColor:'#C4B6B6', color:"black"}}>On Time</ToggleButton>
-                    <ToggleButton value={'Delayed'} style={{backgroundColor:'#C4B6B6', borderColor:'#C4B6B6', color:"black"}}>Delayed</ToggleButton>
+                    <ToggleButton value={'All'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>All</ToggleButton>
+                    <ToggleButton value={'On Time'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>On Time</ToggleButton>
+                    <ToggleButton value={'Delayed'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>Delayed</ToggleButton>
                 </ToggleButtonGroup>
 
                

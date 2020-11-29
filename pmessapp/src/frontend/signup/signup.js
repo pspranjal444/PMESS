@@ -96,7 +96,7 @@ class Signup extends Component {
                         </div>
                         <br/>
                         <br/>
-                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#1B6CA8", color:"white", borderRadius:"20px", borderColor:"#1B6CA8",fontSize:"16px", marginLeft:"130px", width:"135px"}} onClick={this.onClick}>Create User</button>
+                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#595B83", color:"white", borderRadius:"20px", borderColor:"#595B83",fontSize:"16px", marginLeft:"130px", width:"135px"}} onClick={this.onClick}>Create User</button>
                     </form>
                 </div>
             </div>

@@ -159,10 +159,10 @@ class UserActivity extends Component {
                 </Form.Group>
                  
                     <ToggleButtonGroup type="radio" name="dateFilter" value={this.state.dateFilter} onChange={this.handleFilterChange} >
-                        <ToggleButton value={'Today'} style={{backgroundColor:'#707070', borderColor:'#707070'}}>Today</ToggleButton>
-                        <ToggleButton value={'This Week'} style={{backgroundColor:'#707070', borderColor:'#707070'}}>This Week</ToggleButton>
-                        <ToggleButton value={'This Month'} style={{backgroundColor:'#707070', borderColor:'#707070'}}>This Month</ToggleButton>
-                    <ToggleButton value={'Custom Date'} onChange={this.handleDateToggle} style={{backgroundColor:'#707070', borderColor:'#707070'}}>Custom Date</ToggleButton>
+                        <ToggleButton value={'Today'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>Today</ToggleButton>
+                        <ToggleButton value={'This Week'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>This Week</ToggleButton>
+                        <ToggleButton value={'This Month'} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>This Month</ToggleButton>
+                    <ToggleButton value={'Custom Date'} onChange={this.handleDateToggle} style={{backgroundColor:'#c1c0b9', borderColor:'#c1c0b9', color:"black"}}>Custom Date</ToggleButton>
                         {this.state.toggleCustomDate && 
                             <>
                             <BForm.Group controlId="formBasicCollege">
@@ -179,7 +179,7 @@ class UserActivity extends Component {
                     </ToggleButtonGroup>
 
                 <br/><br/>
-                <Form.Field control={Button} onClick ={this.submitForm} style={{backgroundColor:"#709078", borderRadius:"20px", borderColor:"#709078", color:"white", width:"100px", fontSize:"15px"}}> Submit</Form.Field>
+                <Form.Field control={Button} onClick ={this.submitForm} style={{backgroundColor:"#595B83", borderRadius:"20px", borderColor:"#595B83", color:"white", width:"100px", fontSize:"15px"}}> Submit</Form.Field>
                 
                 {this.state.response != undefined &&         
                     <Table style={{width:"1000px", marginLeft:"40px", marginRight:"40px", textAlign:"center", fontSize:"16px"}}>
@@ -199,7 +199,7 @@ class UserActivity extends Component {
                         </tbody>
                     </Table>
                  }
-                 <Button onClick={this.viewDetails} style={{borderRadius:"20px", width:"140px", fontSize:"15px", height:"38px", backgroundColor:"#5C6E91", color:"white"}}>View Details</Button>
+                 <Button onClick={this.viewDetails} style={{backgroundColor:"#595B83", borderRadius:"20px", borderColor:"#595B83", color:"white", width:"150px", fontSize:"15px"}}>View Details</Button>
                     <Table striped bordered hover style={{width:"1000px", marginLeft:"40px", marginRight:"40px", textAlign:"center", fontSize:"16px",}}>               
                         <thead>
                             <tr>

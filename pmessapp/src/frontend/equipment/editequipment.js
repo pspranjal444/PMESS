@@ -202,7 +202,8 @@ class EditEquipment extends Component {
                 type="submit"
                 class="btn btn-primary"
                 onClick={this.onClick}
-                style={{backgroundColor:"#1B6CA8", color:"white", borderRadius:"20px", borderColor:"#1B6CA8",fontSize:"16px", marginLeft:"160px", width:"130px"}} 
+                
+                style={{backgroundColor:"#595B83", color:"white", borderRadius:"20px", borderColor:"#595B83",fontSize:"16px", marginLeft:"160px", width:"130px"}} 
               >
                 Submit
               </button>

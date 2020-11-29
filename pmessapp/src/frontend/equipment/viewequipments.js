@@ -81,7 +81,7 @@ class Equipments extends Component {
                 : ms.mechanic_id + " is working"}
             </td>
             <td style={{ textAlign: "center" }}>
-              <Button style={{backgroundColor:"#1B6CA8", color:"white", borderRadius:"20px", borderColor:"#1B6CA8"}}
+              <Button style={{backgroundColor:"#595B83", color:"white", borderRadius:"20px", borderColor:"#595B83"}}
                 onClick={() => {
                   Axios.get(backend_url + "/repair/all/maintenance", {
                     params: { maintenance_id: ms._id },
