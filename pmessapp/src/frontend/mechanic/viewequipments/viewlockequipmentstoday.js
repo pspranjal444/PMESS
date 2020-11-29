@@ -38,7 +38,7 @@ class ViewLockEquipmentsToday extends Component {
                     <td style={{ textAlign: 'center' }}>{frequency[equipment.maintenanceFrequency]}</td>
                     {user_id && role=='M' && 
                     <td style={{ textAlign: 'center' }}>
-                        <Button buttonStyle={{backgroundColor:"#B6CDBD"}} disabled={equipment.isLocked} onClick={() => {
+                        <Button style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97"}} disabled={equipment.isLocked} onClick={() => {
                             const mechanic_id = cookie.load('user_id');
                             const equipment_id = equipment.equipment_id;
                             Axios.post(backend_url + '/maintenance/lock', { equipment_id, mechanic_id }).then(result => {

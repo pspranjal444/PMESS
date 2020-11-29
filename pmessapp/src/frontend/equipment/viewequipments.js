@@ -195,7 +195,7 @@ class Equipments extends Component {
     return (
       <div style={{ paddingLeft: "20%" }}>
       <Helmet>
-          <style>{"body{background-color: #E7EED2;}"}</style>
+          <style>{"body{background-color: #EEEEEE;}"}</style>
         </Helmet>  
         
         <div class="container">
@@ -266,7 +266,7 @@ class Equipments extends Component {
         </div>
         {this.state.view && (
           <div class="container">
-            <table class="table table-borderless" style={{ border: "2px", borderRadius:"10px", backgroundColor:"#cfd3ce", width:"1060px"}}>
+            <table class="table table-borderless" style={{ border: "2px", borderRadius:"10px", backgroundColor:"#CDCDCD", width:"1060px"}}>
               <tbody>
                 <tr>
                   <td style={{fontSize:"17px", color: "#393E46"}}>

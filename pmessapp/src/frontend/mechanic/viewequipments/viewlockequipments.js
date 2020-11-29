@@ -40,7 +40,7 @@ class ViewLockEquipment extends Component {
                     <td style={{ textAlign: 'center' }}>{equipment.serialNo}</td>
                     <td style={{ textAlign: 'center' }}>{frequency[equipment.maintenanceFrequency]}</td>
                     <td style={{ textAlign: 'center' }}>
-                        <Button buttonStyle={{backgroundColor:"#B6CDBD"}} disabled={equipment.isLocked} onClick={() => {
+                        <Button style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97", disabled:"white"}} disabled={equipment.isLocked} onClick={() => {
                             const mechanic_id = cookie.load('user_id');
                             const equipment_id = equipment.equipment_id;
                             Axios.post(backend_url + '/maintenance/lock', { equipment_id, mechanic_id }).then(result => {

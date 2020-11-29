@@ -20,14 +20,14 @@ code {
      font-size: medium;
   }
 
-  .table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
   background-color: white;
   color: black;
 }
 .table-striped>tbody>tr:nth-child(even)>td,
 .table-striped>tbody>tr:nth-child(even)>th {
-  background-color: #B8E4C9;
+  background-color:#E3F6F5;
   color: black;
 }
 
@@ -35,6 +35,7 @@ table {
   margin-left:-1px;
   margin-right:1px;
   margin-top: 20px;
+  font-size: medium;
 }
 table tr th,
 table tr td {

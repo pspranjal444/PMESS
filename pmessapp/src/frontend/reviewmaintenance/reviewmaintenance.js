@@ -170,7 +170,7 @@ class ReviewMaintenance extends Component {
             </td>
             <td style={{ textAlign: "center" }}>
               <Button
-                type="primary"
+                style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97"}}
                 onClick={() => {
                   this.setState({
                     visibleTwo: true,
@@ -341,7 +341,7 @@ class ReviewMaintenance extends Component {
               <tr>
                 <th style={{ textAlign: "center" }}>Equipment Id</th>
                 <th style={{ textAlign: "center" }}>
-                  Maintenance Complete Date
+                  Mtnc. Complete Date
                 </th>
                 <th style={{ textAlign: "center" }}>Status</th>
                 <th style={{ textAlign: "center" }}>Completed By</th>

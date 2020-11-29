@@ -58,7 +58,7 @@ class RepairTask extends Component {
           </td>
           <td style={{ textAlign: "center" }}>
             <Button
-              type="primary"
+              style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97"}}
               onClick={() => {
                 this.setState({
                   visibleTwo: true,

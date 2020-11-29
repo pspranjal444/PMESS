@@ -86,7 +86,8 @@ class LockedEquipments extends Component {
                         })
                     }}>More</a></td>
                     <Modal
-                        title={"Equipment Id: " + repairLog.equipment_id}
+                        bodyStyle={{backgroundColor:"#E8E3C7"}}
+                        title={"EQUIPMENT ID: " + repairLog.equipment_id}
                         visible={this.state.visibleFour}
                         onOk={() => {
                             this.setState({
@@ -100,11 +101,11 @@ class LockedEquipments extends Component {
                                 visibleFour: false
                             })
                         }}
-                        width={1000}>
+                        width={700}>
                         <div class="container">
-                            <p><strong>Problem:</strong> {repairLog.problem}</p>
-                            <p><strong>Corrective Action:</strong> {repairLog.correctiveAction}</p>
-                            <p><strong>Mechanic Id:</strong> {repairLog.mechanic_id}</p>
+                            <p style={{fontSize:"16px"}}><strong>Problem:</strong> {repairLog.problem}</p>
+                            <p style={{fontSize:"16px"}}><strong>Corrective Action:</strong> {repairLog.correctiveAction}</p>
+                            <p style={{fontSize:"16px"}}><strong>Mechanic Id:</strong> {repairLog.mechanic_id}</p>
                         </div>
                     </Modal>
                 </tr>
@@ -151,7 +152,7 @@ class LockedEquipments extends Component {
                         </a>
                     </td>
                     <td style={{textAlign: 'center'}}>
-                    <Button type="primary" onClick={()=>{
+                    <Button style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97"}} onClick={()=>{
                             Axios
                                 .get(backend_url + '/maintenance/locked', {params: {equipment_id: equipment.equipment_id}})
                                 .then(result=>{
@@ -195,7 +196,8 @@ class LockedEquipments extends Component {
 
         return (
             <div>
-                <Modal
+                <Modal 
+                    bodyStyle={{backgroundColor:"#E8E3C7"}}
                     title={this.state.equipmentDetails.equipmentName}
                     visible={this.state.visibleOne}
                     onOk={() => {
@@ -209,14 +211,15 @@ class LockedEquipments extends Component {
                         })
                     }}
                     width={500}>
-                    <p><strong>Equipment Id:</strong> {this.state.equipmentDetails.equipment_id}</p>
-                    <p><strong>Serial No:</strong> {this.state.equipmentDetails.serialNo}</p>
-                    <p><strong>Maintenance Frequency:</strong> {frequency[this.state.equipmentDetails.maintenanceFrequency]}</p>
-                    <p><strong>Next due date:</strong> {new Date(this.state.equipmentDetails.dueDate).toLocaleDateString()}</p>
+                    <p style={{fontSize:"16px"}}><strong>Equipment Id:</strong> {this.state.equipmentDetails.equipment_id}</p>
+                    <p style={{fontSize:"16px"}} ><strong>Serial No:</strong> {this.state.equipmentDetails.serialNo}</p>
+                    <p style={{fontSize:"16px"}}><strong>Maintenance Frequency:</strong> {frequency[this.state.equipmentDetails.maintenanceFrequency]}</p>
+                    <p style={{fontSize:"16px"}}><strong>Next due date:</strong> {new Date(this.state.equipmentDetails.dueDate).toLocaleDateString()}</p>
                 </Modal>
 
-                <Modal
-                    title="Add Repair Log"
+                <Modal 
+                    bodyStyle={{backgroundColor:"#E8E3C7"}}
+                    title="ADD REPAIR LOG"
                     visible={this.state.visibleTwo}
                     onOk={() => {
                         this.setState({
@@ -231,15 +234,15 @@ class LockedEquipments extends Component {
                     width={500}>
                     <form>
                         <div class="form-group">
-                            <label for="problem">Problem</label>
-                            <textarea class="form-control" id="problem" name="problem" aria-describedby="emailHelp" placeholder="Enter problem description" onChange={this.onChange} />
+                            <label for="problem" style={{fontSize:"17px" }}><strong>Problem:</strong></label>
+                            <textarea class="form-control" id="problem" name="problem" aria-describedby="emailHelp" onChange={this.onChange} style={{borderRadius:"15px"}} />
                         </div>
                         <div class="form-group">
-                            <label for="part">Part</label>
-                            <input type="text" class="form-control" id="part" name="part" aria-describedby="emailHelp" placeholder="Part" onChange={this.onChange} />
+                            <label for="part" style={{fontSize:"17px"}}><strong>Part:</strong></label>
+                            <input type="text" class="form-control" id="part" name="part" aria-describedby="emailHelp" onChange={this.onChange} style={{borderRadius:"10px"}} />
                         </div>
                         <div class="form-group">
-                            <label for="severity">Severity</label>
+                            <label for="severity" style={{fontSize:"17px"}}><strong>Severity</strong></label>
                             <div class="form-check">
                             <input
                                 class="form-check-input"
@@ -248,9 +251,10 @@ class LockedEquipments extends Component {
                                 id="severity"
                                 value="L"
                                 onChange={this.onChange}
+                                style={{fontSize:"17px"}}
                             />
-                            <label class="form-check-label" for="Low">
-                                Low
+                            <label class="form-check-label" for="Low" style={{fontSize:"15px"}}>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low
                             </label>
                             </div>
                             <div class="form-check">
@@ -262,8 +266,8 @@ class LockedEquipments extends Component {
                                 value="M"
                                 onChange={this.onChange}
                             />
-                            <label class="form-check-label" for="Medium">
-                                Medium
+                            <label class="form-check-label" for="Medium" style={{fontSize:"15px"}}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medium
                             </label>
                             </div>
                             <div class="form-check">
@@ -275,18 +279,19 @@ class LockedEquipments extends Component {
                                 value="C"
                                 onChange={this.onChange}
                             />
-                            <label class="form-check-label" for="Critical">
-                                Critical
+                            <label class="form-check-label" for="Critical" style={{fontSize:"15px"}}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Critical
                             </label>
                             </div>
                         </div>    
                         
-                        <button type="submit" class="btn btn-primary" onClick={this.onClick}>Add</button>
+                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#403121", color:"white", borderRadius:"20px", borderColor:"#403121", width:"90px"}} onClick={this.onClick}>Add</button>
                     </form>
                 </Modal>
 
                 <Modal
-                    title="View Repair Logs"
+                    title="VIEW REPAIR LOGS"
+                    bodyStyle={{backgroundColor:"#E8E3C7"}}
                     visible={this.state.visibleThree}
                     onOk={() => {
                         this.setState({
@@ -298,9 +303,9 @@ class LockedEquipments extends Component {
                             visibleThree: false
                         })
                     }}
-                    width={1000}>
+                    width={700}>
                     <div class="container">
-                        <table class="table table-striped" style={{ width: "910px" }}>
+                        <table class="table table-striped" style={{ width: "650px" }}>
                             <thead>
                                 <tr>
                                     <th style={{ textAlign: 'center' }}>Part</th>

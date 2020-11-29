@@ -56,7 +56,7 @@ class Home extends Component {
         {user_id && role == "A" && (
             <div>
             <Helmet>
-            <style>{"body{background-color: #e6ffe6;}"}</style>
+            <style>{"body{background-color: #EEEEEE;}"}</style>
             </Helmet>  
             <div class="container">
             <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
@@ -77,7 +77,7 @@ class Home extends Component {
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                  <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
+                  <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px", marginLeft:"10px"}}>
                     View
                   </Button>
                 </div>
@@ -109,7 +109,7 @@ class Home extends Component {
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
+                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px", marginLeft:"10px"}}>
                     View
                   </Button>
                 </div>
@@ -123,7 +123,7 @@ class Home extends Component {
           {user_id && role == "M" && (
             <div>
             <Helmet>
-            <style>{"body{background-color: #EEEEEE;}"}</style>
+            <style>{"body{background-color: rgb(76, 175, 80, 0.2);}"}</style>
             </Helmet>  
             <div class="container">
             <img src="admin-settings-male.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Stephen Parker (Mechanic)</strong>
@@ -144,7 +144,7 @@ class Home extends Component {
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                  <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
+                  <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px", marginLeft:"10px"}}>
                     View
                   </Button>
                 </div>
@@ -176,7 +176,7 @@ class Home extends Component {
               </Card.Content>
               <Card.Content extra>
                 <div className="ui two buttons">
-                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px"}}>
+                <Button style={{backgroundColor:"whitesmoke", color:"black", fontSize:"16px", textAlign:"center", width:"250px", fontFamily:"sans-serif", borderRadius:"20px", marginLeft:"10px"}}>
                     View
                   </Button>
                 </div>
@@ -199,7 +199,7 @@ class Home extends Component {
                 Button
                 type="warning"
               >
-                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
+                <Radio.Button style={{backgroundColor:'#0074E4', borderColor:'#0074E4', fontSize:"15px"}} 
                   value="a"
                   onChange={() => {
                     this.setState({
@@ -209,7 +209,7 @@ class Home extends Component {
                 >
                   Overdue
                 </Radio.Button>
-                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
+                <Radio.Button style={{backgroundColor:'#0074E4', borderColor:'#0074E4', fontSize:"15px"}} 
                   value="b"
                   onChange={() => {
                     this.setState({
@@ -219,7 +219,7 @@ class Home extends Component {
                 >
                   Today
                 </Radio.Button>
-                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
+                <Radio.Button style={{backgroundColor:'#0074E4', borderColor:'#0074E4', fontSize:"15px"}} 
                   value="c"
                   onChange={() => {
                     this.setState({
@@ -229,7 +229,7 @@ class Home extends Component {
                 >
                   This Week
                 </Radio.Button>
-                <Radio.Button style={{backgroundColor:'#9DAB86', borderColor:'#9DAB86', fontSize:"15px"}} 
+                <Radio.Button style={{backgroundColor:'#0074E4', borderColor:'#0074E4', fontSize:"15px"}} 
                   value="d"
                   onChange={() => {
                     this.setState({
@@ -253,7 +253,7 @@ class Home extends Component {
                 &nbsp;&nbsp;
 
             
-                <Button style={{backgroundColor:"#709078", borderRadius:"20px", borderColor:"#709078"}}
+                <Button style={{backgroundColor:"#0074E4", borderRadius:"20px", borderColor:"#0074E4", color:"whitesmoke"}}
                   type="primary"
                   onClick={() => {
                     Axios.get(backend_url + "/equipment/daterange", {
