@@ -81,7 +81,7 @@ class Equipments extends Component {
                 : ms.mechanic_id + " is working"}
             </td>
             <td style={{ textAlign: "center" }}>
-              <Button style={{backgroundColor:"#839B97", color:"white", borderRadius:"20px", borderColor:"#839B97"}}
+              <Button style={{backgroundColor:"#1B6CA8", color:"white", borderRadius:"20px", borderColor:"#1B6CA8"}}
                 onClick={() => {
                   Axios.get(backend_url + "/repair/all/maintenance", {
                     params: { maintenance_id: ms._id },
@@ -113,6 +113,7 @@ class Equipments extends Component {
                             </td>
                             <td style={{ textAlign: "center" }}>
                               <a
+                                style={{color:"#0779E4"}}
                                 onClick={() => {
                                   this.setState({
                                     visibleTwo: true,
@@ -163,7 +164,7 @@ class Equipments extends Component {
             </td>
             <Modal
               title="REPAIR DETAILS"
-              bodyStyle={{backgroundColor:"#B6CDBD"}}
+              bodyStyle={{backgroundColor:"#C8E6F5"}}
               visible={this.state.visibleTwo}
               onOk={() => {
                 this.setState({
@@ -250,7 +251,7 @@ class Equipments extends Component {
 
           <>
             <Modal
-              bodyStyle={{backgroundColor:"#E4EDD8"}}
+              bodyStyle={{backgroundColor:"#C8E6F5"}}
               title={this.state.equipmentName}
               visible={this.state.visibleOne}
               onOk={this.handleOk}

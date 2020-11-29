@@ -68,6 +68,7 @@ class EditEquipment extends Component {
           </td>
           <td style={{ textAlign: "center" }}>
             <a
+              style={{color:"#0779E4"}}
               href="#"
               onClick={() => {
                 this.setState({
@@ -84,7 +85,7 @@ class EditEquipment extends Component {
             </a>
           </td>
           <Modal
-            bodyStyle={{backgroundColor:"#E5F4E7"}}
+            bodyStyle={{backgroundColor:"#C8E6F5"}}
             visible={this.state.visible}
             onOk={() => {
               this.setState({
@@ -201,7 +202,7 @@ class EditEquipment extends Component {
                 type="submit"
                 class="btn btn-primary"
                 onClick={this.onClick}
-                style={{backgroundColor:"#0D625E", color:"aliceblue", borderRadius:"20px", borderColor:"#0D625E",fontSize:"16px", marginLeft:"160px", width:"130px"}} 
+                style={{backgroundColor:"#1B6CA8", color:"white", borderRadius:"20px", borderColor:"#1B6CA8",fontSize:"16px", marginLeft:"160px", width:"130px"}} 
               >
                 Submit
               </button>
