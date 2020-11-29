@@ -51,6 +51,7 @@ class ThisWeek extends Component {
             <td style={{ textAlign: "center" }}>
               <a
                 href="#"
+                style={{color:"#0779E4"}}
                 onClick={() => {
                   this.setState({
                     visibleOne: false,
@@ -62,7 +63,7 @@ class ThisWeek extends Component {
               </a>
             </td>
             <Modal
-              bodyStyle={{backgroundColor:"#B6CDBD"}}
+              bodyStyle={{backgroundColor:"#C8E6F5"}}
               title={"EQUIPMENT ID: " + repairLog.equipment_id}
               visible={this.state.visibleTwo}
               onOk={() => {
@@ -110,6 +111,7 @@ class ThisWeek extends Component {
           <td style={{ textAlign: "center" }}>
             <a
               href="#"
+              style={{color:"#0779E4"}}
               onClick={() => {
                 Axios.get(backend_url + "/repair/all/maintenance", {
                   params: { maintenance_id: ms._id },
@@ -125,7 +127,7 @@ class ThisWeek extends Component {
             </a>
           </td>
           <Modal
-            bodyStyle={{backgroundColor:"#E4EDD8"}}
+            bodyStyle={{backgroundColor:"#C8E6F5"}}
             title="DETAILS"
             visible={this.state.visibleOne}
             onOk={() => {

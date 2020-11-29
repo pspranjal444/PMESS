@@ -19,13 +19,14 @@ class InProgressTasks extends Component {
     return (
       <div>
         <div style={{ mystyle }}>
-          <Radio.Group
+          <Radio.Group buttonStyle="solid" Button type="warning" style={{marginLeft: "30px"}}
             defaultValue="a"
             buttonStyle="solid"
             Button
             type="warning"
           >
             <Radio.Button
+              style={{backgroundColor:"#0074E4", borderColor:"white", fontSize:"15px", textAlign:"center"}}
               value="a"
               onChange={() => {
                 this.setState({
@@ -36,6 +37,7 @@ class InProgressTasks extends Component {
               This Week
             </Radio.Button>
             <Radio.Button
+              style={{backgroundColor:"#0074E4", borderColor:"white", fontSize:"15px", textAlign:"center"}}
               value="b"
               onChange={() => {
                 this.setState({

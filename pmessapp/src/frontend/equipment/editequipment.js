@@ -213,7 +213,7 @@ class EditEquipment extends Component {
     return (
       <div style={{ paddingLeft: "20%" }}>
       <Helmet>
-          <style>{"body{background-color: #E7EED2;}"}</style>
+          <style>{"body{background-color: #EEEEEE;}"}</style>
         </Helmet>  
         
         <div class="container">
