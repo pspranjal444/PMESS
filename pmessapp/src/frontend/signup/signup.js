@@ -46,7 +46,7 @@ class Signup extends Component {
         <div class="container">
          <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
         </div>  
-                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"320px", marginTop:"80px", width:"450px", backgroundColor:"#acbd86"}}>
+                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"320px", marginTop:"80px", width:"450px", backgroundColor:"#B9CEEB"}}>
                     <h2 style={{textAlign:"center" , color: "#393E46", fontSize:"36px"}}>Add New User</h2>
                     <br />
                     <img src="add-male-user.png" style={{height:"150px", width:"150px", marginLeft:"100px"}}/>
@@ -96,7 +96,7 @@ class Signup extends Component {
                         </div>
                         <br/>
                         <br/>
-                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#dddddd", color:"black", borderRadius:"20px", borderColor:"#dddddd",fontSize:"17px", marginLeft:"130px"}} onClick={this.onClick}>Create User</button>
+                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#34699A", color:"white", borderRadius:"20px", borderColor:"#34699A",fontSize:"17px", marginLeft:"130px"}} onClick={this.onClick}>Create User</button>
                     </form>
                 </div>
             </div>
