@@ -55,7 +55,7 @@ class ViewUsers extends Component {
         <br/>
         <Radio.Group defaultValue="a" buttonStyle="solid" Button type="warning" style={{marginLeft: "30px"}}>
           <Radio.Button
-            style={{backgroundColor:"#707070", borderColor:"#707070", fontSize:"18px", height:"35px", width:"160px", textAlign:"center"}}
+            style={{backgroundColor:"#0074E4", borderColor:"white", fontSize:"15px", textAlign:"center"}}
             value="a"
             onChange={() => {
               this.setState({
@@ -66,7 +66,7 @@ class ViewUsers extends Component {
             Administrator
           </Radio.Button>
           <Radio.Button
-          style={{backgroundColor:"#92817A", borderColor:"#92817A", fontSize:"18px", height:"35px", width:"160px", textAlign:"center"}}
+          style={{backgroundColor:"#0074E4", borderColor:"white", fontSize:"15px", textAlign:"center"}}
             value="b"
             onChange={() => {
               this.setState({
