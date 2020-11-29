@@ -55,7 +55,7 @@ class AddEquipment extends Component {
          <img src="admin.png" style={{height:"50px", width:"50px", marginLeft:"870px", marginTop:"10px"}}/> <strong>Susan Doe (Administrator)</strong>
         </div> 
                 <br /><br /><br /><br /><br />
-                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"320px", marginTop:"10px", width:"450px", backgroundColor:"#9ad3bc"}}>
+                <div class="panel panel-default" style={{ borderRadius:"30px", padding: "40px" , marginLeft:"320px", marginTop:"10px", width:"450px", backgroundColor:"#DEECFC", border:"#DEECFC"}}>
                     <h2 style={{textAlign:"center" , color: "#393E46", fontSize:"30px"}}>Add New Equipment</h2>
                     <br />
                     <img src="xxx017-512.png" style={{height:"120px", width:"120px", marginLeft:"120px"}}/>
@@ -105,7 +105,7 @@ class AddEquipment extends Component {
                         </div>
                         <br/>
                         <br/>
-                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#dddddd", color:"black", borderRadius:"20px", borderColor:"#dddddd",fontSize:"17px", marginLeft:"130px", width:"130px"}}  onClick={this.onClick}>Submit</button>
+                        <button type="submit" class="btn btn-primary" style={{backgroundColor:"#1B6CA8", color:"white", borderRadius:"20px", borderColor:"#1B6CA8",fontSize:"16px", marginLeft:"130px", width:"100px"}}  onClick={this.onClick}>Submit</button>
                         
                     
                     </form>
