@@ -47,8 +47,8 @@ class EditEquipment extends Component {
       maintenanceFrequency: this.state.maintenanceFrequency,
     };
 
-    Axios.post(backend_url + "/equipment/edit", { data }).then((res) => {
-      if (res.success && res.status == 200) {
+    Axios.patch(backend_url + "/equipment/edit", { data }).then((res) => {
+      if (res.data.success && res.status == 200) {
         alert(res.data.message);
       } else {
         alert("Equipment could not be added successfully");

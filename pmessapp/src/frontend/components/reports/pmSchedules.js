@@ -193,14 +193,14 @@ class pmSchedules extends Component {
                                         && 
                                         <>
                                         <td>{eachRecord.mechanic_id}</td>
-                                        <td>{eachRecord.maintenanceCompleteDate}</td>
+                                        <td>{new Date(eachRecord.maintenanceCompleteDate).toLocaleDateString()}</td>
                                         <td>{eachRecord.isDelayed ? 'Delayed' : 'On Time' }</td>
                                         </>}
                                         {this.state.taskFilter == "Review"
                                         &&
                                         <> 
                                         <td>{eachRecord.reviewedBy}</td>
-                                        <td>{eachRecord.reviewedDate}</td>
+                                        <td>{new Date(eachRecord.reviewedDate).toLocaleDateString()}</td>
                                         <td>{eachRecord.reviewRemarks}</td>
                                         <td>{eachRecord.reviewDelayed ? 'Delayed' : 'On Time' }</td>
                                         </>}

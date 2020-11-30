@@ -125,13 +125,13 @@ class UserActivity extends Component {
                             {/* <td>Task ID</td> */}
                             <td>{content.equipment_id}</td>
                             {currType == "PM" &&
-                                <td>{content.maintenanceCompleteDate}</td>  
+                                <td>{new Date(content.maintenanceCompleteDate).toLocaleDateString()}</td>  
                             }
                             {currType == "Repair" &&
-                                <td>{content.reviewedDate}</td>    
+                                <td>{new Date(content.reviewedDate).toLocaleDateString()}</td>    
                             }
                             {currType == "Reviews" &&
-                                <td>{content.reviewedDate}</td>
+                                <td>{new Date(content.reviewedDate).toLocaleDateString()}</td>
                             }
                             
                         </tr>)
