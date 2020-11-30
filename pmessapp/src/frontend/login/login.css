@@ -3,7 +3,7 @@
   }
   
   @keyframes moveSlideshow {  
-    0%    { -webkit-transform: translateX(-200%)}
+    0%    { -webkit-transform: translateX(-270%)}
     100% { 
       -webkit-transform: translateX(200%);  
     }
