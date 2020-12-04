@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import pranjal from './credit-images/pranjal.jpeg';
+import shravani from './credit-images/shravani.jpeg';
+import nehal from './credit-images/nehal.jpeg';
+import ankita from './credit-images/ankita.jpeg';
+
 class Credits extends Component {
   constructor() {
     super();
@@ -23,25 +28,25 @@ class Credits extends Component {
               <td>
                 <img
                   height="100px"
-                  src="https://www.pinclipart.com/picdir/middle/138-1385107_png-file-user-vector-icon-png-clipart.png"
+                  src={ankita}
                 ></img>
               </td>
               <td>
                 <img
                   height="100px"
-                  src="https://www.pinclipart.com/picdir/middle/138-1385107_png-file-user-vector-icon-png-clipart.png"
+                  src={shravani}
                 ></img>
               </td>
               <td>
                 <img
                   height="100px"
-                  src="https://www.pinclipart.com/picdir/middle/138-1385107_png-file-user-vector-icon-png-clipart.png"
+                  src={nehal}
                 ></img>
               </td>
               <td>
                 <img
                   height="100px"
-                  src="https://www.pinclipart.com/picdir/middle/138-1385107_png-file-user-vector-icon-png-clipart.png"
+                  src={pranjal}
                 ></img>
               </td>
             </tr>
